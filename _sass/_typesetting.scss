@@ -1,0 +1,35 @@
+/* http://revolutionnaire.github.io/
+   v0.1 | 20190111
+   License: none (public domain)
+*/
+
+h1, h2, h3, h4, h5, h6, p, blockquote, pre
+dl, dt, dd, ol, ul, li,
+.text-h6 {
+  font-size: 1rem;
+  text-rendering: optimizeLegibility;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+
+b, strong {
+  font-weight: 700;
+}
+
+em, i {
+  font-style: italic;
+}
+
+h1, .text-h1 {
+  font-size: 3rem;
+  line-height: 0.84;
+}
+
+h4, .text-h4 {
+  font-size: 1.8rem;
+  line-height: 1.12;
+}
+
+h4 small, .text-h4 small {
+  font-size: 0.667em;
+}
