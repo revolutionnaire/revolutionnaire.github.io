@@ -5,9 +5,13 @@
 
 body {
   color: rgb(21, 34, 186);
-  width: 50rem;
   font-family: 'Space Mono', monospace;
   margin: 1rem;
+
+  @media (min-width: 768px) {
+    width: 50rem;
+  }
+
 }
 
 a, a:active, a:hover, a:visited {
