@@ -8,9 +8,10 @@ body {
   margin-bottom: 2em;
   margin-left: 36px;
 
-  &.home {
+  &#home {
     background: #000 url('/assets/images/fireworks.gif') repeat-y center bottom;
     background-size: cover;
+    color: #CCC;
   }
 
 }
