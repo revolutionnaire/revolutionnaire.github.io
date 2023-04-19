@@ -39,30 +39,52 @@ a {
 #introduction-1,
 #introduction-2,
 #introduction-3 {
-  font-size: 50px;
+  font-size: 2.5em;
+  text-align: left;
   margin: 0;
-  position: absolute;
+  position: static;
+  transform: none;
 }
 
 #introduction-1 {
   color: #0FF;
-  transform: rotate(45deg);
-  top: 179px;
-  left: 681px;
 }
 
 #introduction-2 {
   color: #F0F;
-  text-align: right;
-  transform: rotate(-45deg);
-  top: 291px;
-  left: 345px;
 }
 
 #introduction-3 {
   color: #FF0;
-  text-align: right;
-  transform: rotate(-45deg);
-  top: 474px;;
-  left: 631px;
+}
+
+@media (min-width: 1180px) {
+
+  #introduction-1,
+  #introduction-2,
+  #introduction-3 {
+    font-size: 50px;
+    position: absolute;
+  }
+
+  #introduction-1 {
+    transform: rotate(45deg);
+    top: 179px;
+    left: 681px;
+  }
+
+  #introduction-2 {
+    text-align: right;
+    transform: rotate(-45deg);
+    top: 291px;
+    left: 345px;
+  }
+
+  #introduction-3 {
+    text-align: right;
+    transform: rotate(-45deg);
+    top: 474px;;
+    left: 631px;
+  }
+
 }
