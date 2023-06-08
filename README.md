@@ -1,5 +1,5 @@
 # revolutionnaire.github.io
-Home page of a graphic and UI designer
+Home page of a UI/UX designer
 
 Type `bundle exec jekyll serve` to start.
 
