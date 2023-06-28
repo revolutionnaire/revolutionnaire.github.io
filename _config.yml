@@ -22,8 +22,7 @@ title: Samuel Bacay
 email: bpaulsamuel@gmail.com
 description: Home page of a UI/UX or product designer.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://mrbacay.com/" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
+url: "https://mrbacay.com" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  revolutionnaire
 
 # Build settings
