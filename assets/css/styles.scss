@@ -1,19 +1,20 @@
 ---
 ---
-@import "normalize";
+@import 'normalize';
+
+@keyframes hop {
+  from { transform: translate(50%, 0); }
+  to { transform: translate(50%, -100%); }
+}
 
 body {
-  margin-top: 2em;
-  margin-right: 36px;
-  margin-bottom: 2em;
-  margin-left: 36px;
+  background: #000;
 
-  &#home {
-    background: #000 url('/assets/images/fireworks.gif') repeat-y center bottom;
+  &#home,
+  &#landing {
+    background: #000 url('/assets/images/fireworks.gif') repeat-y fixed center bottom;
     background-size: cover;
-    color: #CCC;
   }
-
 }
 
 h1,
@@ -21,10 +22,17 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+p,
+li {
   font-family: 'Poppins', sans-serif;
   font-weight: 900;
+  font-kerning: auto;
   text-rendering: optimizeLegibility;
+}
+
+h3 {
+  font-size: 2rem;
 }
 
 a {
@@ -34,77 +42,198 @@ a {
   &:hover {
     text-decoration: underline;
   }
+}
 
+article header,
+article section,
+article footer {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.text-white {
+  color: #FFF;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-no-margin {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.center-vh {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+}
+
+.button {
+  width: max-content;
+  background-color: #FFF;
+  color: #000;
+  font-family: 'Poppins', sans-serif;
+  padding: 12px;
+  border: none;
+
+  &:hover {
+    background-color: #000;
+    color: #FFF;
+    text-decoration: none;
+  }
 }
 
 .violator {
-  width: 200px;
-  height: 120px;
-  background-color: #BE3455;
-  text-align: center;
-  padding: 60px 20px;
-  margin: 2rem auto;
-  border-radius: 120px;
+  width: calc(60vh - 24px);
+  background-color: #FFF;
+  color: #000;
+  font-size: 2rem;
+  padding: calc((60vh - 6rem * 1.15) / 2) 12px;
+  border-radius: 50%;
+  display: block;
 
-  a:hover {
+  &:hover {
+    background-color: #000;
+    color: #FFF;
     text-decoration: none;
-    opacity: 0.5;
   }
 }
 
-#introduction-1,
-#introduction-2,
-#introduction-3 {
-  font-size: 2.5em;
-  margin: 0;
-  position: static;
-  transform: none;
+.stack {
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+
+  > section {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }
 
-#introduction-1 {
+.phrase {
+  display: inline-block;
+}
+
+.down-arrow {
+  position: absolute;
+  right: 50%;
+  bottom: 24px;
+  animation: 0.5s cubic-bezier(.83, .67, .17, .67) 0s infinite alternate both running hop;
+
+  > path {
+    fill: #FFF;
+  }
+}
+
+.panels {
+  display: flex;
+  flex-direction: row;
+
+  .panel {
+    width: 100vw;
+    height: 100vh;
+    flex-grow: 1;
+    flex-shrink: 0;
+    position: relative;
+  }
+}
+
+.feature {
+  width: calc(100vw - 24px);
+
+  @media only screen and (min-width: 768px) {
+    width: 420px;
+  }
+}
+
+#section-1 .button {
+  transform: translate(50%, 4rem);
+}
+
+#section-2 {
+  background-color: #FFF;
+
+  a {
+    color: #000;
+  }
+
+  svg > path {
+    fill: #000;
+  }
+}
+
+#section-4 {
+  background-color: #0FFF;
+
+  svg > path {
+    fill: #000;
+  }
+}
+
+#section-5 {
+  background-color: #F0F;
+  height: auto;
+}
+
+#section-6 {
+  background-color: #FF0;
+}
+
+#introduction,
+#social-media,
+#experience,
+#services,
+#consultation {
+  width: calc(100vw - 24px);
+  font-size: 2rem;
+  margin: 0 auto;
+
+  // For iPad mini and larger screens
+  @media only screen and (min-width: 768px) {
+    width: 420px;
+  }
+}
+
+#introduction {
   color: #0FF;
 }
 
-#introduction-2 {
+#social-media {
   color: #F0F;
 }
 
-#introduction-3 {
+#experience {
   color: #FF0;
 }
 
-@media (min-width: 1180px) {
+#services {
+  position: absolute;
+  top: 8rem;
+  right: 50%;
+  transform: translateX(50%);
 
-  .violator {
-    position: absolute;
-    left: 240px;
+  @media only screen and (min-width: 768px) {
+    top: 10rem;
   }
+}
 
-  #introduction-1,
-  #introduction-2,
-  #introduction-3 {
-    font-size: 50px;
-    position: absolute;
-  }
+#consultation h1{
+  color: #F0F;
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 0;
+}
 
-  #introduction-1 {
-    transform: rotate(45deg);
-    top: 179px;
-    left: 681px;
-  }
-
-  #introduction-2 {
-    text-align: right;
-    transform: rotate(-45deg);
-    top: 294px;
-    left: 330px;
-  }
-
-  #introduction-3 {
-    text-align: right;
-    transform: rotate(-45deg);
-    top: 463px;;
-    left: 654px;
-  }
-
+#colophon {
+  font-size: 0.667rem;
+  position: absolute;
+  right: 50%;
+  bottom: 24px;
+  transform: translateX(50%);
 }

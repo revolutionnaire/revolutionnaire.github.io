@@ -1,0 +1,36 @@
+{
+  "name": "revolutionnaire.github.io",
+  "version": "1.0.0",
+  "description": "The main Javascript for my personal site",
+  "source": "src/index.js",
+  "main": "index.js",
+  "targets": {
+    "main": false
+  },
+  "browserslist": "> 0.25%",
+  "scripts": {
+    "watch": "parcel watch --dist-dir .",
+    "build": "parcel build --dist-dir ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/revolutionnaire/revolutionnaire.github.io.git"
+  },
+  "keywords": [
+    "parcel",
+    "gsap",
+    "animation"
+  ],
+  "author": "Samuel Bacay",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/revolutionnaire/revolutionnaire.github.io/issues"
+  },
+  "homepage": "https://github.com/revolutionnaire/revolutionnaire.github.io#readme",
+  "devDependencies": {
+    "parcel": "^2.9.3"
+  },
+  "dependencies": {
+    "gsap": "^3.12.2"
+  }
+}
