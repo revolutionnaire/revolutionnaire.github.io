@@ -11,10 +11,19 @@ body {
   background: #000;
 
   &#home,
-  &#landing {
+  &#confirmation {
     background: #000 url('/assets/images/fireworks.gif') repeat-y fixed center bottom;
     background-size: cover;
   }
+}
+
+article header,
+article section,
+article footer {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
 }
 
 h1,
@@ -42,15 +51,6 @@ a {
   &:hover {
     text-decoration: underline;
   }
-}
-
-article header,
-article section,
-article footer {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  position: relative;
 }
 
 .text-white {
@@ -152,6 +152,26 @@ article footer {
   }
 }
 
+#confirmation article section,
+#error article header,
+#error article section {
+  color: #FFF;
+  width: calc(100vw - 24px);
+  height: auto;
+  margin: 0 auto;
+
+  @media only screen and (min-width: 768px) {
+    width: 420px;
+  }
+}
+
+#confirmation h1 {
+  color: #F0F;
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 #section-1 .button {
   transform: translate(50%, 4rem);
 }
@@ -188,8 +208,7 @@ article footer {
 #introduction,
 #social-media,
 #experience,
-#services,
-#consultation {
+#services {
   width: calc(100vw - 24px);
   font-size: 2rem;
   margin: 0 auto;
@@ -221,13 +240,6 @@ article footer {
   @media only screen and (min-width: 768px) {
     top: 10rem;
   }
-}
-
-#consultation h1{
-  color: #F0F;
-  font-size: 2rem;
-  margin-top: 0;
-  margin-bottom: 0;
 }
 
 #colophon {
