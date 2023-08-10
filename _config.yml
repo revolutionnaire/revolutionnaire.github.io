@@ -26,8 +26,8 @@ url: "https://mrbacay.com" # the base hostname & protocol for your site, e.g. ht
 github_username:  revolutionnaire
 
 # Build settings
-plugins:
-  - jekyll-feed
+# plugins:
+#   - jekyll-feed
 
 # Sass settings
 sass:
