@@ -2,15 +2,18 @@
   "name": "revolutionnaire.github.io",
   "version": "1.0.0",
   "description": "The main Javascript for my personal site",
-  "source": "src/index.js",
+  "source": "_src/index.js",
   "main": "index.js",
   "targets": {
+    "default": {
+      "distDir": "."
+    },
     "main": false
   },
   "browserslist": "> 0.25%",
   "scripts": {
-    "watch": "parcel watch --dist-dir .",
-    "build": "parcel build --dist-dir ."
+    "watch": "parcel watch",
+    "build": "parcel build"
   },
   "repository": {
     "type": "git",

@@ -51,7 +51,6 @@ exclude:
   - node_modules/
   - package.json
   - package-lock.json
-  - src/
   - vendor/bundle/
   - vendor/cache/
   - vendor/gems/
