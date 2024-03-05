@@ -2,7 +2,7 @@
   "name": "revolutionnaire.github.io",
   "version": "1.0.0",
   "description": "The main Javascript for my personal site",
-  "source": "_src/index.js",
+  "source": "_source/index.js",
   "main": "index.js",
   "targets": {
     "default": {

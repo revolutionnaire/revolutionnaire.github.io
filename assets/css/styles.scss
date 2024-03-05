@@ -172,8 +172,18 @@ a {
   margin-bottom: 0;
 }
 
-#section-1 .button {
-  transform: translate(50%, 4rem);
+#section-1 {
+  #introduction {
+    background: #FFF;
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .button {
+    transform: translate(50%, 4rem);
+  }
 }
 
 #section-2 {
@@ -217,10 +227,6 @@ a {
   @media only screen and (min-width: 768px) {
     width: 420px;
   }
-}
-
-#introduction {
-  color: #0FF;
 }
 
 #social-media {
