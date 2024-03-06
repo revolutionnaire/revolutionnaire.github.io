@@ -129,6 +129,10 @@ a {
   > path {
     fill: #FFF;
   }
+
+  &.reverse path {
+    fill: #000;
+  }
 }
 
 .panels {
@@ -173,6 +177,18 @@ a {
 }
 
 #section-1 {
+  h1 {
+    color: #0FFF;
+  }
+
+  .button {
+    transform: translate(50%, 5rem);
+  }
+}
+
+#section-2 {
+  background: #FFF;
+
   #introduction {
     background: #FFF;
     width: 420px;
@@ -180,25 +196,17 @@ a {
     border-radius: 50%;
     overflow: hidden;
   }
-
-  .button {
-    transform: translate(50%, 4rem);
-  }
 }
 
-#section-2 {
+#section-3 {
   background-color: #FFF;
 
   a {
     color: #000;
   }
-
-  svg > path {
-    fill: #000;
-  }
 }
 
-#section-4 {
+#section-5 {
   background-color: #0FFF;
 
   svg > path {
@@ -206,12 +214,12 @@ a {
   }
 }
 
-#section-5 {
+#section-6 {
   background-color: #F0F;
   height: auto;
 }
 
-#section-6 {
+#section-7 {
   background-color: #FF0;
 }
 

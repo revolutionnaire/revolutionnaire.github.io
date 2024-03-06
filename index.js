@@ -1466,28 +1466,64 @@ var _scrollTrigger = require("gsap/ScrollTrigger");
 document.addEventListener("DOMContentLoaded", function() {
     // Setup GSAP
     (0, _gsap.gsap).registerPlugin((0, _scrollTrigger.ScrollTrigger));
+    // Zoom in text
+    var firstSectionMM = (0, _gsap.gsap).matchMedia();
     var firstSectionOut = (0, _gsap.gsap).timeline({
         scrollTrigger: {
             trigger: "#section-2",
             start: "top bottom",
             end: "center center",
             scrub: true,
-            pin: "#section-1"
+            pin: "#section-1",
+            refreshPriority: 1
         }
     });
-    firstSectionOut.to("#introduction", {
-        scale: 100,
-        ease: "none"
+    firstSectionMM.add({
+        isMobile: "(min-width: 320px)",
+        isDesktop: "(min-width: 768px)"
+    }, function(context) {
+        var _context_conditions = context.conditions, isMobile = _context_conditions.isMobile, isDesktop = _context_conditions.isDesktop;
+        firstSectionOut.to("h1", {
+            color: "#FFF",
+            xPercent: isDesktop ? 1868 : -1420,
+            yPercent: isDesktop ? 7200 : -800,
+            scale: isDesktop ? 206 : 160,
+            ease: "none"
+        });
     });
-    firstSectionOut.to("#introduction video", {
-        opacity: 0
-    }, 0);
-    // Animate the entrance of the contents of the second fold
-    var secondSectionIn = (0, _gsap.gsap).timeline();
-    // Zoom out the whole paragraph
-    secondSectionIn.from("#social-media", {
+    // Zoom out video
+    var secondSectionIn = (0, _gsap.gsap).timeline({
         scrollTrigger: {
             trigger: "#section-2",
+            start: "top bottom",
+            end: "top +=20%",
+            scrub: true
+        }
+    });
+    secondSectionIn.from("#introduction video", {
+        opacity: 0,
+        ease: "none"
+    });
+    // Fade video out of view
+    var secondSectionOut = (0, _gsap.gsap).timeline({
+        scrollTrigger: {
+            trigger: "#section-3",
+            start: "top bottom",
+            end: "center center",
+            scrub: true,
+            pin: "#section-2"
+        }
+    });
+    secondSectionOut.to("#introduction video", {
+        opacity: 0,
+        ease: "none"
+    });
+    // Animate the entrance of the contents of the second fold
+    var thirdSectionIn = (0, _gsap.gsap).timeline();
+    // Zoom out the whole paragraph
+    thirdSectionIn.from("#social-media", {
+        scrollTrigger: {
+            trigger: "#section-3",
             start: "top center",
             end: "center center",
             scrub: true
@@ -1496,9 +1532,9 @@ document.addEventListener("DOMContentLoaded", function() {
         ease: "none"
     });
     // Fade in each phrase one by one
-    secondSectionIn.from("#phrase-4", {
+    thirdSectionIn.from("#phrase-4", {
         scrollTrigger: {
-            trigger: "#section-2",
+            trigger: "#section-3",
             start: "top 50%",
             end: "center center",
             scrub: true
@@ -1506,9 +1542,9 @@ document.addEventListener("DOMContentLoaded", function() {
         opacity: 0,
         ease: "none"
     });
-    secondSectionIn.from("#phrase-5", {
+    thirdSectionIn.from("#phrase-5", {
         scrollTrigger: {
-            trigger: "#section-2",
+            trigger: "#section-3",
             start: "top 45%",
             end: "center center",
             scrub: true
@@ -1516,9 +1552,9 @@ document.addEventListener("DOMContentLoaded", function() {
         opacity: 0,
         ease: "none"
     });
-    secondSectionIn.from("#phrase-6", {
+    thirdSectionIn.from("#phrase-6", {
         scrollTrigger: {
-            trigger: "#section-2",
+            trigger: "#section-3",
             start: "top 40%",
             end: "center center",
             scrub: true
@@ -1526,9 +1562,9 @@ document.addEventListener("DOMContentLoaded", function() {
         opacity: 0,
         ease: "none"
     });
-    secondSectionIn.from("#phrase-7", {
+    thirdSectionIn.from("#phrase-7", {
         scrollTrigger: {
-            trigger: "#section-2",
+            trigger: "#section-3",
             start: "top 35%",
             end: "center center",
             scrub: true
@@ -1536,9 +1572,9 @@ document.addEventListener("DOMContentLoaded", function() {
         opacity: 0,
         ease: "none"
     });
-    secondSectionIn.from("#phrase-8", {
+    thirdSectionIn.from("#phrase-8", {
         scrollTrigger: {
-            trigger: "#section-2",
+            trigger: "#section-3",
             start: "top 30%",
             end: "center center",
             scrub: true
@@ -1568,12 +1604,12 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
     // Uncover the third section
-    stackedSections.to("#section-2", {
+    stackedSections.to("#section-3", {
         yPercent: -100,
         ease: "none"
     });
     // Cover the third section
-    stackedSections.to("#section-4", {
+    stackedSections.to("#section-5", {
         // scrollTrigger: {
         //   trigger: '.stack',
         //   start: '+=200%',
