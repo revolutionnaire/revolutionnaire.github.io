@@ -1491,33 +1491,6 @@ document.addEventListener("DOMContentLoaded", function() {
             ease: "none"
         });
     });
-    // Zoom out video
-    var secondSectionIn = (0, _gsap.gsap).timeline({
-        scrollTrigger: {
-            trigger: "#section-2",
-            start: "top bottom",
-            end: "top +=20%",
-            scrub: true
-        }
-    });
-    secondSectionIn.from("#introduction video", {
-        opacity: 0,
-        ease: "none"
-    });
-    // Fade video out of view
-    var secondSectionOut = (0, _gsap.gsap).timeline({
-        scrollTrigger: {
-            trigger: "#section-3",
-            start: "top bottom",
-            end: "center center",
-            scrub: true,
-            pin: "#section-2"
-        }
-    });
-    secondSectionOut.to("#introduction video", {
-        opacity: 0,
-        ease: "none"
-    });
     // Animate the entrance of the contents of the second fold
     var thirdSectionIn = (0, _gsap.gsap).timeline();
     // Zoom out the whole paragraph

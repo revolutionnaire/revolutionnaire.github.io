@@ -182,7 +182,11 @@ a {
   }
 
   .button {
-    transform: translate(50%, 5rem);
+    transform: translate(50%, 7rem);
+
+    @media only screen and (min-width: 1024px) {
+      transform: translate(50%, 5rem);
+    }
   }
 }
 

@@ -33,37 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Zoom out video
-  let secondSectionIn = gsap.timeline({
-    scrollTrigger: {
-      trigger: '#section-2',
-      start: 'top bottom',
-      end: 'top +=20%',
-      scrub: true,
-    }
-  });
-
-  secondSectionIn.from('#introduction video', {
-    opacity: 0,
-    ease: 'none'
-  });
-
-  // Fade video out of view
-  let secondSectionOut = gsap.timeline({
-    scrollTrigger: {
-      trigger: '#section-3',
-      start: 'top bottom',
-      end: 'center center',
-      scrub: true,
-      pin: '#section-2'
-    }
-  });
-
-  secondSectionOut.to('#introduction video', {
-    opacity: 0,
-    ease: 'none'
-  });
-
   // Animate the entrance of the contents of the second fold
   let thirdSectionIn = gsap.timeline();
 
