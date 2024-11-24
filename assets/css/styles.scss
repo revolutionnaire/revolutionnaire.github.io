@@ -135,6 +135,17 @@ a {
   }
 }
 
+.cards {
+  width: 404px;
+  margin: 1rem auto;
+  position: relative;
+  z-index: 2;
+
+  iframe {
+    position: absolute
+  }
+}
+
 .panels {
   display: flex;
   flex-direction: row;
@@ -182,35 +193,27 @@ a {
   }
 
   .button {
-    transform: translate(50%, 7rem);
+    transform: translate(50%, 4rem);
+  }
 
-    @media only screen and (min-width: 1024px) {
-      transform: translate(50%, 5rem);
-    }
+  svg > path {
+    fill: #0FF;
   }
 }
 
 #section-2 {
   background: #FFF;
 
-  #introduction {
-    background: #FFF;
-    width: 420px;
-    height: 420px;
-    border-radius: 50%;
-    overflow: hidden;
+  svg > path {
+    fill: #F0F;
   }
 }
 
-#section-3 {
-  background-color: #FFF;
-
-  a {
-    color: #000;
-  }
+#section-3 svg > path {
+  fill: #FF0;
 }
 
-#section-5 {
+#section-4 {
   background-color: #0FFF;
 
   svg > path {
@@ -218,16 +221,25 @@ a {
   }
 }
 
-#section-6 {
+#section-5 {
   background-color: #F0F;
-  height: auto;
+
+  svg > path {
+    fill: #000;
+  }
 }
 
-#section-7 {
+#section-6 {
   background-color: #FF0;
+  height: auto;
+
+  svg > path {
+    fill: #F0F;
+  }
 }
 
 #introduction,
+#works,
 #social-media,
 #experience,
 #services {
@@ -241,11 +253,21 @@ a {
   }
 }
 
-#social-media {
-  color: #F0F;
+#introduction {
+  color: #0FF;
+  z-index: 2;
 }
 
-#experience {
+#works {
+  color: #F0F;
+  margin-top: 8rem;
+
+  @media only screen and (min-width: 768px) {
+    margin-top: 10rem;
+  }
+}
+
+#social-media {
   color: #FF0;
 }
 

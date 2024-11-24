@@ -5,9 +5,32 @@ document.addEventListener('DOMContentLoaded', function() {
   // Setup GSAP
   gsap.registerPlugin(ScrollTrigger);
 
-  // Zoom in text
-  let firstSectionMM = gsap.matchMedia();
-  let firstSectionOut = gsap.timeline({
+  // Introduction animation of the first section
+  const firstSectionIn = gsap.timeline();
+
+  // Fade in each phrase of the paragraph
+  firstSectionIn.from('#phrase-1', {
+    opacity: 0
+  });
+
+  firstSectionIn.from('#phrase-2', {
+    opacity: 0
+  },
+  '+=0.25');
+
+  firstSectionIn.from('#phrase-3', {
+    opacity: 0
+  },
+  '+=0.25');
+
+  firstSectionIn.from('#section-1 .button', {
+    opacity: 0
+  },
+  '+=0.25');
+
+  // Exit animation of the first section on scroll
+  const firstSectionMM = gsap.matchMedia();
+  const firstSectionOut = gsap.timeline({
     scrollTrigger: {
       trigger: '#section-2',
       start: 'top bottom',
@@ -18,100 +41,29 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
- firstSectionMM.add({
-    isMobile: '(min-width: 320px)',
-    isDesktop: '(min-width: 768px)'
+  firstSectionMM.add({
+     isMobile: '(min-width: 320px)',
+     isDesktop: '(min-width: 768px)'
   }, (context) => {
     let { isMobile, isDesktop } = context.conditions;
 
     firstSectionOut.to('h1', {
       color: '#FFF',
-      xPercent: isDesktop ? 1868 : -1420,
-      yPercent: isDesktop ? 7200 : -800,
-      scale: isDesktop ?  206 : 160,
+      xPercent: isDesktop ? -20 : -1354,
+      yPercent: 3000,
+      scale: isDesktop ?  206 : 100,
       ease: 'none'
     });
   });
 
-  // Animate the entrance of the contents of the second fold
-  let thirdSectionIn = gsap.timeline();
-
-  // Zoom out the whole paragraph
-  thirdSectionIn.from('#social-media', {
-    scrollTrigger: {
-      trigger: '#section-3',
-      start: 'top center',
-      end: 'center center',
-      scrub: true
-    },
-    scale: 4,
-    ease: 'none'
-  });
-
-  // Fade in each phrase one by one
-  thirdSectionIn.from('#phrase-4', {
-    scrollTrigger: {
-      trigger: '#section-3',
-      start: 'top 50%',
-      end: 'center center',
-      scrub: true
-    },
-    opacity: 0,
-    ease: 'none'
-  });
-
-  thirdSectionIn.from('#phrase-5', {
-    scrollTrigger: {
-      trigger: '#section-3',
-      start: 'top 45%',
-      end: 'center center',
-      scrub: true
-    },
-    opacity: 0,
-    ease: 'none'
-  });
-
-  thirdSectionIn.from('#phrase-6', {
-    scrollTrigger: {
-      trigger: '#section-3',
-      start: 'top 40%',
-      end: 'center center',
-      scrub: true
-    },
-    opacity: 0,
-    ease: 'none'
-  });
-
-  thirdSectionIn.from('#phrase-7', {
-    scrollTrigger: {
-      trigger: '#section-3',
-      start: 'top 35%',
-      end: 'center center',
-      scrub: true
-    },
-    opacity: 0,
-    ease: 'none'
-  });
-
-  thirdSectionIn.from('#phrase-8', {
-    scrollTrigger: {
-      trigger: '#section-3',
-      start: 'top 30%',
-      end: 'center center',
-      scrub: true
-    },
-    opacity: 0,
-    ease: 'none'
-  });
-
-  // Setup stacked sections
-  // const panelContainer = document.getElementById('section-4');
-  const panels = gsap.utils.toArray('.panel');
-  gsap.set('.stack section', { zIndex: (i, target, targets) => i === targets.length - 1 ? targets.length - 1 : targets.length - i });
+  //Setup stacked sections
+  gsap.set('.stack section', { zIndex: (i, target, targets) => i < 2 && i == 0 ? 1 : 0 });
+  gsap.set('.stack section:nth-child(3)', { yPercent: 100 });
+  gsap.set('.stack section:nth-child(4)', { yPercent: 100 })
   gsap.set('.stack section:last-child', { yPercent: 100 });
 
   // Animate the stacked sections on scroll
-  let stackedSections = gsap.timeline({
+  const stackedSections = gsap.timeline({
     scrollTrigger: {
       trigger: '.stack',
       start: 'top top',
@@ -121,39 +73,53 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+  // Setup cards
+  const cards = gsap.utils.toArray('.cards iframe');
+  gsap.set(cards, { yPercent: (i, target, targets) => i != 0 ? 200 : 0 });
+
+  // Scroll cards vertically
+  cards.forEach((card, i) => {
+    stackedSections.to(card, {
+      yPercent: i * 2,
+      ease: 'none'
+    });
+  });
+
   // Uncover the third section
-  stackedSections.to('#section-3', {
+  stackedSections.to('#section-2', {
     yPercent: -100,
     ease: 'none'
   });
 
   // Cover the third section
-  stackedSections.to('#section-5', {
-    // scrollTrigger: {
-    //   trigger: '.stack',
-    //   start: '+=200%',
-    //   end: '+=300%',
-    //   scrub: true,
-    //   pin: true
-    // },
+  stackedSections.to('#section-3', {
     yPercent: 0,
     ease: 'none'
   });
 
+  // Cover the fourth section
+  stackedSections.to('#section-4', {
+    yPercent: 0,
+    ease: 'none'
+  })
+
+  // Setup panels
+  const panels = gsap.utils.toArray('.panel');
+
+  // Scroll panels horizontally
   stackedSections.to(panels, {
-    // scrollTrigger: {
-    //   trigger: panelContainer,
-    //   end: () => '+=' + panelContainer.offsetWidth,
-    //   pin: true,
-    //   scrub: true,
-    //   snap: {
-    //     snapTo: 1 / (panels.length - 1),
-    //     duration: { min: 0, max: 0.5 },
-    //     delay: 0,
-    //     ease: 'cubic-bezier(.17,.67,.49,1)'
-    //   }
-    // },
     xPercent: -100 * (panels.length - 1),
+    ease: 'none'
+  });
+
+  // Cover the fifth section
+  stackedSections.to('#section-5', {
+    yPercent: 0,
+    ease: 'none'
+  })
+
+  stackedSections.to('#section-6', {
+    yPercent: 0,
     ease: 'none'
   });
 });

@@ -142,13 +142,13 @@
       this[globalName] = mainExports;
     }
   }
-})({"3GWes":[function(require,module,exports) {
+})({"3ri9N":[function(require,module,exports) {
 var _asyncToGenerator = require("@swc/helpers/_/_async_to_generator");
 var _toConsumableArray = require("@swc/helpers/_/_to_consumable_array");
 var _tsGenerator = require("@swc/helpers/_/_ts_generator");
 var global = arguments[3];
 var HMR_HOST = null;
-var HMR_PORT = 54418;
+var HMR_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "ddb6ac7c9a3a9178";
 var HMR_USE_SSE = false;
@@ -1466,7 +1466,22 @@ var _scrollTrigger = require("gsap/ScrollTrigger");
 document.addEventListener("DOMContentLoaded", function() {
     // Setup GSAP
     (0, _gsap.gsap).registerPlugin((0, _scrollTrigger.ScrollTrigger));
-    // Zoom in text
+    // Introduction animation of the first section
+    var firstSectionIn = (0, _gsap.gsap).timeline();
+    // Fade in each phrase of the paragraph
+    firstSectionIn.from("#phrase-1", {
+        opacity: 0
+    });
+    firstSectionIn.from("#phrase-2", {
+        opacity: 0
+    }, "+=0.25");
+    firstSectionIn.from("#phrase-3", {
+        opacity: 0
+    }, "+=0.25");
+    firstSectionIn.from("#section-1 .button", {
+        opacity: 0
+    }, "+=0.25");
+    // Exit animation of the first section on scroll
     var firstSectionMM = (0, _gsap.gsap).matchMedia();
     var firstSectionOut = (0, _gsap.gsap).timeline({
         scrollTrigger: {
@@ -1485,83 +1500,23 @@ document.addEventListener("DOMContentLoaded", function() {
         var _context_conditions = context.conditions, isMobile = _context_conditions.isMobile, isDesktop = _context_conditions.isDesktop;
         firstSectionOut.to("h1", {
             color: "#FFF",
-            xPercent: isDesktop ? 1868 : -1420,
-            yPercent: isDesktop ? 7200 : -800,
-            scale: isDesktop ? 206 : 160,
+            xPercent: isDesktop ? -20 : -1354,
+            yPercent: 3000,
+            scale: isDesktop ? 206 : 100,
             ease: "none"
         });
     });
-    // Animate the entrance of the contents of the second fold
-    var thirdSectionIn = (0, _gsap.gsap).timeline();
-    // Zoom out the whole paragraph
-    thirdSectionIn.from("#social-media", {
-        scrollTrigger: {
-            trigger: "#section-3",
-            start: "top center",
-            end: "center center",
-            scrub: true
-        },
-        scale: 4,
-        ease: "none"
-    });
-    // Fade in each phrase one by one
-    thirdSectionIn.from("#phrase-4", {
-        scrollTrigger: {
-            trigger: "#section-3",
-            start: "top 50%",
-            end: "center center",
-            scrub: true
-        },
-        opacity: 0,
-        ease: "none"
-    });
-    thirdSectionIn.from("#phrase-5", {
-        scrollTrigger: {
-            trigger: "#section-3",
-            start: "top 45%",
-            end: "center center",
-            scrub: true
-        },
-        opacity: 0,
-        ease: "none"
-    });
-    thirdSectionIn.from("#phrase-6", {
-        scrollTrigger: {
-            trigger: "#section-3",
-            start: "top 40%",
-            end: "center center",
-            scrub: true
-        },
-        opacity: 0,
-        ease: "none"
-    });
-    thirdSectionIn.from("#phrase-7", {
-        scrollTrigger: {
-            trigger: "#section-3",
-            start: "top 35%",
-            end: "center center",
-            scrub: true
-        },
-        opacity: 0,
-        ease: "none"
-    });
-    thirdSectionIn.from("#phrase-8", {
-        scrollTrigger: {
-            trigger: "#section-3",
-            start: "top 30%",
-            end: "center center",
-            scrub: true
-        },
-        opacity: 0,
-        ease: "none"
-    });
-    // Setup stacked sections
-    // const panelContainer = document.getElementById('section-4');
-    var panels = (0, _gsap.gsap).utils.toArray(".panel");
+    //Setup stacked sections
     (0, _gsap.gsap).set(".stack section", {
         zIndex: function(i, target, targets) {
-            return i === targets.length - 1 ? targets.length - 1 : targets.length - i;
+            return i < 2 && i == 0 ? 1 : 0;
         }
+    });
+    (0, _gsap.gsap).set(".stack section:nth-child(3)", {
+        yPercent: 100
+    });
+    (0, _gsap.gsap).set(".stack section:nth-child(4)", {
+        yPercent: 100
     });
     (0, _gsap.gsap).set(".stack section:last-child", {
         yPercent: 100
@@ -1576,37 +1531,49 @@ document.addEventListener("DOMContentLoaded", function() {
             pin: true
         }
     });
+    // Setup cards
+    var cards = (0, _gsap.gsap).utils.toArray(".cards iframe");
+    (0, _gsap.gsap).set(cards, {
+        yPercent: function(i, target, targets) {
+            return i != 0 ? 200 : 0;
+        }
+    });
+    // Scroll cards vertically
+    cards.forEach(function(card, i) {
+        stackedSections.to(card, {
+            yPercent: i * 2,
+            ease: "none"
+        });
+    });
     // Uncover the third section
-    stackedSections.to("#section-3", {
+    stackedSections.to("#section-2", {
         yPercent: -100,
         ease: "none"
     });
     // Cover the third section
-    stackedSections.to("#section-5", {
-        // scrollTrigger: {
-        //   trigger: '.stack',
-        //   start: '+=200%',
-        //   end: '+=300%',
-        //   scrub: true,
-        //   pin: true
-        // },
+    stackedSections.to("#section-3", {
         yPercent: 0,
         ease: "none"
     });
+    // Cover the fourth section
+    stackedSections.to("#section-4", {
+        yPercent: 0,
+        ease: "none"
+    });
+    // Setup panels
+    var panels = (0, _gsap.gsap).utils.toArray(".panel");
+    // Scroll panels horizontally
     stackedSections.to(panels, {
-        // scrollTrigger: {
-        //   trigger: panelContainer,
-        //   end: () => '+=' + panelContainer.offsetWidth,
-        //   pin: true,
-        //   scrub: true,
-        //   snap: {
-        //     snapTo: 1 / (panels.length - 1),
-        //     duration: { min: 0, max: 0.5 },
-        //     delay: 0,
-        //     ease: 'cubic-bezier(.17,.67,.49,1)'
-        //   }
-        // },
         xPercent: -100 * (panels.length - 1),
+        ease: "none"
+    });
+    // Cover the fifth section
+    stackedSections.to("#section-5", {
+        yPercent: 0,
+        ease: "none"
+    });
+    stackedSections.to("#section-6", {
+        yPercent: 0,
         ease: "none"
     });
 });
@@ -8084,6 +8051,6 @@ Observer.getById = function(id) {
 };
 _getGSAP() && gsap.registerPlugin(Observer);
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}]},["3GWes","1Ak3V"], "1Ak3V", "parcelRequire494b")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}]},["3ri9N","1Ak3V"], "1Ak3V", "parcelRequire494b")
 
 //# sourceMappingURL=index.js.map
