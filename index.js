@@ -1500,8 +1500,8 @@ document.addEventListener("DOMContentLoaded", function() {
         var _context_conditions = context.conditions, isMobile = _context_conditions.isMobile, isDesktop = _context_conditions.isDesktop;
         firstSectionOut.to("h1", {
             color: "#FFF",
-            xPercent: isDesktop ? -20 : -1354,
-            yPercent: 3000,
+            xPercent: isDesktop ? -20 : -712,
+            yPercent: isDesktop ? 3000 : 2000,
             scale: isDesktop ? 206 : 100,
             ease: "none"
         });
@@ -1535,7 +1535,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var cards = (0, _gsap.gsap).utils.toArray(".cards iframe");
     (0, _gsap.gsap).set(cards, {
         yPercent: function(i, target, targets) {
-            return i != 0 ? 200 : 0;
+            return i != 0 ? 240 : 0;
         }
     });
     // Scroll cards vertically

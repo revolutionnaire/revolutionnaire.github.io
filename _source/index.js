@@ -49,8 +49,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     firstSectionOut.to('h1', {
       color: '#FFF',
-      xPercent: isDesktop ? -20 : -1354,
-      yPercent: 3000,
+      xPercent: isDesktop ? -20 : -712,
+      yPercent: isDesktop ? 3000 : 2000,
       scale: isDesktop ?  206 : 100,
       ease: 'none'
     });
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Setup cards
   const cards = gsap.utils.toArray('.cards iframe');
-  gsap.set(cards, { yPercent: (i, target, targets) => i != 0 ? 200 : 0 });
+  gsap.set(cards, { yPercent: (i, target, targets) => i != 0 ? 240 : 0 });
 
   // Scroll cards vertically
   cards.forEach((card, i) => {
