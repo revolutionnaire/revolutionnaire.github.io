@@ -231,10 +231,11 @@ a {
 
 #section-6 {
   background-color: #FF0;
-  height: auto;
 
-  svg > path {
-    fill: #F0F;
+  .calendly-inline-widget {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
 
