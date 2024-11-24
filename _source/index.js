@@ -92,13 +92,13 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Cover the third section
-  stackedSections.to('#section-3', {
+  stackedSections.to('#section-4', {
     yPercent: 0,
     ease: 'none'
-  });
+  })
 
   // Cover the fourth section
-  stackedSections.to('#section-4', {
+  stackedSections.to('#section-5', {
     yPercent: 0,
     ease: 'none'
   })
@@ -112,12 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ease: 'none'
   });
 
-  // Cover the fifth section
-  stackedSections.to('#section-5', {
-    yPercent: 0,
-    ease: 'none'
-  })
-
+  // Cover fifth section
   stackedSections.to('#section-6', {
     yPercent: 0,
     ease: 'none'
