@@ -9,12 +9,6 @@
 
 body {
   background: #000;
-
-  &#home,
-  &#confirmation {
-    background: #000 url('/assets/images/fireworks.gif') repeat-y fixed center bottom;
-    background-size: cover;
-  }
 }
 
 article header,
@@ -51,6 +45,10 @@ a {
   &:hover {
     text-decoration: underline;
   }
+}
+
+.background {
+  position: fixed;
 }
 
 .text-white {
@@ -284,6 +282,7 @@ a {
 }
 
 #colophon {
+  color: #FFF;
   font-size: 0.667rem;
   position: absolute;
   right: 50%;
