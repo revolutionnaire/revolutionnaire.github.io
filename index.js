@@ -1507,18 +1507,19 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
     //Setup stacked sections
-    (0, _gsap.gsap).set(".stack section", {
+    (0, _gsap.gsap).set(".stack section:first-child", {
+        zIndex: 2
+    });
+    (0, _gsap.gsap).set(".stack .sub", {
         zIndex: function(i, target, targets) {
-            return i < 2 && i == 0 ? 1 : 0;
+            return i > 0 ? i + 3 : 1;
+        },
+        yPercent: function(i, target, targets) {
+            return i > 0 ? 100 : 0;
         }
     });
-    (0, _gsap.gsap).set(".stack section:nth-child(3)", {
-        yPercent: 100
-    });
-    (0, _gsap.gsap).set(".stack section:nth-child(4)", {
-        yPercent: 100
-    });
-    (0, _gsap.gsap).set(".stack section:last-child", {
+    (0, _gsap.gsap).set(".stack footer", {
+        zIndex: 0,
         yPercent: 100
     });
     // Animate the stacked sections on scroll
@@ -1550,6 +1551,9 @@ document.addEventListener("DOMContentLoaded", function() {
         yPercent: -100,
         ease: "none"
     });
+    // Setup sub-stacked and simultaneous sections
+    var simultaneous = (0, _gsap.gsap).utils.toArray(".stack .simultaneous");
+    var substack = (0, _gsap.gsap).utils.toArray(".stack .sub");
     // Cover the third section
     stackedSections.to("#section-4", {
         yPercent: 0,
@@ -1568,8 +1572,13 @@ document.addEventListener("DOMContentLoaded", function() {
         ease: "none"
     });
     // Cover fifth section
-    stackedSections.to("#section-6", {
+    stackedSections.to(simultaneous, {
         yPercent: 0,
+        ease: "none"
+    });
+    // Uncover footer
+    stackedSections.to(substack, {
+        yPercent: -100,
         ease: "none"
     });
 });

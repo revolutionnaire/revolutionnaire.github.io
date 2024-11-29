@@ -57,10 +57,9 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   //Setup stacked sections
-  gsap.set('.stack section', { zIndex: (i, target, targets) => i < 2 && i == 0 ? 1 : 0 });
-  gsap.set('.stack section:nth-child(3)', { yPercent: 100 });
-  gsap.set('.stack section:nth-child(4)', { yPercent: 100 })
-  gsap.set('.stack section:last-child', { yPercent: 100 });
+  gsap.set('.stack section:first-child', { zIndex: 2 });
+  gsap.set('.stack .sub', { zIndex: (i, target, targets) => i > 0 ? i + 3 : 1, yPercent: (i, target, targets) => i > 0 ? 100 : 0 });
+  gsap.set('.stack footer', { zIndex: 0, yPercent: 100 });
 
   // Animate the stacked sections on scroll
   const stackedSections = gsap.timeline({
@@ -91,6 +90,10 @@ document.addEventListener('DOMContentLoaded', function() {
     ease: 'none'
   });
 
+  // Setup sub-stacked and simultaneous sections
+  const simultaneous = gsap.utils.toArray('.stack .simultaneous');
+  const substack = gsap.utils.toArray('.stack .sub');
+
   // Cover the third section
   stackedSections.to('#section-4', {
     yPercent: 0,
@@ -113,8 +116,14 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Cover fifth section
-  stackedSections.to('#section-6', {
+  stackedSections.to(simultaneous, {
     yPercent: 0,
+    ease: 'none'
+  });
+
+  // Uncover footer
+  stackedSections.to(substack, {
+    yPercent: -100,
     ease: 'none'
   });
 });
