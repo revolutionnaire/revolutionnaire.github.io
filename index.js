@@ -1466,21 +1466,6 @@ var _scrollTrigger = require("gsap/ScrollTrigger");
 document.addEventListener("DOMContentLoaded", function() {
     // Setup GSAP
     (0, _gsap.gsap).registerPlugin((0, _scrollTrigger.ScrollTrigger));
-    // Introduction animation of the first section
-    var firstSectionIn = (0, _gsap.gsap).timeline();
-    // Fade in each phrase of the paragraph
-    firstSectionIn.from("#phrase-1", {
-        opacity: 0
-    });
-    firstSectionIn.from("#phrase-2", {
-        opacity: 0
-    }, "+=0.25");
-    firstSectionIn.from("#phrase-3", {
-        opacity: 0
-    }, "+=0.25");
-    firstSectionIn.from("#section-1 .button", {
-        opacity: 0
-    }, "+=0.25");
     // Exit animation of the first section on scroll
     var firstSectionMM = (0, _gsap.gsap).matchMedia();
     var firstSectionOut = (0, _gsap.gsap).timeline({
@@ -1499,7 +1484,6 @@ document.addEventListener("DOMContentLoaded", function() {
     }, function(context) {
         var _context_conditions = context.conditions, isMobile = _context_conditions.isMobile, isDesktop = _context_conditions.isDesktop;
         firstSectionOut.to("h1", {
-            color: "#FFF",
             xPercent: isDesktop ? -20 : -712,
             yPercent: isDesktop ? 3000 : 2000,
             scale: isDesktop ? 206 : 100,
@@ -1536,7 +1520,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var cards = (0, _gsap.gsap).utils.toArray(".cards iframe");
     (0, _gsap.gsap).set(cards, {
         yPercent: function(i, target, targets) {
-            return i != 0 ? 240 : 0;
+            return i != 0 ? 420 : 0;
         }
     });
     // Scroll cards vertically
@@ -1562,13 +1546,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // Cover the fourth section
     stackedSections.to("#section-5", {
         yPercent: 0,
-        ease: "none"
-    });
-    // Setup panels
-    var panels = (0, _gsap.gsap).utils.toArray(".panel");
-    // Scroll panels horizontally
-    stackedSections.to(panels, {
-        xPercent: -100 * (panels.length - 1),
         ease: "none"
     });
     // Cover fifth section

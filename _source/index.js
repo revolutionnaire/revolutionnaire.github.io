@@ -5,29 +5,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Setup GSAP
   gsap.registerPlugin(ScrollTrigger);
 
-  // Introduction animation of the first section
-  const firstSectionIn = gsap.timeline();
-
-  // Fade in each phrase of the paragraph
-  firstSectionIn.from('#phrase-1', {
-    opacity: 0
-  });
-
-  firstSectionIn.from('#phrase-2', {
-    opacity: 0
-  },
-  '+=0.25');
-
-  firstSectionIn.from('#phrase-3', {
-    opacity: 0
-  },
-  '+=0.25');
-
-  firstSectionIn.from('#section-1 .button', {
-    opacity: 0
-  },
-  '+=0.25');
-
   // Exit animation of the first section on scroll
   const firstSectionMM = gsap.matchMedia();
   const firstSectionOut = gsap.timeline({
@@ -48,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
     let { isMobile, isDesktop } = context.conditions;
 
     firstSectionOut.to('h1', {
-      color: '#FFF',
       xPercent: isDesktop ? -20 : -712,
       yPercent: isDesktop ? 3000 : 2000,
       scale: isDesktop ?  206 : 100,
@@ -74,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Setup cards
   const cards = gsap.utils.toArray('.cards iframe');
-  gsap.set(cards, { yPercent: (i, target, targets) => i != 0 ? 240 : 0 });
+  gsap.set(cards, { yPercent: (i, target, targets) => i != 0 ? 420 : 0 });
 
   // Scroll cards vertically
   cards.forEach((card, i) => {
@@ -105,15 +81,6 @@ document.addEventListener('DOMContentLoaded', function() {
     yPercent: 0,
     ease: 'none'
   })
-
-  // Setup panels
-  const panels = gsap.utils.toArray('.panel');
-
-  // Scroll panels horizontally
-  stackedSections.to(panels, {
-    xPercent: -100 * (panels.length - 1),
-    ease: 'none'
-  });
 
   // Cover fifth section
   stackedSections.to(simultaneous, {

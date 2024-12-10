@@ -9,6 +9,7 @@
 
 body {
   background: #000;
+  color: #D9D6D2;
 }
 
 article header,
@@ -27,24 +28,41 @@ h4,
 h5,
 h6,
 p,
-li {
+blockquote,
+figcaption {
   font-family: 'Poppins', sans-serif;
   font-weight: 900;
   font-kerning: auto;
   text-rendering: optimizeLegibility;
 }
 
-h3 {
+h1,
+h2,
+h3,
+blockquote {
   font-size: 2rem;
 }
 
+blockquote {
+  margin-block-start: 0;
+  margin-inline: 0;
+}
+
 a {
-  color: #FFF;
+  color: #E34234;
   text-decoration: none;
+
+  &.light {
+    color: #FFAE98;
+  }
 
   &:hover {
     text-decoration: underline;
   }
+}
+
+cite {
+  font-style: normal;
 }
 
 .background {
@@ -55,14 +73,14 @@ a {
   right: 50%;
   transform: translate(50%, -50%);
 
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: 768px) and (orientation: landscape) {
     width: 100%;
     height: auto;
   }
 }
 
-.text-white {
-  color: #FFF;
+.text-negative {
+  color: #0D0D0D;
 }
 
 .text-center {
@@ -83,31 +101,31 @@ a {
 
 .button {
   width: max-content;
-  background-color: #FFF;
-  color: #000;
+  background-color: #E34234;
+  color: #D9D6D2;
   font-family: 'Poppins', sans-serif;
   padding: 12px;
   border: none;
 
   &:hover {
-    background-color: #000;
-    color: #FFF;
+    background-color: #D9D6D2;
+    color: #E34234;
     text-decoration: none;
   }
 }
 
 .violator {
   width: calc(60vh - 24px);
-  background-color: #FFF;
-  color: #000;
+  background-color: #E34234;
+  color: #D9D6D2;
   font-size: 2rem;
   padding: calc((60vh - 6rem * 1.15) / 2) 12px;
   border-radius: 50%;
   display: block;
 
   &:hover {
-    background-color: #000;
-    color: #FFF;
+    background-color: #D9D6D2;
+    color: #E34234;
     text-decoration: none;
   }
 }
@@ -135,11 +153,11 @@ a {
   animation: 0.5s cubic-bezier(.83, .67, .17, .67) 0s infinite alternate both running hop;
 
   > path {
-    fill: #FFF;
+    fill: #D9D6D2;
   }
 
   &.reverse path {
-    fill: #000;
+    fill: #0D0D0D;
   }
 }
 
@@ -178,7 +196,7 @@ a {
 #confirmation article section,
 #error article header,
 #error article section {
-  color: #FFF;
+  color: #D9D6D2;
   width: calc(100vw - 24px);
   height: auto;
   margin: 0 auto;
@@ -189,56 +207,30 @@ a {
 }
 
 #confirmation h1 {
-  color: #F0F;
+  color: #403B36;
   font-size: 2rem;
   margin-top: 0;
   margin-bottom: 0;
 }
 
-#section-1 {
-  h1 {
-    color: #0FFF;
-  }
-
-  .button {
-    transform: translate(50%, 4rem);
-  }
-
-  svg > path {
-    fill: #0FF;
-  }
+#section-1 .button {
+  transform: translate(50%, 4rem);
 }
 
 #section-2 {
-  background: #FFF;
-
-  svg > path {
-    fill: #F0F;
-  }
-}
-
-#section-3 svg > path {
-  fill: #FF0;
+  background: #D9D6D2;
 }
 
 #section-4 {
-  background-color: #0FFF;
-
-  svg > path {
-    fill: #000;
-  }
+  background-color: #BFBAB0;
 }
 
 #section-5 {
-  background-color: #F0F;
-
-  svg > path {
-    fill: #000;
-  }
+  background-color: #736B65;
 }
 
 #section-6 {
-  background-color: #FF0;
+  background-color: #D9D6D2;
 
   .calendly-inline-widget {
     position: absolute;
@@ -249,11 +241,10 @@ a {
 
 #introduction,
 #works,
-#social-media,
-#experience,
-#services {
+#socialMedia,
+#services,
+#testimonial {
   width: calc(100vw - 24px);
-  font-size: 2rem;
   margin: 0 auto;
 
   // For iPad mini and larger screens
@@ -263,31 +254,14 @@ a {
 }
 
 #introduction {
-  color: #0FF;
   z-index: 2;
 }
 
 #works {
-  color: #F0F;
   margin-top: 8rem;
 
   @media only screen and (min-width: 768px) {
     margin-top: 10rem;
-  }
-}
-
-#social-media {
-  color: #FF0;
-}
-
-#services {
-  position: absolute;
-  top: 8rem;
-  right: 50%;
-  transform: translateX(50%);
-
-  @media only screen and (min-width: 768px) {
-    top: 10rem;
   }
 }
 
