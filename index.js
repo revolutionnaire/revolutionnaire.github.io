@@ -1485,7 +1485,7 @@ document.addEventListener("DOMContentLoaded", function() {
         var _context_conditions = context.conditions, isMobile = _context_conditions.isMobile, isDesktop = _context_conditions.isDesktop;
         firstSectionOut.to("h1", {
             xPercent: isDesktop ? -20 : -712,
-            yPercent: isDesktop ? 3000 : 2000,
+            yPercent: isDesktop ? 3000 : 3000,
             scale: isDesktop ? 206 : 100,
             ease: "none"
         });
@@ -1516,6 +1516,19 @@ document.addEventListener("DOMContentLoaded", function() {
             pin: true
         }
     });
+    // Uncover the third section
+    stackedSections.to("#section-2", {
+        yPercent: -100,
+        ease: "none"
+    });
+    // Setup sub-stacked and simultaneous sections
+    var simultaneous = (0, _gsap.gsap).utils.toArray(".stack .simultaneous");
+    var substack = (0, _gsap.gsap).utils.toArray(".stack .sub");
+    // Cover the third section
+    stackedSections.to("#section-4", {
+        yPercent: 0,
+        ease: "none"
+    });
     // Setup cards
     var cards = (0, _gsap.gsap).utils.toArray(".cards iframe");
     (0, _gsap.gsap).set(cards, {
@@ -1529,19 +1542,6 @@ document.addEventListener("DOMContentLoaded", function() {
             yPercent: i * 2,
             ease: "none"
         });
-    });
-    // Uncover the third section
-    stackedSections.to("#section-2", {
-        yPercent: -100,
-        ease: "none"
-    });
-    // Setup sub-stacked and simultaneous sections
-    var simultaneous = (0, _gsap.gsap).utils.toArray(".stack .simultaneous");
-    var substack = (0, _gsap.gsap).utils.toArray(".stack .sub");
-    // Cover the third section
-    stackedSections.to("#section-4", {
-        yPercent: 0,
-        ease: "none"
     });
     // Cover the fourth section
     stackedSections.to("#section-5", {

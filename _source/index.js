@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     firstSectionOut.to('h1', {
       xPercent: isDesktop ? -20 : -712,
-      yPercent: isDesktop ? 3000 : 2000,
+      yPercent: isDesktop ? 3000 : 3000,
       scale: isDesktop ?  206 : 100,
       ease: 'none'
     });
@@ -48,18 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Setup cards
-  const cards = gsap.utils.toArray('.cards iframe');
-  gsap.set(cards, { yPercent: (i, target, targets) => i != 0 ? 420 : 0 });
-
-  // Scroll cards vertically
-  cards.forEach((card, i) => {
-    stackedSections.to(card, {
-      yPercent: i * 2,
-      ease: 'none'
-    });
-  });
-
   // Uncover the third section
   stackedSections.to('#section-2', {
     yPercent: -100,
@@ -75,6 +63,18 @@ document.addEventListener('DOMContentLoaded', function() {
     yPercent: 0,
     ease: 'none'
   })
+
+  // Setup cards
+  const cards = gsap.utils.toArray('.cards iframe');
+  gsap.set(cards, { yPercent: (i, target, targets) => i != 0 ? 420 : 0 });
+
+  // Scroll cards vertically
+  cards.forEach((card, i) => {
+    stackedSections.to(card, {
+      yPercent: i * 2,
+      ease: 'none'
+    });
+  });
 
   // Cover the fourth section
   stackedSections.to('#section-5', {
