@@ -73,7 +73,7 @@
         localRequire,
         module,
         module.exports,
-        this
+        globalObject
       );
     }
 
@@ -142,7 +142,7 @@
       this[globalName] = mainExports;
     }
   }
-})({"3ri9N":[function(require,module,exports) {
+})({"4AmVa":[function(require,module,exports,__globalThis) {
 var _asyncToGenerator = require("@swc/helpers/_/_async_to_generator");
 var _toConsumableArray = require("@swc/helpers/_/_to_consumable_array");
 var _tsGenerator = require("@swc/helpers/_/_ts_generator");
@@ -200,7 +200,7 @@ declare var __parcel__import__: (string) => Promise<void>;
 declare var __parcel__importScripts__: (string) => Promise<void>;
 declare var globalThis: typeof self;
 declare var ServiceWorkerGlobalScope: Object;
-*/ var OVERLAY_ID = "__parcel__error__overlay__";
+*/ var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
 function Module(moduleName) {
     OldModule.call(this, moduleName);
@@ -219,112 +219,115 @@ function Module(moduleName) {
 }
 module.bundle.Module = Module;
 module.bundle.hotData = {};
-var checkedAssets /*: {|[string]: boolean|} */ , assetsToDispose /*: Array<[ParcelRequire, string]> */ , assetsToAccept /*: Array<[ParcelRequire, string]> */ ;
+var checkedAssets /*: {|[string]: boolean|} */ , disposedAssets /*: {|[string]: boolean|} */ , assetsToDispose /*: Array<[ParcelRequire, string]> */ , assetsToAccept /*: Array<[ParcelRequire, string]> */ ;
 function getHostname() {
-    return HMR_HOST || (location.protocol.indexOf("http") === 0 ? location.hostname : "localhost");
+    return HMR_HOST || (location.protocol.indexOf('http') === 0 ? location.hostname : 'localhost');
 }
 function getPort() {
     return HMR_PORT || location.port;
 }
 // eslint-disable-next-line no-redeclare
 var parent = module.bundle.parent;
-if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== "undefined") {
+if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
     var hostname = getHostname();
     var port = getPort();
-    var protocol = HMR_SECURE || location.protocol == "https:" && ![
-        "localhost",
-        "127.0.0.1",
-        "0.0.0.0"
-    ].includes(hostname) ? "wss" : "ws";
+    var protocol = HMR_SECURE || location.protocol == 'https:' && ![
+        'localhost',
+        '127.0.0.1',
+        '0.0.0.0'
+    ].includes(hostname) ? 'wss' : 'ws';
     var ws;
-    if (HMR_USE_SSE) ws = new EventSource("/__parcel_hmr");
+    if (HMR_USE_SSE) ws = new EventSource('/__parcel_hmr');
     else try {
-        ws = new WebSocket(protocol + "://" + hostname + (port ? ":" + port : "") + "/");
+        ws = new WebSocket(protocol + '://' + hostname + (port ? ':' + port : '') + '/');
     } catch (err) {
         if (err.message) console.error(err.message);
         ws = {};
     }
     // Web extension context
-    var extCtx = typeof browser === "undefined" ? typeof chrome === "undefined" ? null : chrome : browser;
+    var extCtx = typeof browser === 'undefined' ? typeof chrome === 'undefined' ? null : chrome : browser;
     // Safari doesn't support sourceURL in error stacks.
     // eval may also be disabled via CSP, so do a quick check.
     var supportsSourceURL = false;
     try {
         (0, eval)('throw new Error("test"); //# sourceURL=test.js');
     } catch (err) {
-        supportsSourceURL = err.stack.includes("test.js");
+        supportsSourceURL = err.stack.includes('test.js');
     }
     // $FlowFixMe
-    ws.onmessage = function() {
+    ws.onmessage = /*#__PURE__*/ function() {
         var _ref = (0, _asyncToGenerator._)(function(event /*: {data: string, ...} */ ) {
-            var data /*: HMRMessage */ , assets, handled, processedAssets, i, id, i1, id1, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, ansiDiagnostic, stack, overlay;
+            var data /*: HMRMessage */ , assets, handled, processedAssets, i, id, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, ansiDiagnostic, stack, overlay;
             return (0, _tsGenerator._)(this, function(_state) {
                 switch(_state.label){
                     case 0:
                         checkedAssets = {} /*: {|[string]: boolean|} */ ;
+                        disposedAssets = {} /*: {|[string]: boolean|} */ ;
                         assetsToAccept = [];
                         assetsToDispose = [];
                         data = JSON.parse(event.data);
-                        if (!(data.type === "update")) return [
+                        if (!(data.type === 'reload')) return [
                             3,
-                            3
+                            1
+                        ];
+                        fullReload();
+                        return [
+                            3,
+                            4
+                        ];
+                    case 1:
+                        if (!(data.type === 'update')) return [
+                            3,
+                            4
                         ];
                         // Remove error overlay if there is one
-                        if (typeof document !== "undefined") removeErrorOverlay();
+                        if (typeof document !== 'undefined') removeErrorOverlay();
                         assets = data.assets.filter(function(asset) {
                             return asset.envHash === HMR_ENV_HASH;
                         });
                         // Handle HMR Update
                         handled = assets.every(function(asset) {
-                            return asset.type === "css" || asset.type === "js" && hmrAcceptCheck(module.bundle.root, asset.id, asset.depsByBundle);
+                            return asset.type === 'css' || asset.type === 'js' && hmrAcceptCheck(module.bundle.root, asset.id, asset.depsByBundle);
                         });
                         if (!handled) return [
                             3,
-                            2
+                            3
                         ];
                         console.clear();
                         // Dispatch custom event so other runtimes (e.g React Refresh) are aware.
-                        if (typeof window !== "undefined" && typeof CustomEvent !== "undefined") window.dispatchEvent(new CustomEvent("parcelhmraccept"));
+                        if (typeof window !== 'undefined' && typeof CustomEvent !== 'undefined') window.dispatchEvent(new CustomEvent('parcelhmraccept'));
                         return [
                             4,
                             hmrApplyUpdates(assets)
                         ];
-                    case 1:
+                    case 2:
                         _state.sent();
-                        // Dispose all old assets.
-                        processedAssets = {} /*: {|[string]: boolean|} */ ;
-                        for(i = 0; i < assetsToDispose.length; i++){
-                            id = assetsToDispose[i][1];
-                            if (!processedAssets[id]) {
-                                hmrDispose(assetsToDispose[i][0], id);
-                                processedAssets[id] = true;
-                            }
-                        }
+                        hmrDisposeQueue();
                         // Run accept callbacks. This will also re-execute other disposed assets in topological order.
                         processedAssets = {};
-                        for(i1 = 0; i1 < assetsToAccept.length; i1++){
-                            id1 = assetsToAccept[i1][1];
-                            if (!processedAssets[id1]) {
-                                hmrAccept(assetsToAccept[i1][0], id1);
-                                processedAssets[id1] = true;
+                        for(i = 0; i < assetsToAccept.length; i++){
+                            id = assetsToAccept[i][1];
+                            if (!processedAssets[id]) {
+                                hmrAccept(assetsToAccept[i][0], id);
+                                processedAssets[id] = true;
                             }
                         }
                         return [
                             3,
-                            3
+                            4
                         ];
-                    case 2:
-                        fullReload();
-                        _state.label = 3;
                     case 3:
-                        if (data.type === "error") {
+                        fullReload();
+                        _state.label = 4;
+                    case 4:
+                        if (data.type === 'error') {
                             _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
                             try {
                                 // Log parcel errors to console
                                 for(_iterator = data.diagnostics.ansi[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true){
                                     ansiDiagnostic = _step.value;
                                     stack = ansiDiagnostic.codeframe ? ansiDiagnostic.codeframe : ansiDiagnostic.stack;
-                                    console.error("\uD83D\uDEA8 [parcel]: " + ansiDiagnostic.message + "\n" + stack + "\n\n" + ansiDiagnostic.hints.join("\n"));
+                                    console.error("\uD83D\uDEA8 [parcel]: " + ansiDiagnostic.message + '\n' + stack + '\n\n' + ansiDiagnostic.hints.join('\n'));
                                 }
                             } catch (err) {
                                 _didIteratorError = true;
@@ -340,7 +343,7 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== "undefined") {
                                     }
                                 }
                             }
-                            if (typeof document !== "undefined") {
+                            if (typeof document !== 'undefined') {
                                 // Render the fancy html overlay
                                 removeErrorOverlay();
                                 overlay = createErrorOverlay(data.diagnostics.html);
@@ -375,7 +378,7 @@ function removeErrorOverlay() {
     }
 }
 function createErrorOverlay(diagnostics) {
-    var overlay = document.createElement("div");
+    var overlay = document.createElement('div');
     overlay.id = OVERLAY_ID;
     var errorHTML = '<div style="background: black; opacity: 0.85; font-size: 16px; color: white; position: fixed; height: 100%; width: 100%; top: 0px; left: 0px; padding: 30px; font-family: Menlo, Consolas, monospace; z-index: 9999;">';
     var _iteratorNormalCompletion = true, _didIteratorError = false, _iteratorError = undefined;
@@ -384,10 +387,10 @@ function createErrorOverlay(diagnostics) {
             var diagnostic = _step.value;
             var stack = diagnostic.frames.length ? diagnostic.frames.reduce(function(p, frame) {
                 return "".concat(p, '\n<a href="/__parcel_launch_editor?file=').concat(encodeURIComponent(frame.location), '" style="text-decoration: underline; color: #888" onclick="fetch(this.href); return false">').concat(frame.location, "</a>\n").concat(frame.code);
-            }, "") : diagnostic.stack;
+            }, '') : diagnostic.stack;
             errorHTML += '\n      <div>\n        <div style="font-size: 18px; font-weight: bold; margin-top: 20px;">\n          \uD83D\uDEA8 '.concat(diagnostic.message, "\n        </div>\n        <pre>").concat(stack, "</pre>\n        <div>\n          ").concat(diagnostic.hints.map(function(hint) {
-                return "<div>\uD83D\uDCA1 " + hint + "</div>";
-            }).join(""), "\n        </div>\n        ").concat(diagnostic.documentation ? '<div>\uD83D\uDCDD <a style="color: violet" href="'.concat(diagnostic.documentation, '" target="_blank">Learn more</a></div>') : "", "\n      </div>\n    ");
+                return "<div>\uD83D\uDCA1 " + hint + '</div>';
+            }).join(''), "\n        </div>\n        ").concat(diagnostic.documentation ? '<div>\uD83D\uDCDD <a style="color: violet" href="'.concat(diagnostic.documentation, '" target="_blank">Learn more</a></div>') : '', "\n      </div>\n    ");
         }
     } catch (err) {
         _didIteratorError = true;
@@ -403,12 +406,12 @@ function createErrorOverlay(diagnostics) {
             }
         }
     }
-    errorHTML += "</div>";
+    errorHTML += '</div>';
     overlay.innerHTML = errorHTML;
     return overlay;
 }
 function fullReload() {
-    if ("reload" in location) location.reload();
+    if ('reload' in location) location.reload();
     else if (extCtx && extCtx.runtime && extCtx.runtime.reload) extCtx.runtime.reload();
 }
 function getParents(bundle, id) /*: Array<[ParcelRequire, string]> */ {
@@ -427,15 +430,15 @@ function getParents(bundle, id) /*: Array<[ParcelRequire, string]> */ {
     return parents;
 }
 function updateLink(link) {
-    var href = link.getAttribute("href");
+    var href = link.getAttribute('href');
     if (!href) return;
     var newLink = link.cloneNode();
     newLink.onload = function() {
         if (link.parentNode !== null) // $FlowFixMe
         link.parentNode.removeChild(link);
     };
-    newLink.setAttribute("href", // $FlowFixMe
-    href.split("?")[0] + "?" + Date.now());
+    newLink.setAttribute('href', // $FlowFixMe
+    href.split('?')[0] + '?' + Date.now());
     // $FlowFixMe
     link.parentNode.insertBefore(newLink, link.nextSibling);
 }
@@ -446,9 +449,9 @@ function reloadCSS() {
         var links = document.querySelectorAll('link[rel="stylesheet"]');
         for(var i = 0; i < links.length; i++){
             // $FlowFixMe[incompatible-type]
-            var href /*: string */  = links[i].getAttribute("href");
+            var href /*: string */  = links[i].getAttribute('href');
             var hostname = getHostname();
-            var servedFromHMRServer = hostname === "localhost" ? new RegExp("^(https?:\\/\\/(0.0.0.0|127.0.0.1)|localhost):" + getPort()).test(href) : href.indexOf(hostname + ":" + getPort());
+            var servedFromHMRServer = hostname === 'localhost' ? new RegExp('^(https?:\\/\\/(0.0.0.0|127.0.0.1)|localhost):' + getPort()).test(href) : href.indexOf(hostname + ':' + getPort());
             var absolute = /^https?:\/\//i.test(href) && href.indexOf(location.origin) !== 0 && !servedFromHMRServer;
             if (!absolute) updateLink(links[i]);
         }
@@ -456,11 +459,11 @@ function reloadCSS() {
     }, 50);
 }
 function hmrDownload(asset) {
-    if (asset.type === "js") {
-        if (typeof document !== "undefined") {
-            var script = document.createElement("script");
-            script.src = asset.url + "?t=" + Date.now();
-            if (asset.outputFormat === "esmodule") script.type = "module";
+    if (asset.type === 'js') {
+        if (typeof document !== 'undefined') {
+            var script = document.createElement('script');
+            script.src = asset.url + '?t=' + Date.now();
+            if (asset.outputFormat === 'esmodule') script.type = 'module';
             return new Promise(function(resolve, reject) {
                 var _document$head;
                 script.onload = function() {
@@ -469,12 +472,12 @@ function hmrDownload(asset) {
                 script.onerror = reject;
                 (_document$head = document.head) === null || _document$head === void 0 || _document$head.appendChild(script);
             });
-        } else if (typeof importScripts === "function") {
+        } else if (typeof importScripts === 'function') {
             // Worker scripts
-            if (asset.outputFormat === "esmodule") return import(asset.url + "?t=" + Date.now());
+            if (asset.outputFormat === 'esmodule') return import(asset.url + '?t=' + Date.now());
             else return new Promise(function(resolve, reject) {
                 try {
-                    importScripts(asset.url + "?t=" + Date.now());
+                    importScripts(asset.url + '?t=' + Date.now());
                     resolve();
                 } catch (err) {
                     reject(err);
@@ -509,7 +512,7 @@ function _hmrApplyUpdates() {
                         var _hmrDownload;
                         return (_hmrDownload = hmrDownload(asset)) === null || _hmrDownload === void 0 ? void 0 : _hmrDownload.catch(function(err) {
                             // Web extension fix
-                            if (extCtx && extCtx.runtime && extCtx.runtime.getManifest().manifest_version == 3 && typeof ServiceWorkerGlobalScope != "undefined" && global instanceof ServiceWorkerGlobalScope) {
+                            if (extCtx && extCtx.runtime && extCtx.runtime.getManifest().manifest_version == 3 && typeof ServiceWorkerGlobalScope != 'undefined' && global instanceof ServiceWorkerGlobalScope) {
                                 extCtx.runtime.reload();
                                 return;
                             }
@@ -554,8 +557,8 @@ function _hmrApplyUpdates() {
 function hmrApply(bundle /*: ParcelRequire */ , asset /*:  HMRAsset */ ) {
     var modules = bundle.modules;
     if (!modules) return;
-    if (asset.type === "css") reloadCSS();
-    else if (asset.type === "js") {
+    if (asset.type === 'css') reloadCSS();
+    else if (asset.type === 'js') {
         var deps = asset.depsByBundle[bundle.HMR_BUNDLE_ID];
         if (deps) {
             if (modules[asset.id]) {
@@ -577,7 +580,10 @@ function hmrApply(bundle /*: ParcelRequire */ , asset /*:  HMRAsset */ ) {
                 fn,
                 deps
             ];
-        } else if (bundle.parent) hmrApply(bundle.parent, asset);
+        }
+        // Always traverse to the parent bundle, even if we already replaced the asset in this bundle.
+        // This is required in case modules are duplicated. We need to ensure all instances have the updated code.
+        if (bundle.parent) hmrApply(bundle.parent, asset);
     }
 }
 function hmrDelete(bundle, id) {
@@ -648,6 +654,17 @@ function hmrAcceptCheckOne(bundle /*: ParcelRequire */ , id /*: string */ , deps
         return true;
     }
 }
+function hmrDisposeQueue() {
+    // Dispose all old assets.
+    for(var i = 0; i < assetsToDispose.length; i++){
+        var id = assetsToDispose[i][1];
+        if (!disposedAssets[id]) {
+            hmrDispose(assetsToDispose[i][0], id);
+            disposedAssets[id] = true;
+        }
+    }
+    assetsToDispose = [];
+}
 function hmrDispose(bundle /*: ParcelRequire */ , id /*: string */ ) {
     var cached = bundle.cache[id];
     bundle.hotData[id] = {};
@@ -662,26 +679,28 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
     bundle(id);
     // Run the accept callbacks in the new version of the module.
     var cached = bundle.cache[id];
-    if (cached && cached.hot && cached.hot._acceptCallbacks.length) cached.hot._acceptCallbacks.forEach(function(cb) {
-        var assetsToAlsoAccept = cb(function() {
-            return getParents(module.bundle.root, id);
-        });
-        if (assetsToAlsoAccept && assetsToAccept.length) {
-            assetsToAlsoAccept.forEach(function(a) {
-                hmrDispose(a[0], a[1]);
+    if (cached && cached.hot && cached.hot._acceptCallbacks.length) {
+        var assetsToAlsoAccept = [];
+        cached.hot._acceptCallbacks.forEach(function(cb) {
+            var _assetsToAlsoAccept;
+            var additionalAssets = cb(function() {
+                return getParents(module.bundle.root, id);
             });
-            // $FlowFixMe[method-unbinding]
-            assetsToAccept.push.apply(assetsToAccept, assetsToAlsoAccept);
+            if (Array.isArray(additionalAssets) && additionalAssets.length) (_assetsToAlsoAccept = assetsToAlsoAccept).push.apply(_assetsToAlsoAccept, (0, _toConsumableArray._)(additionalAssets));
+        });
+        if (assetsToAlsoAccept.length) {
+            var handled = assetsToAlsoAccept.every(function(a) {
+                return hmrAcceptCheck(a[0], a[1]);
+            });
+            if (!handled) return fullReload();
+            hmrDisposeQueue();
         }
-    });
+    }
 }
 
-},{"@swc/helpers/_/_async_to_generator":"cKNxR","@swc/helpers/_/_to_consumable_array":"4hSnh","@swc/helpers/_/_ts_generator":"amoyQ"}],"cKNxR":[function(require,module,exports) {
+},{"@swc/helpers/_/_async_to_generator":"cKNxR","@swc/helpers/_/_to_consumable_array":"4hSnh","@swc/helpers/_/_ts_generator":"amoyQ"}],"cKNxR":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_async_to_generator", function() {
-    return _async_to_generator;
-});
 parcelHelpers.export(exports, "_", function() {
     return _async_to_generator;
 });
@@ -712,20 +731,20 @@ function _async_to_generator(fn) {
     };
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"hyCVi":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"hyCVi":[function(require,module,exports,__globalThis) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
     };
 };
 exports.defineInteropFlag = function(a) {
-    Object.defineProperty(a, "__esModule", {
+    Object.defineProperty(a, '__esModule', {
         value: true
     });
 };
 exports.exportAll = function(source, dest) {
     Object.keys(source).forEach(function(key) {
-        if (key === "default" || key === "__esModule" || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        if (key === 'default' || key === '__esModule' || Object.prototype.hasOwnProperty.call(dest, key)) return;
         Object.defineProperty(dest, key, {
             enumerable: true,
             get: function get() {
@@ -742,12 +761,9 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"4hSnh":[function(require,module,exports) {
+},{}],"4hSnh":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_to_consumable_array", function() {
-    return _to_consumable_array;
-});
 parcelHelpers.export(exports, "_", function() {
     return _to_consumable_array;
 });
@@ -756,29 +772,23 @@ var _iterableToArrayJs = require("./_iterable_to_array.js");
 var _nonIterableSpreadJs = require("./_non_iterable_spread.js");
 var _unsupportedIterableToArrayJs = require("./_unsupported_iterable_to_array.js");
 function _to_consumable_array(arr) {
-    return (0, _arrayWithoutHolesJs._array_without_holes)(arr) || (0, _iterableToArrayJs._iterable_to_array)(arr) || (0, _unsupportedIterableToArrayJs._unsupported_iterable_to_array)(arr) || (0, _nonIterableSpreadJs._non_iterable_spread)();
+    return (0, _arrayWithoutHolesJs._)(arr) || (0, _iterableToArrayJs._)(arr) || (0, _unsupportedIterableToArrayJs._)(arr) || (0, _nonIterableSpreadJs._)();
 }
 
-},{"./_array_without_holes.js":"1C3Al","./_iterable_to_array.js":"kOxUi","./_non_iterable_spread.js":"fpqcW","./_unsupported_iterable_to_array.js":"3cHFn","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"1C3Al":[function(require,module,exports) {
+},{"./_array_without_holes.js":"1C3Al","./_iterable_to_array.js":"kOxUi","./_non_iterable_spread.js":"fpqcW","./_unsupported_iterable_to_array.js":"3cHFn","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"1C3Al":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_array_without_holes", function() {
-    return _array_without_holes;
-});
 parcelHelpers.export(exports, "_", function() {
     return _array_without_holes;
 });
 var _arrayLikeToArrayJs = require("./_array_like_to_array.js");
 function _array_without_holes(arr) {
-    if (Array.isArray(arr)) return (0, _arrayLikeToArrayJs._array_like_to_array)(arr);
+    if (Array.isArray(arr)) return (0, _arrayLikeToArrayJs._)(arr);
 }
 
-},{"./_array_like_to_array.js":"do0Di","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"do0Di":[function(require,module,exports) {
+},{"./_array_like_to_array.js":"do0Di","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"do0Di":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_array_like_to_array", function() {
-    return _array_like_to_array;
-});
 parcelHelpers.export(exports, "_", function() {
     return _array_like_to_array;
 });
@@ -788,12 +798,9 @@ function _array_like_to_array(arr, len) {
     return arr2;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"kOxUi":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"kOxUi":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_iterable_to_array", function() {
-    return _iterable_to_array;
-});
 parcelHelpers.export(exports, "_", function() {
     return _iterable_to_array;
 });
@@ -801,12 +808,9 @@ function _iterable_to_array(iter) {
     if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"fpqcW":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"fpqcW":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_non_iterable_spread", function() {
-    return _non_iterable_spread;
-});
 parcelHelpers.export(exports, "_", function() {
     return _non_iterable_spread;
 });
@@ -814,37 +818,31 @@ function _non_iterable_spread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"3cHFn":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"3cHFn":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_unsupported_iterable_to_array", function() {
-    return _unsupported_iterable_to_array;
-});
 parcelHelpers.export(exports, "_", function() {
     return _unsupported_iterable_to_array;
 });
 var _arrayLikeToArrayJs = require("./_array_like_to_array.js");
 function _unsupported_iterable_to_array(o, minLen) {
     if (!o) return;
-    if (typeof o === "string") return (0, _arrayLikeToArrayJs._array_like_to_array)(o, minLen);
+    if (typeof o === "string") return (0, _arrayLikeToArrayJs._)(o, minLen);
     var n = Object.prototype.toString.call(o).slice(8, -1);
     if (n === "Object" && o.constructor) n = o.constructor.name;
     if (n === "Map" || n === "Set") return Array.from(n);
-    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return (0, _arrayLikeToArrayJs._array_like_to_array)(o, minLen);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return (0, _arrayLikeToArrayJs._)(o, minLen);
 }
 
-},{"./_array_like_to_array.js":"do0Di","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"amoyQ":[function(require,module,exports) {
+},{"./_array_like_to_array.js":"do0Di","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"amoyQ":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "_", function() {
     return 0, _tslib.__generator;
 });
-parcelHelpers.export(exports, "_ts_generator", function() {
-    return 0, _tslib.__generator;
-});
 var _tslib = require("tslib");
 
-},{"tslib":"7nZGt","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"7nZGt":[function(require,module,exports) {
+},{"tslib":"7nZGt","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"7nZGt":[function(require,module,exports,__globalThis) {
 /******************************************************************************
 Copyright (c) Microsoft Corporation.
 
@@ -858,7 +856,7 @@ INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
 LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */ /* global Reflect, Promise, SuppressedError, Symbol */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+***************************************************************************** */ /* global Reflect, Promise, SuppressedError, Symbol, Iterator */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "__extends", function() {
     return __extends;
@@ -953,6 +951,9 @@ parcelHelpers.export(exports, "__addDisposableResource", function() {
 parcelHelpers.export(exports, "__disposeResources", function() {
     return __disposeResources;
 });
+parcelHelpers.export(exports, "__rewriteRelativeImportExtension", function() {
+    return __rewriteRelativeImportExtension;
+});
 var _typeOf = require("@swc/helpers/_/_type_of");
 var extendStatics = function extendStatics1(d, b) {
     extendStatics = Object.setPrototypeOf || ({
@@ -992,7 +993,7 @@ function __rest(s, e) {
 }
 function __decorate(decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    if ((typeof Reflect === "undefined" ? "undefined" : (0, _typeOf._)(Reflect)) === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for(var i = decorators.length - 1; i >= 0; i--)if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 }
@@ -1024,7 +1025,7 @@ function __esDecorate(ctor, descriptorIn, decorators, contextIn, initializers, e
         } : descriptor[key], context);
         if (kind === "accessor") {
             if (result === void 0) continue;
-            if (result === null || typeof result !== "object") throw new TypeError("Object expected");
+            if (result === null || (typeof result === "undefined" ? "undefined" : (0, _typeOf._)(result)) !== "object") throw new TypeError("Object expected");
             if (_ = accept(result.get)) descriptor.get = _;
             if (_ = accept(result.set)) descriptor.set = _;
             if (_ = accept(result.init)) initializers.unshift(_);
@@ -1052,7 +1053,7 @@ function __setFunctionName(f, name, prefix) {
     });
 }
 function __metadata(metadataKey, metadataValue) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+    if ((typeof Reflect === "undefined" ? "undefined" : (0, _typeOf._)(Reflect)) === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
 }
 function __awaiter(thisArg, _arguments, P, generator) {
     function adopt(value) {
@@ -1090,12 +1091,8 @@ function __generator(thisArg, body) {
         },
         trys: [],
         ops: []
-    }, f, y, t, g;
-    return g = {
-        next: verb(0),
-        "throw": verb(1),
-        "return": verb(2)
-    }, typeof Symbol === "function" && (g[Symbol.iterator] = function() {
+    }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() {
         return this;
     }), g;
     function verb(n) {
@@ -1250,20 +1247,28 @@ function __await(v) {
 function __asyncGenerator(thisArg, _arguments, generator) {
     if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
     var g = generator.apply(thisArg, _arguments || []), i, q = [];
-    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function() {
+    return i = Object.create((typeof AsyncIterator === "function" ? AsyncIterator : Object).prototype), verb("next"), verb("throw"), verb("return", awaitReturn), i[Symbol.asyncIterator] = function() {
         return this;
     }, i;
-    function verb(n) {
-        if (g[n]) i[n] = function(v) {
-            return new Promise(function(a, b) {
-                q.push([
-                    n,
-                    v,
-                    a,
-                    b
-                ]) > 1 || resume(n, v);
-            });
+    function awaitReturn(f) {
+        return function(v) {
+            return Promise.resolve(v).then(f, reject);
         };
+    }
+    function verb(n, f) {
+        if (g[n]) {
+            i[n] = function(v) {
+                return new Promise(function(a, b) {
+                    q.push([
+                        n,
+                        v,
+                        a,
+                        b
+                    ]) > 1 || resume(n, v);
+                });
+            };
+            if (f) i[n] = f(i[n]);
+        }
     }
     function resume(n, v) {
         try {
@@ -1338,11 +1343,19 @@ var __setModuleDefault = Object.create ? function __setModuleDefault(o, v) {
 } : function(o, v) {
     o["default"] = v;
 };
+var ownKeys = function ownKeys1(o) {
+    ownKeys = Object.getOwnPropertyNames || function(o) {
+        var ar = [];
+        for(var k in o)if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+        return ar;
+    };
+    return ownKeys(o);
+};
 function __importStar(mod) {
     if (mod && mod.__esModule) return mod;
     var result = {};
     if (mod != null) {
-        for(var k in mod)if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+        for(var k = ownKeys(mod), i = 0; i < k.length; i++)if (k[i] !== "default") __createBinding(result, mod, k[i]);
     }
     __setModuleDefault(result, mod);
     return result;
@@ -1364,13 +1377,13 @@ function __classPrivateFieldSet(receiver, state, value, kind, f) {
     return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
 }
 function __classPrivateFieldIn(state, receiver) {
-    if (receiver === null || typeof receiver !== "object" && typeof receiver !== "function") throw new TypeError("Cannot use 'in' operator on non-object");
+    if (receiver === null || (typeof receiver === "undefined" ? "undefined" : (0, _typeOf._)(receiver)) !== "object" && typeof receiver !== "function") throw new TypeError("Cannot use 'in' operator on non-object");
     return typeof state === "function" ? receiver === state : state.has(receiver);
 }
 function __addDisposableResource(env, value, async) {
     if (value !== null && value !== void 0) {
-        if (typeof value !== "object" && typeof value !== "function") throw new TypeError("Object expected.");
-        var dispose;
+        if ((typeof value === "undefined" ? "undefined" : (0, _typeOf._)(value)) !== "object" && typeof value !== "function") throw new TypeError("Object expected.");
+        var dispose, inner;
         if (async) {
             if (!Symbol.asyncDispose) throw new TypeError("Symbol.asyncDispose is not defined.");
             dispose = value[Symbol.asyncDispose];
@@ -1378,8 +1391,16 @@ function __addDisposableResource(env, value, async) {
         if (dispose === void 0) {
             if (!Symbol.dispose) throw new TypeError("Symbol.dispose is not defined.");
             dispose = value[Symbol.dispose];
+            if (async) inner = dispose;
         }
         if (typeof dispose !== "function") throw new TypeError("Object not disposable.");
+        if (inner) dispose = function dispose() {
+            try {
+                inner.call(this);
+            } catch (e) {
+                return Promise.reject(e);
+            }
+        };
         env.stack.push({
             value: value,
             dispose: dispose,
@@ -1399,22 +1420,30 @@ function __disposeResources(env) {
         env.error = env.hasError ? new _SuppressedError(e, env.error, "An error was suppressed during disposal.") : e;
         env.hasError = true;
     }
+    var r, s = 0;
     function next() {
-        while(env.stack.length){
-            var rec = env.stack.pop();
-            try {
-                var result = rec.dispose && rec.dispose.call(rec.value);
-                if (rec.async) return Promise.resolve(result).then(next, function(e) {
+        while(r = env.stack.pop())try {
+            if (!r.async && s === 1) return s = 0, env.stack.push(r), Promise.resolve().then(next);
+            if (r.dispose) {
+                var result = r.dispose.call(r.value);
+                if (r.async) return s |= 2, Promise.resolve(result).then(next, function(e) {
                     fail(e);
                     return next();
                 });
-            } catch (e) {
-                fail(e);
-            }
+            } else s |= 1;
+        } catch (e) {
+            fail(e);
         }
+        if (s === 1) return env.hasError ? Promise.reject(env.error) : Promise.resolve();
         if (env.hasError) throw env.error;
     }
     return next();
+}
+function __rewriteRelativeImportExtension(path, preserveJsx) {
+    if (typeof path === "string" && /^\.\.?\//.test(path)) return path.replace(/\.(tsx)$|((?:\.d)?)((?:\.[^./]+?)?)\.([cm]?)ts$/i, function(m, tsx, d, ext, cm) {
+        return tsx ? preserveJsx ? ".jsx" : ".js" : d && (!ext || !cm) ? m : d + ext + "." + cm.toLowerCase() + "js";
+    });
+    return path;
 }
 exports.default = {
     __extends: __extends,
@@ -1422,6 +1451,10 @@ exports.default = {
     __rest: __rest,
     __decorate: __decorate,
     __param: __param,
+    __esDecorate: __esDecorate,
+    __runInitializers: __runInitializers,
+    __propKey: __propKey,
+    __setFunctionName: __setFunctionName,
     __metadata: __metadata,
     __awaiter: __awaiter,
     __generator: __generator,
@@ -1443,15 +1476,13 @@ exports.default = {
     __classPrivateFieldSet: __classPrivateFieldSet,
     __classPrivateFieldIn: __classPrivateFieldIn,
     __addDisposableResource: __addDisposableResource,
-    __disposeResources: __disposeResources
+    __disposeResources: __disposeResources,
+    __rewriteRelativeImportExtension: __rewriteRelativeImportExtension
 };
 
-},{"@swc/helpers/_/_type_of":"7dHw6","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"7dHw6":[function(require,module,exports) {
+},{"@swc/helpers/_/_type_of":"7dHw6","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"7dHw6":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "_type_of", function() {
-    return _type_of;
-});
 parcelHelpers.export(exports, "_", function() {
     return _type_of;
 });
@@ -1460,41 +1491,56 @@ function _type_of(obj) {
     return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj;
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"1Ak3V":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"1Ak3V":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 var _gsap = require("gsap");
 var _scrollTrigger = require("gsap/ScrollTrigger");
-document.addEventListener("DOMContentLoaded", function() {
+var _lenis = require("lenis");
+var _lenisDefault = parcelHelpers.interopDefault(_lenis);
+document.addEventListener('DOMContentLoaded', function() {
     // Setup GSAP
     (0, _gsap.gsap).registerPlugin((0, _scrollTrigger.ScrollTrigger));
+    // Setup Lenis
+    var lenis = new (0, _lenisDefault.default)({
+        autoRaf: true
+    });
+    lenis.on('scroll', (0, _scrollTrigger.ScrollTrigger).update);
+    // Add Lenis's requestAnimationFrame (raf) method to GSAP's ticker
+    // This ensures Lenis's smooth scroll animation updates on each GSAP tick
+    (0, _gsap.gsap).ticker.add(function(time) {
+        lenis.raf(time * 1000); // Convert time from seconds to milliseconds
+    });
+    // Disable lag smoothing in GSAP to prevent any delay in scroll animations
+    (0, _gsap.gsap).ticker.lagSmoothing(0);
     // Exit animation of the first section on scroll
     var firstSectionMM = (0, _gsap.gsap).matchMedia();
     var firstSectionOut = (0, _gsap.gsap).timeline({
         scrollTrigger: {
-            trigger: "#section-2",
-            start: "top bottom",
-            end: "center center",
+            trigger: '#section-2',
+            start: 'top bottom',
+            end: 'center center',
             scrub: true,
-            pin: "#section-1",
+            pin: '#section-1',
             refreshPriority: 1
         }
     });
     firstSectionMM.add({
-        isMobile: "(min-width: 320px)",
-        isDesktop: "(min-width: 768px)"
+        isMobile: '(min-width: 320px)',
+        isDesktop: '(min-width: 768px)'
     }, function(context) {
         var _context_conditions = context.conditions, isMobile = _context_conditions.isMobile, isDesktop = _context_conditions.isDesktop;
-        firstSectionOut.to("h1", {
+        firstSectionOut.to('h1', {
             xPercent: isDesktop ? -20 : -712,
             yPercent: isDesktop ? 3000 : 3000,
             scale: isDesktop ? 206 : 100,
-            ease: "none"
+            ease: 'none'
         });
     });
     //Setup stacked sections
-    (0, _gsap.gsap).set(".stack section:first-child", {
+    (0, _gsap.gsap).set('.stack section:first-child', {
         zIndex: 2
     });
-    (0, _gsap.gsap).set(".stack .sub", {
+    (0, _gsap.gsap).set('.stack .sub', {
         zIndex: function(i, target, targets) {
             return i > 0 ? i + 3 : 1;
         },
@@ -1502,35 +1548,35 @@ document.addEventListener("DOMContentLoaded", function() {
             return i > 0 ? 100 : 0;
         }
     });
-    (0, _gsap.gsap).set(".stack footer", {
+    (0, _gsap.gsap).set('.stack footer', {
         zIndex: 0,
         yPercent: 100
     });
     // Animate the stacked sections on scroll
     var stackedSections = (0, _gsap.gsap).timeline({
         scrollTrigger: {
-            trigger: ".stack",
-            start: "top top",
-            end: "top+=300% top",
+            trigger: '.stack',
+            start: 'top top',
+            end: 'top+=300% top',
             scrub: true,
             pin: true
         }
     });
     // Uncover the third section
-    stackedSections.to("#section-2", {
+    stackedSections.to('#section-2', {
         yPercent: -100,
-        ease: "none"
+        ease: 'none'
     });
     // Setup sub-stacked and simultaneous sections
-    var simultaneous = (0, _gsap.gsap).utils.toArray(".stack .simultaneous");
-    var substack = (0, _gsap.gsap).utils.toArray(".stack .sub");
+    var simultaneous = (0, _gsap.gsap).utils.toArray('.stack .simultaneous');
+    var substack = (0, _gsap.gsap).utils.toArray('.stack .sub');
     // Cover the third section
-    stackedSections.to("#section-4", {
+    stackedSections.to('#section-4', {
         yPercent: 0,
-        ease: "none"
+        ease: 'none'
     });
     // Setup cards
-    var cards = (0, _gsap.gsap).utils.toArray(".cards iframe");
+    var cards = (0, _gsap.gsap).utils.toArray('.cards iframe');
     (0, _gsap.gsap).set(cards, {
         yPercent: function(i, target, targets) {
             return i != 0 ? 420 : 0;
@@ -1540,27 +1586,27 @@ document.addEventListener("DOMContentLoaded", function() {
     cards.forEach(function(card, i) {
         stackedSections.to(card, {
             yPercent: i * 2,
-            ease: "none"
+            ease: 'none'
         });
     });
     // Cover the fourth section
-    stackedSections.to("#section-5", {
+    stackedSections.to('#section-5', {
         yPercent: 0,
-        ease: "none"
+        ease: 'none'
     });
     // Cover fifth section
     stackedSections.to(simultaneous, {
         yPercent: 0,
-        ease: "none"
+        ease: 'none'
     });
     // Uncover footer
     stackedSections.to(substack, {
         yPercent: -100,
-        ease: "none"
+        ease: 'none'
     });
 });
 
-},{"gsap":"386gi","gsap/ScrollTrigger":"lSvcS"}],"386gi":[function(require,module,exports) {
+},{"gsap":"386gi","gsap/ScrollTrigger":"lSvcS","lenis":"5Zcv2","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"386gi":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "gsap", function() {
@@ -1643,7 +1689,7 @@ var _csspluginJs = require("./CSSPlugin.js");
 var gsapWithCSS = (0, _gsapCoreJs.gsap).registerPlugin((0, _csspluginJs.CSSPlugin)) || (0, _gsapCoreJs.gsap), // to protect from tree shaking
 TweenMaxWithCSS = gsapWithCSS.core.Tween;
 
-},{"./gsap-core.js":"aa2h4","./CSSPlugin.js":"iSNCE","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"aa2h4":[function(require,module,exports) {
+},{"./gsap-core.js":"aa2h4","./CSSPlugin.js":"iSNCE","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"aa2h4":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "GSCache", function() {
@@ -1854,6 +1900,7 @@ parcelHelpers.export(exports, "_colorExp", function() {
 parcelHelpers.export(exports, "_parseRelative", function() {
     return _parseRelative;
 });
+var _typeOf = require("@swc/helpers/_/_type_of");
 function _assertThisInitialized(self) {
     if (self === void 0) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
     return self;
@@ -1864,12 +1911,12 @@ function _inheritsLoose(subClass, superClass) {
     subClass.__proto__ = superClass;
 }
 /*!
- * GSAP 3.12.5
- * https://gsap.com
+ * GSAP 3.12.2
+ * https://greensock.com
  *
- * @license Copyright 2008-2024, GreenSock. All rights reserved.
- * Subject to the terms at https://gsap.com/standard-license or for
- * Club GSAP members, the agreement issued with that membership.
+ * @license Copyright 2008-2023, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
  * @author: Jack Doyle, jack@greensock.com
 */ /* eslint-disable */ var _config = {
     autoSleep: 120,
@@ -1891,7 +1938,7 @@ function _inheritsLoose(subClass, superClass) {
 }, _isUndefined = function _isUndefined(value) {
     return typeof value === "undefined";
 }, _isObject = function _isObject(value) {
-    return typeof value === "object";
+    return (typeof value === "undefined" ? "undefined" : (0, _typeOf._)(value)) === "object";
 }, _isNotFalse = function _isNotFalse(value) {
     return value !== false;
 }, _windowExists = function _windowExists() {
@@ -2300,7 +2347,7 @@ distribute = function distribute(v) {
             if (!wrapAt) {
                 max = -_bigNum;
                 while(max < (max = a[wrapAt++].getBoundingClientRect().left) && wrapAt < l);
-                wrapAt < l && wrapAt--;
+                wrapAt--;
             }
             distances = cache[l] = [];
             originX = ratios ? Math.min(wrapAt, l) * ratioX - .5 : from % wrapAt;
@@ -2471,10 +2518,9 @@ distribute = function distribute(v) {
     animation.progress() < 1 && _callback(animation, "onInterrupt");
     return animation;
 }, _quickTween, _registerPluginQueue = [], _createPlugin = function _createPlugin(config) {
-    if (!config) return;
-    config = !config.name && config["default"] || config; // UMD packaging wraps things oddly, so for example MotionPathHelper becomes {MotionPathHelper:MotionPathHelper, default:MotionPathHelper}.
-    if (_windowExists() || config.headless) {
+    if (_windowExists() && config) {
         // edge case: some build tools may pass in a null/undefined value
+        config = !config.name && config["default"] || config; //UMD packaging wraps things oddly, so for example MotionPathHelper becomes {MotionPathHelper:MotionPathHelper, default:MotionPathHelper}.
         var name = config.name, isFunc = _isFunction(config), Plugin = name && !isFunc && config.init ? function Plugin() {
             this._props = [];
         } : config, //in case someone passes in an object that's not a plugin, like CustomEase
@@ -2506,7 +2552,7 @@ distribute = function distribute(v) {
         }
         _addGlobal(name, Plugin);
         config.register && config.register(gsap, Plugin, PropTween);
-    } else _registerPluginQueue.push(config);
+    } else config && _registerPluginQueue.push(config);
 }, /*
  * --------------------------------------------------------------------------------------
  * COLORS
@@ -2741,7 +2787,7 @@ _hue = function _hue(h, m1, m2) {
  */ _tickerActive, _ticker = function() {
     var _getTime = Date.now, _lagThreshold = 500, _adjustedLag = 33, _startTime = _getTime(), _lastUpdate = _startTime, _gap = 1000 / 240, _nextTime = _gap, _listeners = [], _id, _req, _raf, _self, _delta, _i, _tick = function _tick(v) {
         var elapsed = _getTime() - _lastUpdate, manual = v === true, overlap, dispatch, time, frame;
-        (elapsed > _lagThreshold || elapsed < 0) && (_startTime += elapsed - _adjustedLag);
+        elapsed > _lagThreshold && (_startTime += elapsed - _adjustedLag);
         _lastUpdate += elapsed;
         time = _lastUpdate - _startTime;
         overlap = time - _nextTime;
@@ -2773,9 +2819,9 @@ _hue = function _hue(h, m1, m2) {
                     _globals.gsap = gsap;
                     (_win.gsapVersions || (_win.gsapVersions = [])).push(gsap.version);
                     _install(_installScope || _win.GreenSockGlobals || !_win.gsap && _win || {});
+                    _raf = _win.requestAnimationFrame;
                     _registerPluginQueue.forEach(_createPlugin);
                 }
-                _raf = typeof requestAnimationFrame !== "undefined" && requestAnimationFrame;
                 _id && _self.sleep();
                 _req = _raf || function(f) {
                     return setTimeout(f, _nextTime - _self.time * 1000 + 1 | 0);
@@ -2785,7 +2831,7 @@ _hue = function _hue(h, m1, m2) {
             }
         },
         sleep: function sleep() {
-            (_raf ? cancelAnimationFrame : clearTimeout)(_id);
+            (_raf ? _win.cancelAnimationFrame : clearTimeout)(_id);
             _tickerActive = 0;
             _req = _emptyFunc;
         },
@@ -3037,17 +3083,17 @@ var Animation = /*#__PURE__*/ function() {
         return arguments.length ? this.totalTime(Math.min(this.totalDuration(), value + _elapsedCycleDuration(this)) % (this._dur + this._rDelay) || (value ? this._dur : 0), suppressEvents) : this._time; // note: if the modulus results in 0, the playhead could be exactly at the end or the beginning, and we always defer to the END with a non-zero value, otherwise if you set the time() to the very end (duration()), it would render at the START!
     };
     _proto.totalProgress = function totalProgress(value, suppressEvents) {
-        return arguments.length ? this.totalTime(this.totalDuration() * value, suppressEvents) : this.totalDuration() ? Math.min(1, this._tTime / this._tDur) : this.rawTime() > 0 ? 1 : 0;
+        return arguments.length ? this.totalTime(this.totalDuration() * value, suppressEvents) : this.totalDuration() ? Math.min(1, this._tTime / this._tDur) : this.ratio;
     };
     _proto.progress = function progress(value, suppressEvents) {
-        return arguments.length ? this.totalTime(this.duration() * (this._yoyo && !(this.iteration() & 1) ? 1 - value : value) + _elapsedCycleDuration(this), suppressEvents) : this.duration() ? Math.min(1, this._time / this._dur) : this.rawTime() > 0 ? 1 : 0;
+        return arguments.length ? this.totalTime(this.duration() * (this._yoyo && !(this.iteration() & 1) ? 1 - value : value) + _elapsedCycleDuration(this), suppressEvents) : this.duration() ? Math.min(1, this._time / this._dur) : this.ratio;
     };
     _proto.iteration = function iteration(value, suppressEvents) {
         var cycleDuration = this.duration() + this._rDelay;
         return arguments.length ? this.totalTime(this._time + (value - 1) * cycleDuration, suppressEvents) : this._repeat ? _animationCycle(this._tTime, cycleDuration) + 1 : 1;
     } // potential future addition:
     ;
-    _proto.timeScale = function timeScale(value, suppressEvents) {
+    _proto.timeScale = function timeScale(value) {
         if (!arguments.length) return this._rts === -_tinyNum ? 0 : this._rts; // recorded timeScale. Special case: if someone calls reverse() on an animation with timeScale of 0, we assign it -_tinyNum to remember it's reversed.
         if (this._rts === value) return this;
         var tTime = this.parent && this._ts ? _parentToChildTotalTime(this.parent._time, this) : this._tTime; // make sure to do the parentToChildTotalTime() BEFORE setting the new _ts because the old one must be used in that calculation.
@@ -3056,7 +3102,7 @@ var Animation = /*#__PURE__*/ function() {
         // prioritize rendering where the parent's playhead lines up instead of this._tTime because there could be a tween that's animating another tween's timeScale in the same rendering loop (same parent), thus if the timeScale tween renders first, it would alter _start BEFORE _tTime was set on that tick (in the rendering loop), effectively freezing it until the timeScale tween finishes.
         this._rts = +value || 0;
         this._ts = this._ps || value === -_tinyNum ? 0 : this._rts; // _ts is the functional timeScale which would be 0 if the animation is paused.
-        this.totalTime(_clamp(-Math.abs(this._delay), this._tDur, tTime), suppressEvents !== false);
+        this.totalTime(_clamp(-Math.abs(this._delay), this._tDur, tTime), true);
         _setEnd(this); // if parent.smoothChildTiming was false, the end time didn't get updated in the _alignPlayhead() method, so do it here.
         return _recacheAncestors(this);
     };
@@ -3106,10 +3152,10 @@ var Animation = /*#__PURE__*/ function() {
     _proto.globalTime = function globalTime(rawTime) {
         var animation = this, time = arguments.length ? rawTime : animation.rawTime();
         while(animation){
-            time = animation._start + time / (Math.abs(animation._ts) || 1);
+            time = animation._start + time / (animation._ts || 1);
             animation = animation._dp;
         }
-        return !this.parent && this._sat ? this._sat.globalTime(rawTime) : time; // the _startAt tweens for .fromTo() and .from() that have immediateRender should always be FIRST in the timeline (important for context.revert()). "_sat" stands for _startAtTween, referring to the parent tween that created the _startAt. We must discern if that tween had immediateRender so that we can know whether or not to prioritize it in revert().
+        return !this.parent && this._sat ? this._sat.vars.immediateRender ? -Infinity : this._sat.globalTime(rawTime) : time; // the _startAt tweens for .fromTo() and .from() that have immediateRender should always be FIRST in the timeline (important for context.revert()). "_sat" stands for _startAtTween, referring to the parent tween that created the _startAt. We must discern if that tween had immediateRender so that we can know whether or not to prioritize it in revert().
     };
     _proto.repeat = function repeat(value) {
         if (arguments.length) {
@@ -3320,7 +3366,7 @@ var Timeline = /*#__PURE__*/ function(_Animation) {
                     time > dur && (time = dur);
                 }
                 prevIteration = _animationCycle(this._tTime, cycleDuration);
-                !prevTime && this._tTime && prevIteration !== iteration && this._tTime - prevIteration * cycleDuration - this._dur <= 0 && (prevIteration = iteration); // edge case - if someone does addPause() at the very beginning of a repeating timeline, that pause is technically at the same spot as the end which causes this._time to get set to 0 when the totalTime would normally place the playhead at the end. See https://gsap.com/forums/topic/23823-closing-nav-animation-not-working-on-ie-and-iphone-6-maybe-other-older-browser/?tab=comments#comment-113005 also, this._tTime - prevIteration * cycleDuration - this._dur <= 0 just checks to make sure it wasn't previously in the "repeatDelay" portion
+                !prevTime && this._tTime && prevIteration !== iteration && this._tTime - prevIteration * cycleDuration - this._dur <= 0 && (prevIteration = iteration); // edge case - if someone does addPause() at the very beginning of a repeating timeline, that pause is technically at the same spot as the end which causes this._time to get set to 0 when the totalTime would normally place the playhead at the end. See https://greensock.com/forums/topic/23823-closing-nav-animation-not-working-on-ie-and-iphone-6-maybe-other-older-browser/?tab=comments#comment-113005 also, this._tTime - prevIteration * cycleDuration - this._dur <= 0 just checks to make sure it wasn't previously in the "repeatDelay" portion
                 if (yoyo && iteration & 1) {
                     time = dur - time;
                     isYoyo = 1;
@@ -3750,7 +3796,7 @@ _processVars = function _processVars(vars, index, target, targets, tween) {
     return plugin;
 }, _overwritingTween, //store a reference temporarily so we can avoid overwriting itself.
 _forceAllPropTweens, _initTween = function _initTween(tween, time, tTime) {
-    var vars = tween.vars, ease = vars.ease, startAt = vars.startAt, immediateRender = vars.immediateRender, lazy = vars.lazy, onUpdate = vars.onUpdate, runBackwards = vars.runBackwards, yoyoEase = vars.yoyoEase, keyframes = vars.keyframes, autoRevert = vars.autoRevert, dur = tween._dur, prevStartAt = tween._startAt, targets = tween._targets, parent = tween.parent, fullTargets = parent && parent.data === "nested" ? parent.vars.targets : targets, autoOverwrite = tween._overwrite === "auto" && !_suppressOverwrites, tl = tween.timeline, cleanVars, i, p, pt, target, hasPriority, gsData, harness, plugin, ptLookup, index, harnessVars, overwritten;
+    var vars = tween.vars, ease = vars.ease, startAt = vars.startAt, immediateRender = vars.immediateRender, lazy = vars.lazy, onUpdate = vars.onUpdate, onUpdateParams = vars.onUpdateParams, callbackScope = vars.callbackScope, runBackwards = vars.runBackwards, yoyoEase = vars.yoyoEase, keyframes = vars.keyframes, autoRevert = vars.autoRevert, dur = tween._dur, prevStartAt = tween._startAt, targets = tween._targets, parent = tween.parent, fullTargets = parent && parent.data === "nested" ? parent.vars.targets : targets, autoOverwrite = tween._overwrite === "auto" && !_suppressOverwrites, tl = tween.timeline, cleanVars, i, p, pt, target, hasPriority, gsData, harness, plugin, ptLookup, index, harnessVars, overwritten;
     tl && (!keyframes || !ease) && (ease = "none");
     tween._ease = _parseEase(ease, _defaults.ease);
     tween._yEase = yoyoEase ? _invertEase(_parseEase(yoyoEase === true ? ease : yoyoEase, _defaults.ease)) : 0;
@@ -3781,9 +3827,9 @@ _forceAllPropTweens, _initTween = function _initTween(tween, time, tTime) {
                 lazy: !prevStartAt && _isNotFalse(lazy),
                 startAt: null,
                 delay: 0,
-                onUpdate: onUpdate && function() {
-                    return _callback(tween, "onUpdate");
-                },
+                onUpdate: onUpdate,
+                onUpdateParams: onUpdateParams,
+                callbackScope: callbackScope,
                 stagger: 0
             }, startAt))); //copy the properties/values into a new object to avoid collisions, like var to = {x:0}, from = {x:500}; timeline.fromTo(e, from, to).fromTo(e, to, from);
             tween._startAt._dp = 0; // don't allow it to get put back into root timeline! Like when revert() is called and totalTime() gets set.
@@ -3854,7 +3900,7 @@ _forceAllPropTweens, _initTween = function _initTween(tween, time, tTime) {
     tween._onUpdate = onUpdate;
     tween._initted = (!tween._op || tween._pt) && !overwritten; // if overwrittenProps resulted in the entire tween being killed, do NOT flag it as initted or else it may render for one tick.
     keyframes && time <= 0 && tl.render(_bigNum, true, true); // if there's a 0% keyframe, it'll render in the "before" state for any staggered/delayed animations thus when the following tween initializes, it'll use the "before" state instead of the "after" state as the initial values.
-}, _updatePropTweens = function _updatePropTweens(tween, property, value, start, startIsRelative, ratio, time, skipRecursion) {
+}, _updatePropTweens = function _updatePropTweens(tween, property, value, start, startIsRelative, ratio, time) {
     var ptCache = (tween._pt && tween._ptCache || (tween._ptCache = {}))[property], pt, rootPT, lookup, i;
     if (!ptCache) {
         ptCache = tween._ptCache[property] = [];
@@ -3875,7 +3921,7 @@ _forceAllPropTweens, _initTween = function _initTween(tween, time, tTime) {
                 tween.vars[property] = "+=0";
                 _initTween(tween, time);
                 _forceAllPropTweens = 0;
-                return skipRecursion ? _warn(property + " not eligible for reset") : 1; // if someone tries to do a quickTo() on a special property like borderRadius which must get split into 4 different properties, that's not eligible for .resetTo().
+                return 1;
             }
             ptCache.push(pt);
         }
@@ -3938,7 +3984,7 @@ var Tween = /*#__PURE__*/ function(_Animation2) {
         var _this3$vars = _this3.vars, duration = _this3$vars.duration, delay = _this3$vars.delay, immediateRender = _this3$vars.immediateRender, stagger = _this3$vars.stagger, overwrite = _this3$vars.overwrite, keyframes = _this3$vars.keyframes, defaults = _this3$vars.defaults, scrollTrigger = _this3$vars.scrollTrigger, yoyoEase = _this3$vars.yoyoEase, parent = vars.parent || _globalTimeline, parsedTargets = (_isArray(targets) || _isTypedArray(targets) ? _isNumber(targets[0]) : "length" in vars) ? [
             targets
         ] : toArray(targets), tl, i, copy, l, p, curTarget, staggerFunc, staggerVarsToMerge;
-        _this3._targets = parsedTargets.length ? _harness(parsedTargets) : _warn("GSAP target " + targets + " not found. https://gsap.com", !_config.nullTargetWarn) || [];
+        _this3._targets = parsedTargets.length ? _harness(parsedTargets) : _warn("GSAP target " + targets + " not found. https://greensock.com", !_config.nullTargetWarn) || [];
         _this3._ptLookup = []; //PropTween lookup. An array containing an object for each target, having keys for each tweening property
         _this3._overwrite = overwrite;
         if (keyframes || stagger || _isFuncOrString(duration) || _isFuncOrString(delay)) {
@@ -4050,7 +4096,7 @@ var Tween = /*#__PURE__*/ function(_Animation2) {
                     time = dur;
                 } else {
                     iteration = ~~(tTime / cycleDuration);
-                    if (iteration && iteration === _roundPrecise(tTime / cycleDuration)) {
+                    if (iteration && iteration === tTime / cycleDuration) {
                         time = dur;
                         iteration--;
                     }
@@ -4062,15 +4108,14 @@ var Tween = /*#__PURE__*/ function(_Animation2) {
                     time = dur - time;
                 }
                 prevIteration = _animationCycle(this._tTime, cycleDuration);
-                if (time === prevTime && !force && this._initted && iteration === prevIteration) {
+                if (time === prevTime && !force && this._initted) {
                     //could be during the repeatDelay part. No need to render and fire callbacks.
                     this._tTime = tTime;
                     return this;
                 }
                 if (iteration !== prevIteration) {
                     timeline && this._yEase && _propagateYoyoEase(timeline, isYoyo); //repeatRefresh functionality
-                    if (this.vars.repeatRefresh && !isYoyo && !this._lock && this._time !== cycleDuration && this._initted) {
-                        // this._time will === cycleDuration when we render at EXACTLY the end of an iteration. Without this condition, it'd often do the repeatRefresh render TWICE (again on the very next tick).
+                    if (this.vars.repeatRefresh && !isYoyo && !this._lock) {
                         this._lock = force = 1; //force, otherwise if lazy is true, the _attemptInitTween() will return and we'll jump out and get caught bouncing on each tick.
                         this.render(_roundPrecise(cycleDuration * iteration), true).invalidate()._lock = 0;
                     }
@@ -4081,7 +4126,7 @@ var Tween = /*#__PURE__*/ function(_Animation2) {
                     this._tTime = 0; // in constructor if immediateRender is true, we set _tTime to -_tinyNum to have the playhead cross the starting point but we can't leave _tTime as a negative number.
                     return this;
                 }
-                if (prevTime !== this._time && !(force && this.vars.repeatRefresh && iteration !== prevIteration)) // rare edge case - during initialization, an onUpdate in the _startAt (.fromTo()) might force this tween to render at a different spot in which case we should ditch this render() call so that it doesn't revert the values. But we also don't want to dump if we're doing a repeatRefresh render!
+                if (prevTime !== this._time) // rare edge case - during initialization, an onUpdate in the _startAt (.fromTo()) might force this tween to render at a different spot in which case we should ditch this render() call so that it doesn't revert the values.
                 return this;
                 if (dur !== this._dur) // while initting, a plugin like InertiaPlugin might alter the duration, so rerun from the start to ensure everything renders as it should.
                 return this.render(totalTime, suppressEvents, force);
@@ -4104,7 +4149,7 @@ var Tween = /*#__PURE__*/ function(_Animation2) {
                 pt.r(ratio, pt.d);
                 pt = pt._next;
             }
-            timeline && timeline.render(totalTime < 0 ? totalTime : timeline._dur * timeline._ease(time / this._dur), suppressEvents, force) || this._startAt && (this._zTime = totalTime);
+            timeline && timeline.render(totalTime < 0 ? totalTime : !time && isYoyo ? -_tinyNum : timeline._dur * timeline._ease(time / this._dur), suppressEvents, force) || this._startAt && (this._zTime = totalTime);
             if (this._onUpdate && !suppressEvents) {
                 isNegative && _rewindStartAt(this, totalTime, suppressEvents, force); //note: for performance reasons, we tuck this conditional logic inside less traveled areas (most tweens don't have an onUpdate). We'd just have it at the end before the onComplete, but the values should be updated before any onUpdate is called, so we ALSO put it here and then if it's not called, we do so later near the onComplete.
                 _callback(this, "onUpdate");
@@ -4133,7 +4178,7 @@ var Tween = /*#__PURE__*/ function(_Animation2) {
         this.timeline && this.timeline.invalidate(soft);
         return _Animation2.prototype.invalidate.call(this, soft);
     };
-    _proto3.resetTo = function resetTo(property, value, start, startIsRelative, skipRecursion) {
+    _proto3.resetTo = function resetTo(property, value, start, startIsRelative) {
         _tickerActive || _ticker.wake();
         this._ts || this.play();
         var time = Math.min(this._dur, (this._dp._time - this._start) * this._ts), ratio;
@@ -4147,7 +4192,7 @@ var Tween = /*#__PURE__*/ function(_Animation2) {
         // 		}
         // 	}
         // } else {
-        if (_updatePropTweens(this, property, value, start, startIsRelative, ratio, time, skipRecursion)) return this.resetTo(property, value, start, startIsRelative, 1); // if a PropTween wasn't found for the property, it'll get forced with a re-initialization so we need to jump out and start over again.
+        if (_updatePropTweens(this, property, value, start, startIsRelative, ratio, time)) return this.resetTo(property, value, start, startIsRelative); // if a PropTween wasn't found for the property, it'll get forced with a re-initialization so we need to jump out and start over again.
          //}
         _alignPlayhead(this, 0);
         this.parent || _addLinkedListItem(this._dp, this, "_first", "_last", this._dp._sort ? "_start" : 0);
@@ -4389,9 +4434,7 @@ var _media = [], _listeners = {}, _emptyArray = [], _lastMediaTime = 0, _context
         });
         _dispatch("matchMediaRevert");
         matches.forEach(function(c) {
-            return c.onMatch(c, function(func) {
-                return c.add(null, func);
-            });
+            return c.onMatch(c);
         });
         _lastMediaTime = time;
         _dispatch("matchMedia");
@@ -4431,9 +4474,7 @@ var Context = /*#__PURE__*/ function() {
             return result;
         };
         self.last = f;
-        return name === _isFunction ? f(self, function(func) {
-            return self.add(null, func);
-        }) : name ? self[name] = f : f;
+        return name === _isFunction ? f(self) : name ? self[name] = f : f;
     };
     _proto5.ignore = function ignore(func) {
         var prev = _context;
@@ -4453,21 +4494,20 @@ var Context = /*#__PURE__*/ function() {
     };
     _proto5.kill = function kill(revert, matchMedia) {
         var _this4 = this;
-        if (revert) (function() {
-            var tweens = _this4.getTweens(), i = _this4.data.length, t;
-            while(i--){
+        if (revert) {
+            var tweens = this.getTweens();
+            this.data.forEach(function(t) {
                 // Flip plugin tweens are very different in that they should actually be pushed to their end. The plugin replaces the timeline's .revert() method to do exactly that. But we also need to remove any of those nested tweens inside the flip timeline so that they don't get individually reverted.
-                t = _this4.data[i];
                 if (t.data === "isFlip") {
                     t.revert();
                     t.getChildren(true, true, false).forEach(function(tween) {
                         return tweens.splice(tweens.indexOf(tween), 1);
                     });
                 }
-            } // save as an object so that we can cache the globalTime for each tween to optimize performance during the sort
+            }); // save as an object so that we can cache the globalTime for each tween to optimize performance during the sort
             tweens.map(function(t) {
                 return {
-                    g: t._dur || t._delay || t._sat && !t._sat.vars.immediateRender ? t.globalTime(0) : -Infinity,
+                    g: t.globalTime(0),
                     t: t
                 };
             }).sort(function(a, b) {
@@ -4475,23 +4515,14 @@ var Context = /*#__PURE__*/ function() {
             }).forEach(function(o) {
                 return o.t.revert(revert);
             }); // note: all of the _startAt tweens should be reverted in reverse order that they were created, and they'll all have the same globalTime (-1) so the " || -1" in the sort keeps the order properly.
-            i = _this4.data.length;
-            while(i--){
-                // make sure we loop backwards so that, for example, SplitTexts that were created later on the same element get reverted first
-                t = _this4.data[i];
-                if (t instanceof Timeline) {
-                    if (t.data !== "nested") {
-                        t.scrollTrigger && t.scrollTrigger.revert();
-                        t.kill(); // don't revert() the timeline because that's duplicating efforts since we already reverted all the tweens
-                    }
-                } else !(t instanceof Tween) && t.revert && t.revert(revert);
-            }
-            _this4._r.forEach(function(f) {
+            this.data.forEach(function(e) {
+                return !(e instanceof Tween) && e.revert && e.revert(revert);
+            });
+            this._r.forEach(function(f) {
                 return f(revert, _this4);
             });
-            _this4.isReverted = true;
-        })();
-        else this.data.forEach(function(e) {
+            this.isReverted = true;
+        } else this.data.forEach(function(e) {
             return e.kill && e.kill();
         });
         this.clear();
@@ -4510,7 +4541,6 @@ var MatchMedia = /*#__PURE__*/ function() {
     function MatchMedia(scope) {
         this.contexts = [];
         this.scope = scope;
-        _context && _context.data.push(this);
     }
     var _proto6 = MatchMedia.prototype;
     _proto6.add = function add(conditions, func, scope) {
@@ -4531,9 +4561,7 @@ var MatchMedia = /*#__PURE__*/ function() {
                 mq.addListener ? mq.addListener(_onMediaChange) : mq.addEventListener("change", _onMediaChange);
             }
         }
-        active && func(context, function(f) {
-            return context.add(null, f);
-        });
+        active && func(context);
         return this;
     } // refresh() {
     ;
@@ -4800,19 +4828,19 @@ var gsap = _gsap.registerPlugin({
         while(i--)this.add(target, i, target[i] || 0, value[i], 0, 0, 0, 0, 0, 1);
     }
 }, _buildModifierPlugin("roundProps", _roundModifier), _buildModifierPlugin("modifiers"), _buildModifierPlugin("snap", snap)) || _gsap; //to prevent the core plugins from being dropped via aggressive tree shaking, we must include them in the variable declaration in this way.
-Tween.version = Timeline.version = gsap.version = "3.12.5";
+Tween.version = Timeline.version = gsap.version = "3.12.2";
 _coreReady = 1;
 _windowExists() && _wake();
 var Power0 = _easeMap.Power0, Power1 = _easeMap.Power1, Power2 = _easeMap.Power2, Power3 = _easeMap.Power3, Power4 = _easeMap.Power4, Linear = _easeMap.Linear, Quad = _easeMap.Quad, Cubic = _easeMap.Cubic, Quart = _easeMap.Quart, Quint = _easeMap.Quint, Strong = _easeMap.Strong, Elastic = _easeMap.Elastic, Back = _easeMap.Back, SteppedEase = _easeMap.SteppedEase, Bounce = _easeMap.Bounce, Sine = _easeMap.Sine, Expo = _easeMap.Expo, Circ = _easeMap.Circ;
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"iSNCE":[function(require,module,exports) {
+},{"@swc/helpers/_/_type_of":"7dHw6","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"iSNCE":[function(require,module,exports,__globalThis) {
 /*!
- * CSSPlugin 3.12.5
- * https://gsap.com
+ * CSSPlugin 3.12.2
+ * https://greensock.com
  *
- * Copyright 2008-2024, GreenSock. All rights reserved.
- * Subject to the terms at https://gsap.com/standard-license or for
- * Club GSAP members, the agreement issued with that membership.
+ * Copyright 2008-2023, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
  * @author: Jack Doyle, jack@greensock.com
 */ /* eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -4871,20 +4899,19 @@ _renderRoundedCSSProp = function _renderRoundedCSSProp(ratio, data) {
     cache.renderTransform(ratio, cache);
 }, _transformProp = "transform", _transformOriginProp = _transformProp + "Origin", _saveStyle = function _saveStyle(property, isNotCSS) {
     var _this = this;
-    var target = this.target, style = target.style, cache = target._gsap;
+    var target = this.target, style = target.style;
     if (property in _transformProps && style) {
         this.tfm = this.tfm || {};
         if (property !== "transform") {
             property = _propertyAliases[property] || property;
             ~property.indexOf(",") ? property.split(",").forEach(function(a) {
                 return _this.tfm[a] = _get(target, a);
-            }) : this.tfm[property] = cache.x ? cache[property] : _get(target, property); // note: scale would map to "scaleX,scaleY", thus we loop and apply them both.
-            property === _transformOriginProp && (this.tfm.zOrigin = cache.zOrigin);
+            }) : this.tfm[property] = target._gsap.x ? target._gsap[property] : _get(target, property); // note: scale would map to "scaleX,scaleY", thus we loop and apply them both.
         } else return _propertyAliases.transform.split(",").forEach(function(p) {
             return _saveStyle.call(_this, p, isNotCSS);
         });
         if (this.props.indexOf(_transformProp) >= 0) return;
-        if (cache.svg) {
+        if (target._gsap.svg) {
             this.svgo = target.getAttribute("data-svg-origin");
             this.props.push(_transformOriginProp, isNotCSS, "");
         }
@@ -4910,11 +4937,6 @@ _renderRoundedCSSProp = function _renderRoundedCSSProp(ratio, data) {
         i = _reverting();
         if ((!i || !i.isStart) && !style[_transformProp]) {
             _removeIndependentTransforms(style);
-            if (cache.zOrigin && style[_transformOriginProp]) {
-                style[_transformOriginProp] += " " + cache.zOrigin + "px"; // since we're uncaching, we must put the zOrigin back into the transformOrigin so that we can pull it out accurately when we parse again. Otherwise, we'd lose the z portion of the origin since we extract it to protect from Safari bugs.
-                cache.zOrigin = 0;
-                cache.renderTransform();
-            }
             cache.uncache = 1; // if it's a startAt that's being reverted in the _initTween() of the core, we don't need to uncache transforms. This is purely a performance optimization.
         }
     }
@@ -4932,7 +4954,7 @@ _renderRoundedCSSProp = function _renderRoundedCSSProp(ratio, data) {
     return saver;
 }, _supports3D, _createElement = function _createElement(type, ns) {
     var e = _doc.createElementNS ? _doc.createElementNS((ns || "http://www.w3.org/1999/xhtml").replace(/^https/, "http"), type) : _doc.createElement(type); //some servers swap in https for http in the namespace which can break things, making "style" inaccessible.
-    return e && e.style ? e : _doc.createElement(type); //some environments won't allow access to the element's style when created with a namespace in which case we default to the standard createElement() to work around the issue. Also note that when GSAP is embedded directly inside an SVG file, createElement() won't allow access to the style object in Firefox (see https://gsap.com/forums/topic/20215-problem-using-tweenmax-in-standalone-self-containing-svg-file-err-cannot-set-property-csstext-of-undefined/).
+    return e.style ? e : _doc.createElement(type); //some environments won't allow access to the element's style when created with a namespace in which case we default to the standard createElement() to work around the issue. Also note that when GSAP is embedded directly inside an SVG file, createElement() won't allow access to the style object in Firefox (see https://greensock.com/forums/topic/20215-problem-using-tweenmax-in-standalone-self-containing-svg-file-err-cannot-set-property-csstext-of-undefined/).
 }, _getComputedProperty = function _getComputedProperty(target, property, skipPrefixFallback) {
     var cs = getComputedStyle(target);
     return cs[property] || cs.getPropertyValue(property.replace(_capsExp, "-$1").toLowerCase()) || cs.getPropertyValue(property) || !skipPrefixFallback && _getComputedProperty(target, _checkPropPrefix(property) || property, 1) || ""; //css variables may not need caps swapped out for dashes and lowercase.
@@ -5009,13 +5031,12 @@ _renderRoundedCSSProp = function _renderRoundedCSSProp(ratio, data) {
 }, //reports if the element is an SVG on which getBBox() actually works
 _removeProperty = function _removeProperty(target, property) {
     if (property) {
-        var style = target.style, first2Chars;
+        var style = target.style;
         if (property in _transformProps && property !== _transformOriginProp) property = _transformProp;
         if (style.removeProperty) {
-            first2Chars = property.substr(0, 2);
-            if (first2Chars === "ms" || property.substr(0, 6) === "webkit") //Microsoft and some Webkit browsers don't conform to the standard of capitalizing the first prefix character, so we adjust so that when we prefix the caps with a dash, it's correct (otherwise it'd be "ms-transform" instead of "-ms-transform" for IE9, for example)
+            if (property.substr(0, 2) === "ms" || property.substr(0, 6) === "webkit") //Microsoft and some Webkit browsers don't conform to the standard of capitalizing the first prefix character, so we adjust so that when we prefix the caps with a dash, it's correct (otherwise it'd be "ms-transform" instead of "-ms-transform" for IE9, for example)
             property = "-" + property;
-            style.removeProperty(first2Chars === "--" ? property : property.replace(_capsExp, "-$1").toLowerCase());
+            style.removeProperty(property.replace(_capsExp, "-$1").toLowerCase());
         } else //note: old versions of IE use "removeAttribute()" instead of "removeProperty()"
         style.removeAttribute(property);
     }
@@ -5051,20 +5072,12 @@ _convertToUnit = function _convertToUnit(target, property, value, unit) {
     cache = parent._gsap;
     if (cache && toPercent && cache.width && horizontal && cache.time === (0, _gsapCoreJs._ticker).time && !cache.uncache) return (0, _gsapCoreJs._round)(curValue / cache.width * amount);
     else {
-        if (toPercent && (property === "height" || property === "width")) {
-            // if we're dealing with width/height that's inside a container with padding and/or it's a flexbox/grid container, we must apply it to the target itself rather than the _tempDiv in order to ensure complete accuracy, factoring in the parent's padding.
-            var v = target.style[property];
-            target.style[property] = amount + unit;
-            px = target[measureProperty];
-            v ? target.style[property] = v : _removeProperty(target, property);
-        } else {
-            (toPercent || curUnit === "%") && !_nonStandardLayouts[_getComputedProperty(parent, "display")] && (style.position = _getComputedProperty(target, "position"));
-            parent === target && (style.position = "static"); // like for borderRadius, if it's a % we must have it relative to the target itself but that may not have position: relative or position: absolute in which case it'd go up the chain until it finds its offsetParent (bad). position: static protects against that.
-            parent.appendChild(_tempDiv);
-            px = _tempDiv[measureProperty];
-            parent.removeChild(_tempDiv);
-            style.position = "absolute";
-        }
+        (toPercent || curUnit === "%") && !_nonStandardLayouts[_getComputedProperty(parent, "display")] && (style.position = _getComputedProperty(target, "position"));
+        parent === target && (style.position = "static"); // like for borderRadius, if it's a % we must have it relative to the target itself but that may not have position: relative or position: absolute in which case it'd go up the chain until it finds its offsetParent (bad). position: static protects against that.
+        parent.appendChild(_tempDiv);
+        px = _tempDiv[measureProperty];
+        parent.removeChild(_tempDiv);
+        style.position = "absolute";
         if (horizontal && toPercent) {
             cache = (0, _gsapCoreJs._getCache)(parent);
             cache.time = (0, _gsapCoreJs._ticker).time;
@@ -5090,12 +5103,12 @@ _convertToUnit = function _convertToUnit(target, property, value, unit) {
 }, _tweenComplexCSSString = function _tweenComplexCSSString(target, prop, start, end) {
     // note: we call _tweenComplexCSSString.call(pluginInstance...) to ensure that it's scoped properly. We may call it from within a plugin too, thus "this" would refer to the plugin.
     if (!start || start === "none") {
-        // some browsers like Safari actually PREFER the prefixed property and mis-report the unprefixed value like clipPath (BUG). In other words, even though clipPath exists in the style ("clipPath" in target.style) and it's set in the CSS properly (along with -webkit-clip-path), Safari reports clipPath as "none" whereas WebkitClipPath reports accurately like "ellipse(100% 0% at 50% 0%)", so in this case we must SWITCH to using the prefixed property instead. See https://gsap.com/forums/topic/18310-clippath-doesnt-work-on-ios/
+        // some browsers like Safari actually PREFER the prefixed property and mis-report the unprefixed value like clipPath (BUG). In other words, even though clipPath exists in the style ("clipPath" in target.style) and it's set in the CSS properly (along with -webkit-clip-path), Safari reports clipPath as "none" whereas WebkitClipPath reports accurately like "ellipse(100% 0% at 50% 0%)", so in this case we must SWITCH to using the prefixed property instead. See https://greensock.com/forums/topic/18310-clippath-doesnt-work-on-ios/
         var p = _checkPropPrefix(prop, target, 1), s = p && _getComputedProperty(target, p, 1);
         if (s && s !== start) {
             prop = p;
             start = s;
-        } else if (prop === "borderColor") start = _getComputedProperty(target, "borderTopColor"); // Firefox bug: always reports "borderColor" as "", so we must fall back to borderTopColor. See https://gsap.com/forums/topic/24583-how-to-return-colors-that-i-had-after-reverse/
+        } else if (prop === "borderColor") start = _getComputedProperty(target, "borderTopColor"); // Firefox bug: always reports "borderColor" as "", so we must fall back to borderTopColor. See https://greensock.com/forums/topic/24583-how-to-return-colors-that-i-had-after-reverse/
     }
     var pt = new (0, _gsapCoreJs.PropTween)(this._pt, target.style, prop, 0, 1, (0, _gsapCoreJs._renderComplexString)), index = 0, matchIndex = 0, a, result, startValues, startNum, color, startValue, endValue, endNum, chunk, endUnit, startUnit, endValues;
     pt.b = start;
@@ -5103,10 +5116,9 @@ _convertToUnit = function _convertToUnit(target, property, value, unit) {
     start += ""; // ensure values are strings
     end += "";
     if (end === "auto") {
-        startValue = target.style[prop];
         target.style[prop] = end;
         end = _getComputedProperty(target, prop) || end;
-        startValue ? target.style[prop] = startValue : _removeProperty(target, prop);
+        target.style[prop] = start;
     }
     a = [
         start,
@@ -5270,16 +5282,13 @@ _specialProps = {
     if (!originIsAbsolute) {
         bounds = _getBBox(target);
         xOrigin = bounds.x + (~originSplit[0].indexOf("%") ? xOrigin / 100 * bounds.width : xOrigin);
-        yOrigin = bounds.y + (~(originSplit[1] || originSplit[0]).indexOf("%") ? yOrigin / 100 * bounds.height : yOrigin); // if (!("xOrigin" in cache) && (xOrigin || yOrigin)) { // added in 3.12.3, reverted in 3.12.4; requires more exploration
-    // 	xOrigin -= bounds.x;
-    // 	yOrigin -= bounds.y;
-    // }
+        yOrigin = bounds.y + (~(originSplit[1] || originSplit[0]).indexOf("%") ? yOrigin / 100 * bounds.height : yOrigin);
     } else if (matrix !== _identity2DMatrix && (determinant = a * d - b * c)) {
         //if it's zero (like if scaleX and scaleY are zero), skip it to avoid errors with dividing by zero.
         x = xOrigin * (d / determinant) + yOrigin * (-c / determinant) + (c * ty - d * tx) / determinant;
         y = xOrigin * (-b / determinant) + yOrigin * (a / determinant) - (a * ty - b * tx) / determinant;
         xOrigin = x;
-        yOrigin = y; // theory: we only had to do this for smoothing and it assumes that the previous one was not originIsAbsolute.
+        yOrigin = y;
     }
     if (smooth || smooth !== false && cache.smooth) {
         tx = xOrigin - xOriginOld;
@@ -5432,7 +5441,7 @@ _specialProps = {
     cache.skewX = skewX + deg;
     cache.skewY = skewY + deg;
     cache.transformPerspective = perspective + px;
-    if (cache.zOrigin = parseFloat(origin.split(" ")[2]) || !uncache && cache.zOrigin || 0) style[_transformOriginProp] = _firstTwoOnly(origin);
+    if (cache.zOrigin = parseFloat(origin.split(" ")[2]) || 0) style[_transformOriginProp] = _firstTwoOnly(origin);
     cache.xOffset = cache.yOffset = 0;
     cache.force3D = (0, _gsapCoreJs._config).force3D;
     cache.renderTransform = cache.svg ? _renderSVGTransforms : _supports3D ? _renderCSSTransforms : _renderNon3DTransforms;
@@ -5652,7 +5661,7 @@ var CSSPlugin = {
                     // in case someone hard-codes a complex value as the start, like top: "calc(2vh / 2)". Without this, it'd use the computed value (always in px)
                     startValue = typeof startAt[p] === "function" ? startAt[p].call(tween, index, target, targets) : startAt[p];
                     (0, _gsapCoreJs._isString)(startValue) && ~startValue.indexOf("random(") && (startValue = (0, _gsapCoreJs._replaceRandom)(startValue));
-                    (0, _gsapCoreJs.getUnit)(startValue + "") || startValue === "auto" || (startValue += (0, _gsapCoreJs._config).units[p] || (0, _gsapCoreJs.getUnit)(_get(target, p)) || ""); // for cases when someone passes in a unitless value like {x: 100}; if we try setting translate(100, 0px) it won't work.
+                    (0, _gsapCoreJs.getUnit)(startValue + "") || (startValue += (0, _gsapCoreJs._config).units[p] || (0, _gsapCoreJs.getUnit)(_get(target, p)) || ""); // for cases when someone passes in a unitless value like {x: 100}; if we try setting translate(100, 0px) it won't work.
                     (startValue + "").charAt(1) === "=" && (startValue = _get(target, p)); // can't work with relative values
                 } else startValue = _get(target, p);
                 startNum = parseFloat(startValue);
@@ -5783,14 +5792,14 @@ var CSSPlugin = {
 });
 (0, _gsapCoreJs.gsap).registerPlugin(CSSPlugin);
 
-},{"@swc/helpers/_/_type_of":"7dHw6","./gsap-core.js":"aa2h4","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"lSvcS":[function(require,module,exports) {
+},{"@swc/helpers/_/_type_of":"7dHw6","./gsap-core.js":"aa2h4","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"lSvcS":[function(require,module,exports,__globalThis) {
 /*!
- * ScrollTrigger 3.12.5
- * https://gsap.com
+ * ScrollTrigger 3.12.2
+ * https://greensock.com
  *
- * @license Copyright 2008-2024, GreenSock. All rights reserved.
- * Subject to the terms at https://gsap.com/standard-license or for
- * Club GSAP members, the agreement issued with that membership.
+ * @license Copyright 2008-2023, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
  * @author: Jack Doyle, jack@greensock.com
 */ /* eslint-disable */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
@@ -5800,8 +5809,9 @@ parcelHelpers.export(exports, "ScrollTrigger", function() {
 parcelHelpers.export(exports, "default", function() {
     return ScrollTrigger;
 });
+var _typeOf = require("@swc/helpers/_/_type_of");
 var _observerJs = require("./Observer.js");
-var gsap, _coreInitted, _win, _doc, _docEl, _body, _root, _resizeDelay, _toArray, _clamp, _time2, _syncInterval, _refreshing, _pointerIsDown, _transformProp, _i, _prevWidth, _prevHeight, _autoRefresh, _sort, _suppressOverwrites, _ignoreResize, _normalizer, _ignoreMobileResize, _baseScreenHeight, _baseScreenWidth, _fixIOSBug, _context, _scrollRestoration, _div100vh, _100vh, _isReverted, _clampingMax, _limitCallbacks, // if true, we'll only trigger callbacks if the active state toggles, so if you scroll immediately past both the start and end positions of a ScrollTrigger (thus inactive to inactive), neither its onEnter nor onLeave will be called. This is useful during startup.
+var gsap, _coreInitted, _win, _doc, _docEl, _body, _root, _resizeDelay, _toArray, _clamp, _time2, _syncInterval, _refreshing, _pointerIsDown, _transformProp, _i, _prevWidth, _prevHeight, _autoRefresh, _sort, _suppressOverwrites, _ignoreResize, _normalizer, _ignoreMobileResize, _baseScreenHeight, _baseScreenWidth, _fixIOSBug, _context, _scrollRestoration, _div100vh, _100vh, _limitCallbacks, // if true, we'll only trigger callbacks if the active state toggles, so if you scroll immediately past both the start and end positions of a ScrollTrigger (thus inactive to inactive), neither its onEnter nor onLeave will be called. This is useful during startup.
 _startup = 1, _getTime = Date.now, _time1 = _getTime(), _lastScrollTime = 0, _enabled = 0, _parseClamp = function _parseClamp(value, type, self) {
     var clamp = _isString(value) && (value.substr(0, 6) === "clamp(" || value.indexOf("max") > -1);
     self["_" + type + "Clamp"] = clamp;
@@ -5858,14 +5868,12 @@ _pointerDownHandler = function _pointerDownHandler() {
 }, _isNumber = function _isNumber(value) {
     return typeof value === "number";
 }, _isObject = function _isObject(value) {
-    return typeof value === "object";
+    return (typeof value === "undefined" ? "undefined" : (0, _typeOf._)(value)) === "object";
 }, _endAnimation = function _endAnimation(animation, reversed, pause) {
     return animation && animation.progress(reversed ? 0 : 1) && pause && animation.pause();
 }, _callback = function _callback(self, func) {
     if (self.enabled) {
-        var result = self._ctx ? self._ctx.add(function() {
-            return func(self);
-        }) : func(self);
+        var result = func(self);
         result && result.totalTime && (self.callbackAnimation = result);
     }
 }, _abs = Math.abs, _left = "left", _top = "top", _right = "right", _bottom = "bottom", _width = "width", _height = "height", _Right = "Right", _Left = "Left", _Top = "Top", _Bottom = "Bottom", _padding = "padding", _margin = "margin", _Width = "Width", _Height = "Height", _px = "px", _getComputedStyle = function _getComputedStyle(element) {
@@ -6042,7 +6050,6 @@ _revertRecorded = function _revertRecorded(media) {
             else trigger.revert(true, true);
         }
     }
-    _isReverted = true;
     media && _revertRecorded(media);
     media || _dispatch("revert");
 }, _clearScrollMemory = function _clearScrollMemory(scrollRestoration, force) {
@@ -6062,14 +6069,10 @@ _revertRecorded = function _revertRecorded(media) {
     }
 }, _refresh100vh = function _refresh100vh() {
     _body.appendChild(_div100vh);
-    _100vh = !_normalizer && _div100vh.offsetHeight || _win.innerHeight;
+    _100vh = _div100vh.offsetHeight || _win.innerHeight;
     _body.removeChild(_div100vh);
-}, _hideAllMarkers = function _hideAllMarkers(hide) {
-    return _toArray(".gsap-marker-start, .gsap-marker-end, .gsap-marker-scroller-start, .gsap-marker-scroller-end").forEach(function(el) {
-        return el.style.display = hide ? "none" : "block";
-    });
 }, _refreshAll = function _refreshAll(force, skipRevert) {
-    if (_lastScrollTime && !force && !_isReverted) {
+    if (_lastScrollTime && !force) {
         _addListener(ScrollTrigger, "scrollEnd", _softRefresh);
         return;
     }
@@ -6090,8 +6093,7 @@ _revertRecorded = function _revertRecorded(media) {
     _triggers.slice(0).forEach(function(t) {
         return t.refresh();
     }); // don't loop with _i because during a refresh() someone could call ScrollTrigger.update() which would iterate through _i resulting in a skip.
-    _isReverted = false;
-    _triggers.forEach(function(t) {
+    _triggers.forEach(function(t, i) {
         // nested pins (pinnedContainer) with pinSpacing may expand the container, so we must accommodate that here.
         if (t._subPinOffset && t.pin) {
             var prop = t.vars.horizontal ? "offsetWidth" : "offsetHeight", original = t.pin[prop];
@@ -6100,15 +6102,11 @@ _revertRecorded = function _revertRecorded(media) {
             t.refresh();
         }
     });
-    _clampingMax = 1; // pinSpacing might be propping a page open, thus when we .setPositions() to clamp a ScrollTrigger's end we should leave the pinSpacing alone. That's what this flag is for.
-    _hideAllMarkers(true);
     _triggers.forEach(function(t) {
         // the scroller's max scroll position may change after all the ScrollTriggers refreshed (like pinning could push it down), so we need to loop back and correct any with end: "max". Same for anything with a clamped end
-        var max = _maxScroll(t.scroller, t._dir), endClamp = t.vars.end === "max" || t._endClamp && t.end > max, startClamp = t._startClamp && t.start >= max;
-        (endClamp || startClamp) && t.setPositions(startClamp ? max - 1 : t.start, endClamp ? Math.max(startClamp ? max : t.start + 1, max) : t.end, true);
+        var max = _maxScroll(t.scroller, t._dir);
+        (t.vars.end === "max" || t._endClamp && t.end > max) && t.setPositions(t.start, Math.max(t.start + 1, max), true);
     });
-    _hideAllMarkers(false);
-    _clampingMax = 0;
     refreshInits.forEach(function(result) {
         return result && result.render && result.render(-1);
     }); // if the onRefreshInit() returns an animation (typically a gsap.set()), revert it. This makes it easy to put things in a certain spot before refreshing for measurement purposes, and then put things back.
@@ -6131,8 +6129,7 @@ _revertRecorded = function _revertRecorded(media) {
     _refreshingAll = ScrollTrigger.isRefreshing = false;
     _dispatch("refresh");
 }, _lastScroll = 0, _direction = 1, _primary, _updateAll = function _updateAll(force) {
-    if (force === 2 || !_refreshingAll && !_isReverted) {
-        // _isReverted could be true if, for example, a matchMedia() is in the process of executing. We don't want to update during the time everything is reverted.
+    if (!_refreshingAll || force === 2) {
         ScrollTrigger.isUpdating = true;
         _primary && _primary.update(0); // ScrollSmoother uses refreshPriority -9999 to become the primary that gets updated before all others because it affects the scroll position.
         var l = _triggers.length, time = _getTime(), recordVelocity = time - _time1 >= 50, scroll = l && _triggers[0].scroll();
@@ -6364,14 +6361,13 @@ _getTweenCreator = function _getTweenCreator(scroller, direction) {
         change1 = change1 || scrollTo - initialValue;
         tween && tween.kill();
         vars[prop] = scrollTo;
-        vars.inherit = false;
         vars.modifiers = modifiers;
         modifiers[prop] = function() {
             return checkForInterruption(initialValue + change1 * tween.ratio + change2 * tween.ratio * tween.ratio);
         };
         vars.onUpdate = function() {
             (0, _observerJs._scrollers).cache++;
-            getTween.tween && _updateAll(); // if it was interrupted/killed, like in a context.revert(), don't force an updateAll()
+            _updateAll();
         };
         vars.onComplete = function() {
             getTween.tween = 0;
@@ -6438,7 +6434,6 @@ var ScrollTrigger = /*#__PURE__*/ function() {
             } else scrubTween ? scrubTween.duration(value) : scrubTween = gsap.to(animation, {
                 ease: "expo",
                 totalProgress: "+=0",
-                inherit: false,
                 duration: scrubSmooth,
                 paused: true,
                 onComplete: function onComplete() {
@@ -6448,7 +6443,7 @@ var ScrollTrigger = /*#__PURE__*/ function() {
         };
         if (animation) {
             animation.vars.lazy = false;
-            animation._initted && !self.isReverted || animation.vars.immediateRender !== false && vars.immediateRender !== false && animation.duration() && animation.render(0, true, true); // special case: if this ScrollTrigger gets re-initted, a from() tween with a stagger could get initted initially and then reverted on the re-init which means it'll need to get rendered again here to properly display things. Otherwise, See https://gsap.com/forums/topic/36777-scrollsmoother-splittext-nextjs/ and https://codepen.io/GreenSock/pen/eYPyPpd?editors=0010
+            animation._initted && !self.isReverted || animation.vars.immediateRender !== false && vars.immediateRender !== false && animation.duration() && animation.render(0, true, true); // special case: if this ScrollTrigger gets re-initted, a from() tween with a stagger could get initted initially and then reverted on the re-init which means it'll need to get rendered again here to properly display things. Otherwise, See https://greensock.com/forums/topic/36777-scrollsmoother-splittext-nextjs/ and https://codepen.io/GreenSock/pen/eYPyPpd?editors=0010
             self.animation = animation.pause();
             animation.scrollTrigger = self;
             self.scrubDuration(scrub);
@@ -6480,10 +6475,7 @@ var ScrollTrigger = /*#__PURE__*/ function() {
             snapDelayedCall = gsap.delayedCall(snap.delay || scrubSmooth / 2 || 0.1, function() {
                 var scroll = scrollFunc(), refreshedRecently = _getTime() - lastRefresh < 500, tween = tweenTo.tween;
                 if ((refreshedRecently || Math.abs(self.getVelocity()) < 10) && !tween && !_pointerIsDown && lastSnap !== scroll) {
-                    var progress = (scroll - start) / change, totalProgress = animation && !isToggle ? animation.totalProgress() : progress, velocity = refreshedRecently ? 0 : (totalProgress - snap2) / (_getTime() - _time2) * 1000 || 0, change1 = gsap.utils.clamp(-progress, 1 - progress, _abs(velocity / 2) * velocity / 0.185), naturalEnd = progress + (snap.inertia === false ? 0 : change1), endValue, endScroll, _snap = snap, onStart = _snap.onStart, _onInterrupt = _snap.onInterrupt, _onComplete = _snap.onComplete;
-                    endValue = snapFunc(naturalEnd, self);
-                    _isNumber(endValue) || (endValue = naturalEnd); // in case the function didn't return a number, fall back to using the naturalEnd
-                    endScroll = Math.round(start + endValue * change);
+                    var progress = (scroll - start) / change, totalProgress = animation && !isToggle ? animation.totalProgress() : progress, velocity = refreshedRecently ? 0 : (totalProgress - snap2) / (_getTime() - _time2) * 1000 || 0, change1 = gsap.utils.clamp(-progress, 1 - progress, _abs(velocity / 2) * velocity / 0.185), naturalEnd = progress + (snap.inertia === false ? 0 : change1), endValue = _clamp(0, 1, snapFunc(naturalEnd, self)), endScroll = Math.round(start + endValue * change), _snap = snap, onStart = _snap.onStart, _onInterrupt = _snap.onInterrupt, _onComplete = _snap.onComplete;
                     if (scroll <= end && scroll >= start && endScroll !== scroll) {
                         if (tween && !tween._initted && tween.data <= _abs(endScroll - scroll)) // there's an overlapping snap! So we must figure out which one is closer and let that tween live.
                         return;
@@ -6499,8 +6491,6 @@ var ScrollTrigger = /*#__PURE__*/ function() {
                             onComplete: function onComplete() {
                                 self.update();
                                 lastSnap = scrollFunc();
-                                if (animation) // the resolution of the scrollbar is limited, so we should correct the scrubbed animation's playhead at the end to match EXACTLY where it was supposed to snap
-                                scrubTween ? scrubTween.resetTo("totalProgress", endValue, animation._tTime / animation._tDur) : animation.progress(endValue);
                                 snap1 = snap2 = animation && !isToggle ? animation.totalProgress() : self.progress;
                                 onSnapComplete && onSnapComplete(self);
                                 _onComplete && _onComplete(self);
@@ -6705,13 +6695,13 @@ var ScrollTrigger = /*#__PURE__*/ function() {
                     markerEnd
                 ], cs);
             }
-            if (pin && !(_clampingMax && self.end >= _maxScroll(scroller, direction))) {
+            if (pin) {
                 cs = _getComputedStyle(pin);
                 isVertical = direction === (0, _observerJs._vertical);
                 scroll = scrollFunc(); // recalculate because the triggers can affect the scroll
                 pinStart = parseFloat(pinGetter(direction.a)) + otherPinOffset;
                 if (!max && end > 1) {
-                    // makes sure the scroller has a scrollbar, otherwise if something has width: 100%, for example, it would be too big (exclude the scrollbar). See https://gsap.com/forums/topic/25182-scrolltrigger-width-of-page-increase-where-markers-are-set-to-false/
+                    // makes sure the scroller has a scrollbar, otherwise if something has width: 100%, for example, it would be too big (exclude the scrollbar). See https://greensock.com/forums/topic/25182-scrolltrigger-width-of-page-increase-where-markers-are-set-to-false/
                     forcedOverflow = (isViewport ? _doc.scrollingElement || _docEl : scroller).style;
                     forcedOverflow = {
                         style: forcedOverflow,
@@ -6731,19 +6721,13 @@ var ScrollTrigger = /*#__PURE__*/ function() {
                     ];
                     spacerState.t = spacer;
                     i = pinSpacing === _padding ? _getSize(pin, direction) + change + otherPinOffset : 0;
-                    if (i) {
-                        spacerState.push(direction.d, i + _px); // for box-sizing: border-box (must include padding).
-                        spacer.style.flexBasis !== "auto" && (spacer.style.flexBasis = i + _px);
-                    }
+                    i && spacerState.push(direction.d, i + _px); // for box-sizing: border-box (must include padding).
                     _setState(spacerState);
                     if (pinnedContainer) // in ScrollTrigger.refresh(), we need to re-evaluate the pinContainer's size because this pinSpacing may stretch it out, but we can't just add the exact distance because depending on layout, it may not push things down or it may only do so partially.
                     _triggers.forEach(function(t) {
                         if (t.pin === pinnedContainer && t.vars.pinSpacing !== false) t._subPinOffset = true;
                     });
                     useFixedPosition && scrollFunc(prevScroll);
-                } else {
-                    i = _getSize(pin, direction);
-                    i && spacer.style.flexBasis !== "auto" && (spacer.style.flexBasis = i + _px);
                 }
                 if (useFixedPosition) {
                     override = {
@@ -6807,7 +6791,7 @@ var ScrollTrigger = /*#__PURE__*/ function() {
             }
             _refreshing = 0;
             animation && isToggle && (animation._initted || prevAnimProgress) && animation.progress() !== prevAnimProgress && animation.progress(prevAnimProgress || 0, true).render(animation.time(), true, true); // must force a re-render because if saveStyles() was used on the target(s), the styles could have been wiped out during the refresh().
-            if (isFirstRefresh || prevProgress !== self.progress || containerAnimation || invalidateOnRefresh) {
+            if (isFirstRefresh || prevProgress !== self.progress || containerAnimation) {
                 // ensures that the direction is set properly (when refreshing, progress is set back to 0 initially, then back again to wherever it needs to be) and that callbacks are triggered.
                 animation && !isToggle && animation.totalProgress(containerAnimation && start < -0.001 && !prevProgress ? gsap.utils.normalize(start, end, 0) : prevProgress, true); // to avoid issues where animation callbacks like onStart aren't triggered.
                 self.progress = isFirstRefresh || (scroll1 - start) / change === prevProgress ? 0 : prevProgress;
@@ -6860,10 +6844,7 @@ var ScrollTrigger = /*#__PURE__*/ function() {
                     snap1 = animation && !isToggle ? animation.totalProgress() : clipped;
                 }
             } // anticipate the pinning a few ticks ahead of time based on velocity to avoid a visual glitch due to the fact that most browsers do scrolling on a separate thread (not synced with requestAnimationFrame).
-            if (anticipatePin && pin && !_refreshing && !_startup && _lastScrollTime) {
-                if (!clipped && start < scroll + (scroll - scroll2) / (_getTime() - _time2) * anticipatePin) clipped = 0.0001;
-                else if (clipped === 1 && end > scroll + (scroll - scroll2) / (_getTime() - _time2) * anticipatePin) clipped = 0.9999;
-            }
+            anticipatePin && !clipped && pin && !_refreshing && !_startup && _lastScrollTime && start < scroll + (scroll - scroll2) / (_getTime() - _time2) * anticipatePin && (clipped = 0.0001);
             if (clipped !== prevProgress && self.enabled) {
                 isActive = self.isActive = !!clipped && clipped < 1;
                 wasActive = !!prevProgress && prevProgress < 1;
@@ -7115,7 +7096,6 @@ var ScrollTrigger = /*#__PURE__*/ function() {
                 (0, _observerJs.Observer).register(gsap); // isTouch is 0 if no touch, 1 if ONLY touch, and 2 if it can accommodate touch but also other types like mouse/pointer.
                 ScrollTrigger.isTouch = (0, _observerJs.Observer).isTouch;
                 _fixIOSBug = (0, _observerJs.Observer).isTouch && /(iPad|iPhone|iPod|Mac)/g.test(navigator.userAgent); // since 2017, iOS has had a bug that causes event.clientX/Y to be inaccurate when a scroll occurs, thus we must alternate ignoring every other touchmove event to work around it. See https://bugs.webkit.org/show_bug.cgi?id=181954 and https://codepen.io/GreenSock/pen/ExbrPNa/087cef197dc35445a0951e8935c41503
-                _ignoreMobileResize = (0, _observerJs.Observer).isTouch === 1;
                 _addListener(_win, "wheel", _onScroll); // mostly for 3rd party smooth scrolling libraries.
                 _root = [
                     _win,
@@ -7163,7 +7143,7 @@ var ScrollTrigger = /*#__PURE__*/ function() {
                     return _startup = 0;
                 });
                 _addListener(_doc, "touchcancel", _passThrough); // some older Android devices intermittently stop dispatching "touchmove" events if we don't listen for "touchcancel" on the document.
-                _addListener(_body, "touchstart", _passThrough); //works around Safari bug: https://gsap.com/forums/topic/21450-draggable-in-iframe-on-mobile-is-buggy/
+                _addListener(_body, "touchstart", _passThrough); //works around Safari bug: https://greensock.com/forums/topic/21450-draggable-in-iframe-on-mobile-is-buggy/
                 _multiListener(_addListener, _doc, "pointerdown,touchstart,mousedown", _pointerDownHandler);
                 _multiListener(_addListener, _doc, "pointerup,touchend,mouseup", _pointerUpHandler);
                 _transformProp = gsap.utils.checkPrefix("transform");
@@ -7244,7 +7224,7 @@ var ScrollTrigger = /*#__PURE__*/ function() {
     };
     return ScrollTrigger;
 }();
-ScrollTrigger.version = "3.12.5";
+ScrollTrigger.version = "3.12.2";
 ScrollTrigger.saveStyles = function(targets) {
     return targets ? _toArray(targets).forEach(function(target) {
         // saved styles are recorded in a consecutive alternating Array, like [element, cssText, transform attribute, cache, matchMedia, ...]
@@ -7500,7 +7480,6 @@ _inputObserver = function _inputObserver(target, type, inputs, nested) {
     tween = gsap.to(self, {
         ease: "power4",
         paused: true,
-        inherit: false,
         scrollX: normalizeScrollX ? "+=0.1" : "+=0",
         scrollY: "+=0.1",
         modifiers: {
@@ -7524,11 +7503,7 @@ ScrollTrigger.observe = function(vars) {
 ScrollTrigger.normalizeScroll = function(vars) {
     if (typeof vars === "undefined") return _normalizer;
     if (vars === true && _normalizer) return _normalizer.enable();
-    if (vars === false) {
-        _normalizer && _normalizer.kill();
-        _normalizer = vars;
-        return;
-    }
+    if (vars === false) return _normalizer && _normalizer.kill();
     var normalizer = vars instanceof (0, _observerJs.Observer) ? vars : _getScrollNormalizer(vars);
     _normalizer && _normalizer.target === normalizer.target && _normalizer.kill();
     _isViewport(normalizer.target) && (_normalizer = normalizer);
@@ -7554,7 +7529,7 @@ ScrollTrigger.core = {
 };
 _getGSAP() && gsap.registerPlugin(ScrollTrigger);
 
-},{"./Observer.js":"8K7Fw","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"8K7Fw":[function(require,module,exports) {
+},{"@swc/helpers/_/_type_of":"7dHw6","./Observer.js":"8K7Fw","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"8K7Fw":[function(require,module,exports,__globalThis) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "Observer", function() {
@@ -7605,12 +7580,12 @@ function _createClass(Constructor, protoProps, staticProps) {
     return Constructor;
 }
 /*!
- * Observer 3.12.5
- * https://gsap.com
+ * Observer 3.12.2
+ * https://greensock.com
  *
- * @license Copyright 2008-2024, GreenSock. All rights reserved.
- * Subject to the terms at https://gsap.com/standard-license or for
- * Club GSAP members, the agreement issued with that membership.
+ * @license Copyright 2008-2023, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
  * @author: Jack Doyle, jack@greensock.com
 */ /* eslint-disable */ var gsap, _coreInitted, _clamp, _win, _doc, _docEl, _body, _isTouch, _pointerType, ScrollTrigger, _root, _normalizer, _eventTypes, _context, _getGSAP = function _getGSAP() {
     return gsap || typeof window !== "undefined" && (gsap = window.gsap) && gsap.registerPlugin && gsap;
@@ -7629,9 +7604,9 @@ function _createClass(Constructor, protoProps, staticProps) {
     return ~_proxies.indexOf(element) && _proxies[_proxies.indexOf(element) + 1][property];
 }, _isViewport = function _isViewport(el) {
     return !!~_root.indexOf(el);
-}, _addListener = function _addListener(element, type, func, passive, capture) {
+}, _addListener = function _addListener(element, type, func, nonPassive, capture) {
     return element.addEventListener(type, func, {
-        passive: passive !== false,
+        passive: !nonPassive,
         capture: !!capture
     });
 }, _removeListener = function _removeListener(element, type, func, capture) {
@@ -7731,7 +7706,7 @@ function _createClass(Constructor, protoProps, staticProps) {
     ScrollTrigger && ScrollTrigger.core && _integrate();
 }, _initCore = function _initCore(core) {
     gsap = core || _getGSAP();
-    if (!_coreInitted && gsap && typeof document !== "undefined" && document.body) {
+    if (gsap && typeof document !== "undefined" && document.body) {
         _win = window;
         _doc = document;
         _docEl = _doc.documentElement;
@@ -7776,7 +7751,7 @@ var Observer = /*#__PURE__*/ function() {
         type = type || "wheel,touch,pointer";
         debounce = debounce !== false;
         lineHeight || (lineHeight = parseFloat(_win.getComputedStyle(_body).lineHeight) || 22); // note: browser may report "normal", so default to 22.
-        var id, onStopDelayedCall, dragged, moved, wheeled, locked, axis, self = this, prevDeltaX = 0, prevDeltaY = 0, passive = vars.passive || !preventDefault, scrollFuncX = _getScrollFunc(target, _horizontal), scrollFuncY = _getScrollFunc(target, _vertical), scrollX = scrollFuncX(), scrollY = scrollFuncY(), limitToTouch = ~type.indexOf("touch") && !~type.indexOf("pointer") && _eventTypes[0] === "pointerdown", // for devices that accommodate mouse events and touch events, we need to distinguish.
+        var id, onStopDelayedCall, dragged, moved, wheeled, locked, axis, self = this, prevDeltaX = 0, prevDeltaY = 0, scrollFuncX = _getScrollFunc(target, _horizontal), scrollFuncY = _getScrollFunc(target, _vertical), scrollX = scrollFuncX(), scrollY = scrollFuncY(), limitToTouch = ~type.indexOf("touch") && !~type.indexOf("pointer") && _eventTypes[0] === "pointerdown", // for devices that accommodate mouse events and touch events, we need to distinguish.
         isViewport = _isViewport(target), ownerDoc = target.ownerDocument || _doc, deltaX = [
             0,
             0,
@@ -7871,17 +7846,17 @@ var Observer = /*#__PURE__*/ function() {
             self.startY = self.y = e.clientY;
             self._vx.reset(); // otherwise the t2 may be stale if the user touches and flicks super fast and releases in less than 2 requestAnimationFrame ticks, causing velocity to be 0.
             self._vy.reset();
-            _addListener(isNormalizer ? target : ownerDoc, _eventTypes[1], _onDrag, passive, true);
+            _addListener(isNormalizer ? target : ownerDoc, _eventTypes[1], _onDrag, preventDefault, true);
             self.deltaX = self.deltaY = 0;
             onPress && onPress(self);
         }, _onRelease = self.onRelease = function _onRelease(e) {
             if (_ignoreCheck(e, 1)) return;
             _removeListener(isNormalizer ? target : ownerDoc, _eventTypes[1], _onDrag, true);
-            var isTrackingDrag = !isNaN(self.y - self.startY), wasDragging = self.isDragging, isDragNotClick = wasDragging && (Math.abs(self.x - self.startX) > 3 || Math.abs(self.y - self.startY) > 3), // some touch devices need some wiggle room in terms of sensing clicks - the finger may move a few pixels.
+            var isTrackingDrag = !isNaN(self.y - self.startY), wasDragging = self.isDragging && (Math.abs(self.x - self.startX) > 3 || Math.abs(self.y - self.startY) > 3), // some touch devices need some wiggle room in terms of sensing clicks - the finger may move a few pixels.
             eventData = _getEvent(e);
-            if (!isDragNotClick && isTrackingDrag) {
+            if (!wasDragging && isTrackingDrag) {
                 self._vx.reset();
-                self._vy.reset(); //if (preventDefault && allowClicks && self.isPressed) { // check isPressed because in a rare edge case, the inputObserver in ScrollTrigger may stopPropagation() on the press/drag, so the onRelease may get fired without the onPress/onDrag ever getting called, thus it could trigger a click to occur on a link after scroll-dragging it.
+                self._vy.reset();
                 if (preventDefault && allowClicks) gsap.delayedCall(0.08, function() {
                     // some browsers (like Firefox) won't trust script-generated clicks, so if the user tries to click on a video to play it, for example, it simply won't work. Since a regular "click" event will most likely be generated anyway (one that has its isTrusted flag set to true), we must slightly delay our script-generated click so that the "real"/trusted one is prioritized. Remember, when there are duplicate events in quick succession, we suppress all but the first one. Some browsers don't even trigger the "real" one at all, so our synthetic one is a safety valve that ensures that no matter what, a click event does get dispatched.
                     if (_getTime() - onClickTime > 300 && !e.defaultPrevented) {
@@ -7896,9 +7871,9 @@ var Observer = /*#__PURE__*/ function() {
                 });
             }
             self.isDragging = self.isGesturing = self.isPressed = false;
-            onStop && wasDragging && !isNormalizer && onStopDelayedCall.restart(true);
+            onStop && !isNormalizer && onStopDelayedCall.restart(true);
             onDragEnd && wasDragging && onDragEnd(self);
-            onRelease && onRelease(self, isDragNotClick);
+            onRelease && onRelease(self, wasDragging);
         }, _onGestureStart = function _onGestureStart(e) {
             return e.touches && e.touches.length > 1 && (self.isGesturing = true) && onGestureStart(e, self.isDragging);
         }, _onGestureEnd = function _onGestureEnd() {
@@ -7923,7 +7898,6 @@ var Observer = /*#__PURE__*/ function() {
             self.x = x;
             self.y = y;
             moved = true;
-            onStop && onStopDelayedCall.restart(true);
             (dx || dy) && onTouchOrPointerDelta(dx, dy);
         }, _onHover = function _onHover(e) {
             self.event = e;
@@ -7945,13 +7919,13 @@ var Observer = /*#__PURE__*/ function() {
         self.enable = function(e) {
             if (!self.isEnabled) {
                 _addListener(isViewport ? ownerDoc : target, "scroll", _onScroll);
-                type.indexOf("scroll") >= 0 && _addListener(isViewport ? ownerDoc : target, "scroll", onScroll, passive, capture);
-                type.indexOf("wheel") >= 0 && _addListener(target, "wheel", _onWheel, passive, capture);
+                type.indexOf("scroll") >= 0 && _addListener(isViewport ? ownerDoc : target, "scroll", onScroll, preventDefault, capture);
+                type.indexOf("wheel") >= 0 && _addListener(target, "wheel", _onWheel, preventDefault, capture);
                 if (type.indexOf("touch") >= 0 && _isTouch || type.indexOf("pointer") >= 0) {
-                    _addListener(target, _eventTypes[0], _onPress, passive, capture);
+                    _addListener(target, _eventTypes[0], _onPress, preventDefault, capture);
                     _addListener(ownerDoc, _eventTypes[2], _onRelease);
                     _addListener(ownerDoc, _eventTypes[3], _onRelease);
-                    allowClicks && _addListener(target, "click", clickCapture, true, true);
+                    allowClicks && _addListener(target, "click", clickCapture, false, true);
                     onClick && _addListener(target, "click", _onClick);
                     onGestureStart && _addListener(ownerDoc, "gesturestart", _onGestureStart);
                     onGestureEnd && _addListener(ownerDoc, "gestureend", _onGestureEnd);
@@ -8018,7 +7992,7 @@ var Observer = /*#__PURE__*/ function() {
     ]);
     return Observer;
 }();
-Observer.version = "3.12.5";
+Observer.version = "3.12.2";
 Observer.create = function(vars) {
     return new Observer(vars);
 };
@@ -8033,6 +8007,981 @@ Observer.getById = function(id) {
 };
 _getGSAP() && gsap.registerPlugin(Observer);
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}]},["3ri9N","1Ak3V"], "1Ak3V", "parcelRequire494b")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"5Zcv2":[function(require,module,exports,__globalThis) {
+// package.json
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "default", function() {
+    return Lenis;
+});
+var _classCallCheck = require("@swc/helpers/_/_class_call_check");
+var _createClass = require("@swc/helpers/_/_create_class");
+var _defineProperty = require("@swc/helpers/_/_define_property");
+var _objectSpread = require("@swc/helpers/_/_object_spread");
+var _toConsumableArray = require("@swc/helpers/_/_to_consumable_array");
+var version = "1.1.18";
+// packages/core/src/maths.ts
+function clamp(min, input, max) {
+    return Math.max(min, Math.min(input, max));
+}
+function lerp(x, y, t) {
+    return (1 - t) * x + t * y;
+}
+function damp(x, y, lambda, deltaTime) {
+    return lerp(x, y, 1 - Math.exp(-lambda * deltaTime));
+}
+function modulo(n, d) {
+    return (n % d + d) % d;
+}
+// packages/core/src/animate.ts
+var Animate = /*#__PURE__*/ function() {
+    "use strict";
+    function Animate() {
+        (0, _classCallCheck._)(this, Animate);
+        (0, _defineProperty._)(this, "isRunning", false);
+        (0, _defineProperty._)(this, "value", 0);
+        (0, _defineProperty._)(this, "from", 0);
+        (0, _defineProperty._)(this, "to", 0);
+        (0, _defineProperty._)(this, "currentTime", 0);
+        // These are instanciated in the fromTo method
+        (0, _defineProperty._)(this, "lerp", void 0);
+        (0, _defineProperty._)(this, "duration", void 0);
+        (0, _defineProperty._)(this, "easing", void 0);
+        (0, _defineProperty._)(this, "onUpdate", void 0);
+    }
+    (0, _createClass._)(Animate, [
+        {
+            /**
+   * Advance the animation by the given delta time
+   *
+   * @param deltaTime - The time in seconds to advance the animation
+   */ key: "advance",
+            value: function advance(deltaTime) {
+                var _this_onUpdate, _this;
+                if (!this.isRunning) return;
+                var completed = false;
+                if (this.duration && this.easing) {
+                    this.currentTime += deltaTime;
+                    var linearProgress = clamp(0, this.currentTime / this.duration, 1);
+                    completed = linearProgress >= 1;
+                    var easedProgress = completed ? 1 : this.easing(linearProgress);
+                    this.value = this.from + (this.to - this.from) * easedProgress;
+                } else if (this.lerp) {
+                    this.value = damp(this.value, this.to, this.lerp * 60, deltaTime);
+                    if (Math.round(this.value) === this.to) {
+                        this.value = this.to;
+                        completed = true;
+                    }
+                } else {
+                    this.value = this.to;
+                    completed = true;
+                }
+                if (completed) this.stop();
+                (_this_onUpdate = (_this = this).onUpdate) === null || _this_onUpdate === void 0 ? void 0 : _this_onUpdate.call(_this, this.value, completed);
+            }
+        },
+        {
+            /** Stop the animation */ key: "stop",
+            value: function stop() {
+                this.isRunning = false;
+            }
+        },
+        {
+            /**
+   * Set up the animation from a starting value to an ending value
+   * with optional parameters for lerping, duration, easing, and onUpdate callback
+   *
+   * @param from - The starting value
+   * @param to - The ending value
+   * @param options - Options for the animation
+   */ key: "fromTo",
+            value: function fromTo(from, to, param) {
+                var lerp2 = param.lerp, duration = param.duration, easing = param.easing, onStart = param.onStart, onUpdate = param.onUpdate;
+                this.from = this.value = from;
+                this.to = to;
+                this.lerp = lerp2;
+                this.duration = duration;
+                this.easing = easing;
+                this.currentTime = 0;
+                this.isRunning = true;
+                onStart === null || onStart === void 0 ? void 0 : onStart();
+                this.onUpdate = onUpdate;
+            }
+        }
+    ]);
+    return Animate;
+}();
+// packages/core/src/debounce.ts
+function debounce(callback, delay) {
+    var timer;
+    return function() {
+        for(var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++){
+            args[_key] = arguments[_key];
+        }
+        var context = this;
+        clearTimeout(timer);
+        timer = setTimeout(function() {
+            timer = void 0;
+            callback.apply(context, args);
+        }, delay);
+    };
+}
+// packages/core/src/dimensions.ts
+var Dimensions = /*#__PURE__*/ function() {
+    "use strict";
+    function Dimensions(wrapper, content) {
+        var _this = this;
+        var _ref = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {}, _ref_autoResize = _ref.autoResize, autoResize = _ref_autoResize === void 0 ? true : _ref_autoResize, tmp = _ref.debounce, debounceValue = tmp === void 0 ? 250 : tmp;
+        (0, _classCallCheck._)(this, Dimensions);
+        (0, _defineProperty._)(this, "width", 0);
+        (0, _defineProperty._)(this, "height", 0);
+        (0, _defineProperty._)(this, "scrollHeight", 0);
+        (0, _defineProperty._)(this, "scrollWidth", 0);
+        // These are instanciated in the constructor as they need information from the options
+        (0, _defineProperty._)(this, "debouncedResize", void 0);
+        (0, _defineProperty._)(this, "wrapperResizeObserver", void 0);
+        (0, _defineProperty._)(this, "contentResizeObserver", void 0);
+        (0, _defineProperty._)(this, "resize", function() {
+            _this.onWrapperResize();
+            _this.onContentResize();
+        });
+        (0, _defineProperty._)(this, "onWrapperResize", function() {
+            if (_this.wrapper instanceof Window) {
+                _this.width = window.innerWidth;
+                _this.height = window.innerHeight;
+            } else {
+                _this.width = _this.wrapper.clientWidth;
+                _this.height = _this.wrapper.clientHeight;
+            }
+        });
+        (0, _defineProperty._)(this, "onContentResize", function() {
+            if (_this.wrapper instanceof Window) {
+                _this.scrollHeight = _this.content.scrollHeight;
+                _this.scrollWidth = _this.content.scrollWidth;
+            } else {
+                _this.scrollHeight = _this.wrapper.scrollHeight;
+                _this.scrollWidth = _this.wrapper.scrollWidth;
+            }
+        });
+        this.wrapper = wrapper;
+        this.content = content;
+        if (autoResize) {
+            this.debouncedResize = debounce(this.resize, debounceValue);
+            if (this.wrapper instanceof Window) window.addEventListener("resize", this.debouncedResize, false);
+            else {
+                this.wrapperResizeObserver = new ResizeObserver(this.debouncedResize);
+                this.wrapperResizeObserver.observe(this.wrapper);
+            }
+            this.contentResizeObserver = new ResizeObserver(this.debouncedResize);
+            this.contentResizeObserver.observe(this.content);
+        }
+        this.resize();
+    }
+    (0, _createClass._)(Dimensions, [
+        {
+            key: "destroy",
+            value: function destroy() {
+                var _this_wrapperResizeObserver, _this_contentResizeObserver;
+                (_this_wrapperResizeObserver = this.wrapperResizeObserver) === null || _this_wrapperResizeObserver === void 0 ? void 0 : _this_wrapperResizeObserver.disconnect();
+                (_this_contentResizeObserver = this.contentResizeObserver) === null || _this_contentResizeObserver === void 0 ? void 0 : _this_contentResizeObserver.disconnect();
+                if (this.wrapper === window && this.debouncedResize) window.removeEventListener("resize", this.debouncedResize, false);
+            }
+        },
+        {
+            key: "limit",
+            get: function get() {
+                return {
+                    x: this.scrollWidth - this.width,
+                    y: this.scrollHeight - this.height
+                };
+            }
+        }
+    ]);
+    return Dimensions;
+}();
+// packages/core/src/emitter.ts
+var Emitter = /*#__PURE__*/ function() {
+    "use strict";
+    function Emitter() {
+        (0, _classCallCheck._)(this, Emitter);
+        (0, _defineProperty._)(this, "events", {});
+    }
+    (0, _createClass._)(Emitter, [
+        {
+            /**
+   * Emit an event with the given data
+   * @param event Event name
+   * @param args Data to pass to the event handlers
+   */ key: "emit",
+            value: function emit(event) {
+                for(var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++){
+                    args[_key - 1] = arguments[_key];
+                }
+                var _callbacks_i;
+                var _callbacks_i1;
+                var callbacks = this.events[event] || [];
+                for(var i = 0, length = callbacks.length; i < length; i++)(_callbacks_i1 = callbacks[i]) === null || _callbacks_i1 === void 0 ? void 0 : (_callbacks_i = _callbacks_i1).call.apply(_callbacks_i, [
+                    callbacks
+                ].concat((0, _toConsumableArray._)(args)));
+            }
+        },
+        {
+            /**
+   * Add a callback to the event
+   * @param event Event name
+   * @param cb Callback function
+   * @returns Unsubscribe function
+   */ key: "on",
+            value: function on(event, cb) {
+                var _this = this;
+                var _this_events_event;
+                ((_this_events_event = this.events[event]) === null || _this_events_event === void 0 ? void 0 : _this_events_event.push(cb)) || (this.events[event] = [
+                    cb
+                ]);
+                return function() {
+                    var _this_events_event;
+                    _this.events[event] = (_this_events_event = _this.events[event]) === null || _this_events_event === void 0 ? void 0 : _this_events_event.filter(function(i) {
+                        return cb !== i;
+                    });
+                };
+            }
+        },
+        {
+            /**
+   * Remove a callback from the event
+   * @param event Event name
+   * @param callback Callback function
+   */ key: "off",
+            value: function off(event, callback) {
+                var _this_events_event;
+                this.events[event] = (_this_events_event = this.events[event]) === null || _this_events_event === void 0 ? void 0 : _this_events_event.filter(function(i) {
+                    return callback !== i;
+                });
+            }
+        },
+        {
+            /**
+   * Remove all event listeners and clean up
+   */ key: "destroy",
+            value: function destroy() {
+                this.events = {};
+            }
+        }
+    ]);
+    return Emitter;
+}();
+// packages/core/src/virtual-scroll.ts
+var LINE_HEIGHT = 100 / 6;
+var listenerOptions = {
+    passive: false
+};
+var VirtualScroll = /*#__PURE__*/ function() {
+    "use strict";
+    function VirtualScroll(element) {
+        var _this = this;
+        var options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {
+            wheelMultiplier: 1,
+            touchMultiplier: 1
+        };
+        (0, _classCallCheck._)(this, VirtualScroll);
+        (0, _defineProperty._)(this, "touchStart", {
+            x: 0,
+            y: 0
+        });
+        (0, _defineProperty._)(this, "lastDelta", {
+            x: 0,
+            y: 0
+        });
+        (0, _defineProperty._)(this, "window", {
+            width: 0,
+            height: 0
+        });
+        (0, _defineProperty._)(this, "emitter", new Emitter());
+        /**
+   * Event handler for 'touchstart' event
+   *
+   * @param event Touch event
+   */ (0, _defineProperty._)(this, "onTouchStart", function(event) {
+            var _ref = event.targetTouches ? event.targetTouches[0] : event, clientX = _ref.clientX, clientY = _ref.clientY;
+            _this.touchStart.x = clientX;
+            _this.touchStart.y = clientY;
+            _this.lastDelta = {
+                x: 0,
+                y: 0
+            };
+            _this.emitter.emit("scroll", {
+                deltaX: 0,
+                deltaY: 0,
+                event: event
+            });
+        });
+        /** Event handler for 'touchmove' event */ (0, _defineProperty._)(this, "onTouchMove", function(event) {
+            var _ref = event.targetTouches ? event.targetTouches[0] : event, clientX = _ref.clientX, clientY = _ref.clientY;
+            var deltaX = -(clientX - _this.touchStart.x) * _this.options.touchMultiplier;
+            var deltaY = -(clientY - _this.touchStart.y) * _this.options.touchMultiplier;
+            _this.touchStart.x = clientX;
+            _this.touchStart.y = clientY;
+            _this.lastDelta = {
+                x: deltaX,
+                y: deltaY
+            };
+            _this.emitter.emit("scroll", {
+                deltaX: deltaX,
+                deltaY: deltaY,
+                event: event
+            });
+        });
+        (0, _defineProperty._)(this, "onTouchEnd", function(event) {
+            _this.emitter.emit("scroll", {
+                deltaX: _this.lastDelta.x,
+                deltaY: _this.lastDelta.y,
+                event: event
+            });
+        });
+        /** Event handler for 'wheel' event */ (0, _defineProperty._)(this, "onWheel", function(event) {
+            var deltaX = event.deltaX, deltaY = event.deltaY, deltaMode = event.deltaMode;
+            var multiplierX = deltaMode === 1 ? LINE_HEIGHT : deltaMode === 2 ? _this.window.width : 1;
+            var multiplierY = deltaMode === 1 ? LINE_HEIGHT : deltaMode === 2 ? _this.window.height : 1;
+            deltaX *= multiplierX;
+            deltaY *= multiplierY;
+            deltaX *= _this.options.wheelMultiplier;
+            deltaY *= _this.options.wheelMultiplier;
+            _this.emitter.emit("scroll", {
+                deltaX: deltaX,
+                deltaY: deltaY,
+                event: event
+            });
+        });
+        (0, _defineProperty._)(this, "onWindowResize", function() {
+            _this.window = {
+                width: window.innerWidth,
+                height: window.innerHeight
+            };
+        });
+        this.element = element;
+        this.options = options;
+        window.addEventListener("resize", this.onWindowResize, false);
+        this.onWindowResize();
+        this.element.addEventListener("wheel", this.onWheel, listenerOptions);
+        this.element.addEventListener("touchstart", this.onTouchStart, listenerOptions);
+        this.element.addEventListener("touchmove", this.onTouchMove, listenerOptions);
+        this.element.addEventListener("touchend", this.onTouchEnd, listenerOptions);
+    }
+    (0, _createClass._)(VirtualScroll, [
+        {
+            /**
+   * Add an event listener for the given event and callback
+   *
+   * @param event Event name
+   * @param callback Callback function
+   */ key: "on",
+            value: function on(event, callback) {
+                return this.emitter.on(event, callback);
+            }
+        },
+        {
+            /** Remove all event listeners and clean up */ key: "destroy",
+            value: function destroy() {
+                this.emitter.destroy();
+                window.removeEventListener("resize", this.onWindowResize, false);
+                this.element.removeEventListener("wheel", this.onWheel, listenerOptions);
+                this.element.removeEventListener("touchstart", this.onTouchStart, listenerOptions);
+                this.element.removeEventListener("touchmove", this.onTouchMove, listenerOptions);
+                this.element.removeEventListener("touchend", this.onTouchEnd, listenerOptions);
+            }
+        }
+    ]);
+    return VirtualScroll;
+}();
+// packages/core/src/lenis.ts
+var Lenis = /*#__PURE__*/ function() {
+    "use strict";
+    function Lenis() {
+        var _this = this;
+        var _ref = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {}, _ref_wrapper = _ref.wrapper, wrapper = _ref_wrapper === void 0 ? window : _ref_wrapper, _ref_content = _ref.content, content = _ref_content === void 0 ? document.documentElement : _ref_content, _ref_eventsTarget = _ref.eventsTarget, eventsTarget = _ref_eventsTarget === void 0 ? wrapper : _ref_eventsTarget, _ref_smoothWheel = _ref.smoothWheel, smoothWheel = _ref_smoothWheel === void 0 ? true : _ref_smoothWheel, _ref_syncTouch = _ref.syncTouch, syncTouch = _ref_syncTouch === void 0 ? false : _ref_syncTouch, _ref_syncTouchLerp = _ref.syncTouchLerp, syncTouchLerp = _ref_syncTouchLerp === void 0 ? 0.075 : _ref_syncTouchLerp, _ref_touchInertiaMultiplier = _ref.touchInertiaMultiplier, touchInertiaMultiplier = _ref_touchInertiaMultiplier === void 0 ? 35 : _ref_touchInertiaMultiplier, duration = _ref.duration, _ref_easing = _ref.// in seconds
+        easing, easing = _ref_easing === void 0 ? function(t) {
+            return Math.min(1, 1.001 - Math.pow(2, -10 * t));
+        } : _ref_easing, tmp = _ref.lerp, lerp2 = tmp === void 0 ? 0.1 : tmp, _ref_infinite = _ref.infinite, infinite = _ref_infinite === void 0 ? false : _ref_infinite, _ref_orientation = _ref.orientation, orientation = _ref_orientation === void 0 ? "vertical" : _ref_orientation, _ref_gestureOrientation = _ref.// vertical, horizontal
+        gestureOrientation, gestureOrientation = _ref_gestureOrientation === void 0 ? "vertical" : _ref_gestureOrientation, _ref_touchMultiplier = _ref.// vertical, horizontal, both
+        touchMultiplier, touchMultiplier = _ref_touchMultiplier === void 0 ? 1 : _ref_touchMultiplier, _ref_wheelMultiplier = _ref.wheelMultiplier, wheelMultiplier = _ref_wheelMultiplier === void 0 ? 1 : _ref_wheelMultiplier, _ref_autoResize = _ref.autoResize, autoResize = _ref_autoResize === void 0 ? true : _ref_autoResize, prevent = _ref.prevent, virtualScroll = _ref.virtualScroll, _ref_overscroll = _ref.overscroll, overscroll = _ref_overscroll === void 0 ? true : _ref_overscroll, _ref_autoRaf = _ref.autoRaf, autoRaf = _ref_autoRaf === void 0 ? false : _ref_autoRaf, _ref___experimental__naiveDimensions = _ref.__experimental__naiveDimensions, __experimental__naiveDimensions = _ref___experimental__naiveDimensions === void 0 ? false : _ref___experimental__naiveDimensions;
+        (0, _classCallCheck._)(this, Lenis);
+        (0, _defineProperty._)(this, "_isScrolling", false);
+        // true when scroll is animating
+        (0, _defineProperty._)(this, "_isStopped", false);
+        // true if user should not be able to scroll - enable/disable programmatically
+        (0, _defineProperty._)(this, "_isLocked", false);
+        // same as isStopped but enabled/disabled when scroll reaches target
+        (0, _defineProperty._)(this, "_preventNextNativeScrollEvent", false);
+        (0, _defineProperty._)(this, "_resetVelocityTimeout", null);
+        (0, _defineProperty._)(this, "__rafID", null);
+        /**
+   * Whether or not the user is touching the screen
+   */ (0, _defineProperty._)(this, "isTouching", void 0);
+        /**
+   * The time in ms since the lenis instance was created
+   */ (0, _defineProperty._)(this, "time", 0);
+        /**
+   * User data that will be forwarded through the scroll event
+   *
+   * @example
+   * lenis.scrollTo(100, {
+   *   userData: {
+   *     foo: 'bar'
+   *   }
+   * })
+   */ (0, _defineProperty._)(this, "userData", {});
+        /**
+   * The last velocity of the scroll
+   */ (0, _defineProperty._)(this, "lastVelocity", 0);
+        /**
+   * The current velocity of the scroll
+   */ (0, _defineProperty._)(this, "velocity", 0);
+        /**
+   * The direction of the scroll
+   */ (0, _defineProperty._)(this, "direction", 0);
+        /**
+   * The options passed to the lenis instance
+   */ (0, _defineProperty._)(this, "options", void 0);
+        /**
+   * The target scroll value
+   */ (0, _defineProperty._)(this, "targetScroll", void 0);
+        /**
+   * The animated scroll value
+   */ (0, _defineProperty._)(this, "animatedScroll", void 0);
+        // These are instanciated here as they don't need information from the options
+        (0, _defineProperty._)(this, "animate", new Animate());
+        (0, _defineProperty._)(this, "emitter", new Emitter());
+        // These are instanciated in the constructor as they need information from the options
+        (0, _defineProperty._)(this, "dimensions", void 0);
+        // This is not private because it's used in the Snap class
+        (0, _defineProperty._)(this, "virtualScroll", void 0);
+        (0, _defineProperty._)(this, "onPointerDown", function(event) {
+            if (event.button === 1) _this.reset();
+        });
+        (0, _defineProperty._)(this, "onVirtualScroll", function(data) {
+            if (typeof _this.options.virtualScroll === "function" && _this.options.virtualScroll(data) === false) return;
+            var deltaX = data.deltaX, deltaY = data.deltaY, event = data.event;
+            _this.emitter.emit("virtual-scroll", {
+                deltaX: deltaX,
+                deltaY: deltaY,
+                event: event
+            });
+            if (event.ctrlKey) return;
+            if (event.lenisStopPropagation) return;
+            var isTouch = event.type.includes("touch");
+            var isWheel = event.type.includes("wheel");
+            _this.isTouching = event.type === "touchstart" || event.type === "touchmove";
+            var isClickOrTap = deltaX === 0 && deltaY === 0;
+            var isTapToStop = _this.options.syncTouch && isTouch && event.type === "touchstart" && isClickOrTap && !_this.isStopped && !_this.isLocked;
+            if (isTapToStop) {
+                _this.reset();
+                return;
+            }
+            var isUnknownGesture = _this.options.gestureOrientation === "vertical" && deltaY === 0 || _this.options.gestureOrientation === "horizontal" && deltaX === 0;
+            if (isClickOrTap || isUnknownGesture) return;
+            var composedPath = event.composedPath();
+            composedPath = composedPath.slice(0, composedPath.indexOf(_this.rootElement));
+            var prevent = _this.options.prevent;
+            if (!!composedPath.find(function(node) {
+                var _node_hasAttribute, _node_hasAttribute1, _node_hasAttribute2;
+                return node instanceof HTMLElement && (typeof prevent === "function" && (prevent === null || prevent === void 0 ? void 0 : prevent(node)) || ((_node_hasAttribute = node.hasAttribute) === null || _node_hasAttribute === void 0 ? void 0 : _node_hasAttribute.call(node, "data-lenis-prevent")) || isTouch && ((_node_hasAttribute1 = node.hasAttribute) === null || _node_hasAttribute1 === void 0 ? void 0 : _node_hasAttribute1.call(node, "data-lenis-prevent-touch")) || isWheel && ((_node_hasAttribute2 = node.hasAttribute) === null || _node_hasAttribute2 === void 0 ? void 0 : _node_hasAttribute2.call(node, "data-lenis-prevent-wheel")));
+            })) return;
+            if (_this.isStopped || _this.isLocked) {
+                event.preventDefault();
+                return;
+            }
+            var isSmooth = _this.options.syncTouch && isTouch || _this.options.smoothWheel && isWheel;
+            if (!isSmooth) {
+                _this.isScrolling = "native";
+                _this.animate.stop();
+                event.lenisStopPropagation = true;
+                return;
+            }
+            var delta = deltaY;
+            if (_this.options.gestureOrientation === "both") delta = Math.abs(deltaY) > Math.abs(deltaX) ? deltaY : deltaX;
+            else if (_this.options.gestureOrientation === "horizontal") delta = deltaX;
+            if (!_this.options.overscroll || _this.options.infinite || _this.options.wrapper !== window && (_this.animatedScroll > 0 && _this.animatedScroll < _this.limit || _this.animatedScroll === 0 && deltaY > 0 || _this.animatedScroll === _this.limit && deltaY < 0)) event.lenisStopPropagation = true;
+            event.preventDefault();
+            var isSyncTouch = isTouch && _this.options.syncTouch;
+            var isTouchEnd = isTouch && event.type === "touchend";
+            var hasTouchInertia = isTouchEnd && Math.abs(delta) > 5;
+            if (hasTouchInertia) delta = _this.velocity * _this.options.touchInertiaMultiplier;
+            _this.scrollTo(_this.targetScroll + delta, (0, _objectSpread._)({
+                programmatic: false
+            }, isSyncTouch ? {
+                lerp: hasTouchInertia ? _this.options.syncTouchLerp : 1
+            } : {
+                lerp: _this.options.lerp,
+                duration: _this.options.duration,
+                easing: _this.options.easing
+            }));
+        });
+        (0, _defineProperty._)(this, "onNativeScroll", function() {
+            if (_this._resetVelocityTimeout !== null) {
+                clearTimeout(_this._resetVelocityTimeout);
+                _this._resetVelocityTimeout = null;
+            }
+            if (_this._preventNextNativeScrollEvent) {
+                _this._preventNextNativeScrollEvent = false;
+                return;
+            }
+            if (_this.isScrolling === false || _this.isScrolling === "native") {
+                var lastScroll = _this.animatedScroll;
+                _this.animatedScroll = _this.targetScroll = _this.actualScroll;
+                _this.lastVelocity = _this.velocity;
+                _this.velocity = _this.animatedScroll - lastScroll;
+                _this.direction = Math.sign(_this.animatedScroll - lastScroll);
+                if (!_this.isStopped) _this.isScrolling = "native";
+                _this.emit();
+                if (_this.velocity !== 0) _this._resetVelocityTimeout = setTimeout(function() {
+                    _this.lastVelocity = _this.velocity;
+                    _this.velocity = 0;
+                    _this.isScrolling = false;
+                    _this.emit();
+                }, 400);
+            }
+        });
+        /**
+   * RequestAnimationFrame for lenis
+   *
+   * @param time The time in ms from an external clock like `requestAnimationFrame` or Tempus
+   */ (0, _defineProperty._)(this, "raf", function(time) {
+            var deltaTime = time - (_this.time || time);
+            _this.time = time;
+            _this.animate.advance(deltaTime * 1e-3);
+            if (_this.options.autoRaf) _this.__rafID = requestAnimationFrame(_this.raf);
+        });
+        window.lenisVersion = version;
+        if (!wrapper || wrapper === document.documentElement || wrapper === document.body) wrapper = window;
+        this.options = {
+            wrapper: wrapper,
+            content: content,
+            eventsTarget: eventsTarget,
+            smoothWheel: smoothWheel,
+            syncTouch: syncTouch,
+            syncTouchLerp: syncTouchLerp,
+            touchInertiaMultiplier: touchInertiaMultiplier,
+            duration: duration,
+            easing: easing,
+            lerp: lerp2,
+            infinite: infinite,
+            gestureOrientation: gestureOrientation,
+            orientation: orientation,
+            touchMultiplier: touchMultiplier,
+            wheelMultiplier: wheelMultiplier,
+            autoResize: autoResize,
+            prevent: prevent,
+            virtualScroll: virtualScroll,
+            overscroll: overscroll,
+            autoRaf: autoRaf,
+            __experimental__naiveDimensions: __experimental__naiveDimensions
+        };
+        this.dimensions = new Dimensions(wrapper, content, {
+            autoResize: autoResize
+        });
+        this.updateClassName();
+        this.targetScroll = this.animatedScroll = this.actualScroll;
+        this.options.wrapper.addEventListener("scroll", this.onNativeScroll, false);
+        this.options.wrapper.addEventListener("pointerdown", this.onPointerDown, false);
+        this.virtualScroll = new VirtualScroll(eventsTarget, {
+            touchMultiplier: touchMultiplier,
+            wheelMultiplier: wheelMultiplier
+        });
+        this.virtualScroll.on("scroll", this.onVirtualScroll);
+        if (this.options.autoRaf) this.__rafID = requestAnimationFrame(this.raf);
+    }
+    (0, _createClass._)(Lenis, [
+        {
+            /**
+   * Destroy the lenis instance, remove all event listeners and clean up the class name
+   */ key: "destroy",
+            value: function destroy() {
+                this.emitter.destroy();
+                this.options.wrapper.removeEventListener("scroll", this.onNativeScroll, false);
+                this.options.wrapper.removeEventListener("pointerdown", this.onPointerDown, false);
+                this.virtualScroll.destroy();
+                this.dimensions.destroy();
+                this.cleanUpClassName();
+                if (this.__rafID) cancelAnimationFrame(this.__rafID);
+            }
+        },
+        {
+            key: "on",
+            value: function on(event, callback) {
+                return this.emitter.on(event, callback);
+            }
+        },
+        {
+            key: "off",
+            value: function off(event, callback) {
+                return this.emitter.off(event, callback);
+            }
+        },
+        {
+            key: "setScroll",
+            value: function setScroll(scroll) {
+                if (this.isHorizontal) this.rootElement.scrollLeft = scroll;
+                else this.rootElement.scrollTop = scroll;
+            }
+        },
+        {
+            /**
+   * Force lenis to recalculate the dimensions
+   */ key: "resize",
+            value: function resize() {
+                this.dimensions.resize();
+                this.animatedScroll = this.targetScroll = this.actualScroll;
+                this.emit();
+            }
+        },
+        {
+            key: "emit",
+            value: function emit() {
+                this.emitter.emit("scroll", this);
+            }
+        },
+        {
+            key: "reset",
+            value: function reset() {
+                this.isLocked = false;
+                this.isScrolling = false;
+                this.animatedScroll = this.targetScroll = this.actualScroll;
+                this.lastVelocity = this.velocity = 0;
+                this.animate.stop();
+            }
+        },
+        {
+            /**
+   * Start lenis scroll after it has been stopped
+   */ key: "start",
+            value: function start() {
+                if (!this.isStopped) return;
+                this.reset();
+                this.isStopped = false;
+            }
+        },
+        {
+            /**
+   * Stop lenis scroll
+   */ key: "stop",
+            value: function stop() {
+                if (this.isStopped) return;
+                this.reset();
+                this.isStopped = true;
+            }
+        },
+        {
+            /**
+   * Scroll to a target value
+   *
+   * @param target The target value to scroll to
+   * @param options The options for the scroll
+   *
+   * @example
+   * lenis.scrollTo(100, {
+   *   offset: 100,
+   *   duration: 1,
+   *   easing: (t) => 1 - Math.cos((t * Math.PI) / 2),
+   *   lerp: 0.1,
+   *   onStart: () => {
+   *     console.log('onStart')
+   *   },
+   *   onComplete: () => {
+   *     console.log('onComplete')
+   *   },
+   * })
+   */ key: "scrollTo",
+            value: function scrollTo(target) {
+                var _this = this;
+                var _ref = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {}, _ref_offset = _ref.offset, offset = _ref_offset === void 0 ? 0 : _ref_offset, _ref_immediate = _ref.immediate, immediate = _ref_immediate === void 0 ? false : _ref_immediate, _ref_lock = _ref.lock, lock = _ref_lock === void 0 ? false : _ref_lock, _ref_duration = _ref.duration, duration = _ref_duration === void 0 ? this.options.duration : _ref_duration, _ref_easing = _ref.easing, easing = _ref_easing === void 0 ? this.options.easing : _ref_easing, tmp = _ref.lerp, lerp2 = tmp === void 0 ? this.options.lerp : tmp, onStart = _ref.onStart, onComplete = _ref.onComplete, _ref_force = _ref.force, force = _ref_force === void 0 ? false : _ref_force, _ref_programmatic = _ref.// scroll even if stopped
+                programmatic, programmatic = _ref_programmatic === void 0 ? true : _ref_programmatic, // called from outside of the class
+                userData = _ref.userData;
+                if ((this.isStopped || this.isLocked) && !force) return;
+                if (typeof target === "string" && [
+                    "top",
+                    "left",
+                    "start"
+                ].includes(target)) target = 0;
+                else if (typeof target === "string" && [
+                    "bottom",
+                    "right",
+                    "end"
+                ].includes(target)) target = this.limit;
+                else {
+                    var node;
+                    if (typeof target === "string") node = document.querySelector(target);
+                    else if (target instanceof HTMLElement && (target === null || target === void 0 ? void 0 : target.nodeType)) node = target;
+                    if (node) {
+                        if (this.options.wrapper !== window) {
+                            var wrapperRect = this.rootElement.getBoundingClientRect();
+                            offset -= this.isHorizontal ? wrapperRect.left : wrapperRect.top;
+                        }
+                        var rect = node.getBoundingClientRect();
+                        target = (this.isHorizontal ? rect.left : rect.top) + this.animatedScroll;
+                    }
+                }
+                if (typeof target !== "number") return;
+                target += offset;
+                target = Math.round(target);
+                if (this.options.infinite) {
+                    if (programmatic) this.targetScroll = this.animatedScroll = this.scroll;
+                } else target = clamp(0, target, this.limit);
+                if (target === this.targetScroll) {
+                    onStart === null || onStart === void 0 ? void 0 : onStart(this);
+                    onComplete === null || onComplete === void 0 ? void 0 : onComplete(this);
+                    return;
+                }
+                this.userData = userData !== null && userData !== void 0 ? userData : {};
+                if (immediate) {
+                    this.animatedScroll = this.targetScroll = target;
+                    this.setScroll(this.scroll);
+                    this.reset();
+                    this.preventNextNativeScrollEvent();
+                    this.emit();
+                    onComplete === null || onComplete === void 0 ? void 0 : onComplete(this);
+                    this.userData = {};
+                    return;
+                }
+                if (!programmatic) this.targetScroll = target;
+                this.animate.fromTo(this.animatedScroll, target, {
+                    duration: duration,
+                    easing: easing,
+                    lerp: lerp2,
+                    onStart: function() {
+                        if (lock) _this.isLocked = true;
+                        _this.isScrolling = "smooth";
+                        onStart === null || onStart === void 0 ? void 0 : onStart(_this);
+                    },
+                    onUpdate: function(value, completed) {
+                        _this.isScrolling = "smooth";
+                        _this.lastVelocity = _this.velocity;
+                        _this.velocity = value - _this.animatedScroll;
+                        _this.direction = Math.sign(_this.velocity);
+                        _this.animatedScroll = value;
+                        _this.setScroll(_this.scroll);
+                        if (programmatic) _this.targetScroll = value;
+                        if (!completed) _this.emit();
+                        if (completed) {
+                            _this.reset();
+                            _this.emit();
+                            onComplete === null || onComplete === void 0 ? void 0 : onComplete(_this);
+                            _this.userData = {};
+                            _this.preventNextNativeScrollEvent();
+                        }
+                    }
+                });
+            }
+        },
+        {
+            key: "preventNextNativeScrollEvent",
+            value: function preventNextNativeScrollEvent() {
+                var _this = this;
+                this._preventNextNativeScrollEvent = true;
+                requestAnimationFrame(function() {
+                    _this._preventNextNativeScrollEvent = false;
+                });
+            }
+        },
+        {
+            key: "rootElement",
+            get: /**
+   * The root element on which lenis is instanced
+   */ function get() {
+                return this.options.wrapper === window ? document.documentElement : this.options.wrapper;
+            }
+        },
+        {
+            key: "limit",
+            get: /**
+   * The limit which is the maximum scroll value
+   */ function get() {
+                if (this.options.__experimental__naiveDimensions) {
+                    if (this.isHorizontal) return this.rootElement.scrollWidth - this.rootElement.clientWidth;
+                    else return this.rootElement.scrollHeight - this.rootElement.clientHeight;
+                } else return this.dimensions.limit[this.isHorizontal ? "x" : "y"];
+            }
+        },
+        {
+            key: "isHorizontal",
+            get: /**
+   * Whether or not the scroll is horizontal
+   */ function get() {
+                return this.options.orientation === "horizontal";
+            }
+        },
+        {
+            key: "actualScroll",
+            get: /**
+   * The actual scroll value
+   */ function get() {
+                return this.isHorizontal ? this.rootElement.scrollLeft : this.rootElement.scrollTop;
+            }
+        },
+        {
+            key: "scroll",
+            get: /**
+   * The current scroll value
+   */ function get() {
+                return this.options.infinite ? modulo(this.animatedScroll, this.limit) : this.animatedScroll;
+            }
+        },
+        {
+            key: "progress",
+            get: /**
+   * The progress of the scroll relative to the limit
+   */ function get() {
+                return this.limit === 0 ? 1 : this.scroll / this.limit;
+            }
+        },
+        {
+            key: "isScrolling",
+            get: /**
+   * Current scroll state
+   */ function get() {
+                return this._isScrolling;
+            },
+            set: function set(value) {
+                if (this._isScrolling !== value) {
+                    this._isScrolling = value;
+                    this.updateClassName();
+                }
+            }
+        },
+        {
+            key: "isStopped",
+            get: /**
+   * Check if lenis is stopped
+   */ function get() {
+                return this._isStopped;
+            },
+            set: function set(value) {
+                if (this._isStopped !== value) {
+                    this._isStopped = value;
+                    this.updateClassName();
+                }
+            }
+        },
+        {
+            key: "isLocked",
+            get: /**
+   * Check if lenis is locked
+   */ function get() {
+                return this._isLocked;
+            },
+            set: function set(value) {
+                if (this._isLocked !== value) {
+                    this._isLocked = value;
+                    this.updateClassName();
+                }
+            }
+        },
+        {
+            key: "isSmooth",
+            get: /**
+   * Check if lenis is smooth scrolling
+   */ function get() {
+                return this.isScrolling === "smooth";
+            }
+        },
+        {
+            key: "className",
+            get: /**
+   * The class name applied to the wrapper element
+   */ function get() {
+                var className = "lenis";
+                if (this.isStopped) className += " lenis-stopped";
+                if (this.isLocked) className += " lenis-locked";
+                if (this.isScrolling) className += " lenis-scrolling";
+                if (this.isScrolling === "smooth") className += " lenis-smooth";
+                return className;
+            }
+        },
+        {
+            key: "updateClassName",
+            value: function updateClassName() {
+                this.cleanUpClassName();
+                this.rootElement.className = "".concat(this.rootElement.className, " ").concat(this.className).trim();
+            }
+        },
+        {
+            key: "cleanUpClassName",
+            value: function cleanUpClassName() {
+                this.rootElement.className = this.rootElement.className.replace(/lenis(-\w+)?/g, "").trim();
+            }
+        }
+    ]);
+    return Lenis;
+}();
+
+},{"@swc/helpers/_/_class_call_check":"cUvdT","@swc/helpers/_/_create_class":"aFUX5","@swc/helpers/_/_define_property":"2kM9N","@swc/helpers/_/_object_spread":"jFF3n","@swc/helpers/_/_to_consumable_array":"4hSnh","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"cUvdT":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_", function() {
+    return _class_call_check;
+});
+function _class_call_check(instance, Constructor) {
+    if (!(instance instanceof Constructor)) throw new TypeError("Cannot call a class as a function");
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"aFUX5":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_", function() {
+    return _create_class;
+});
+function _defineProperties(target, props) {
+    for(var i = 0; i < props.length; i++){
+        var descriptor = props[i];
+        descriptor.enumerable = descriptor.enumerable || false;
+        descriptor.configurable = true;
+        if ("value" in descriptor) descriptor.writable = true;
+        Object.defineProperty(target, descriptor.key, descriptor);
+    }
+}
+function _create_class(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"2kM9N":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_", function() {
+    return _define_property;
+});
+function _define_property(obj, key, value) {
+    if (key in obj) Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+    });
+    else obj[key] = value;
+    return obj;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}],"jFF3n":[function(require,module,exports,__globalThis) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "_", function() {
+    return _object_spread;
+});
+var _definePropertyJs = require("./_define_property.js");
+function _object_spread(target) {
+    for(var i = 1; i < arguments.length; i++){
+        var source = arguments[i] != null ? arguments[i] : {};
+        var ownKeys = Object.keys(source);
+        if (typeof Object.getOwnPropertySymbols === "function") ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function(sym) {
+            return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+        }));
+        ownKeys.forEach(function(key) {
+            (0, _definePropertyJs._)(target, key, source[key]);
+        });
+    }
+    return target;
+}
+
+},{"./_define_property.js":"2kM9N","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}]},["4AmVa","1Ak3V"], "1Ak3V", "parcelRequire94c2")
 
 //# sourceMappingURL=index.js.map
