@@ -65,6 +65,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+  // Initialize second section content animation
+  const secondSectionIn = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#section-2',
+      start: 'top bottom',
+      end: 'center center',
+      scrub: true
+    }
+  });
+
+  // Fade in text on second section
+  secondSectionIn.from('#services', {
+    yPercent: -100,
+    opacity: 0,
+    ease: 'none'
+  });
+
   // Uncover the third section
   stackedSections.to('#section-2', {
     yPercent: -100,
