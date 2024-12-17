@@ -22,6 +22,13 @@ document.addEventListener('DOMContentLoaded', function() {
   // Disable lag smoothing in GSAP to prevent any delay in scroll animations
   gsap.ticker.lagSmoothing(0);
 
+  // Setup scroll to booking from
+  const bookingButton = document.getElementById('bookingButton');
+  bookingButton.addEventListener('click', function (event) {
+    event.preventDefault;
+    lenis.scrollTo('#section-5');
+  });
+
   // Exit animation of the first section on scroll
   const firstSectionMM = gsap.matchMedia();
   const firstSectionOut = gsap.timeline({
