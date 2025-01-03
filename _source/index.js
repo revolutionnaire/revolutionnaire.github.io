@@ -84,7 +84,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Fade in text on second section
   secondSectionIn.from('#services', {
-    yPercent: -100,
     opacity: 0,
     ease: 'none'
   });
