@@ -49,9 +49,9 @@ document.addEventListener('DOMContentLoaded', function() {
     let { isMobile, isDesktop } = context.conditions;
 
     firstSectionOut.to('h1', {
-      xPercent: isDesktop ? -18 : -712,
-      yPercent: isDesktop ? 3000 : 3000,
-      scale: isDesktop ?  180 : 100,
+      xPercent: isDesktop ? -18 : -422,
+      yPercent: isDesktop ? 3000 : 1800,
+      scale: isDesktop ?  172 : 60,
       ease: 'none'
     });
   });
