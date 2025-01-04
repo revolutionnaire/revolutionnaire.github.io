@@ -23,11 +23,11 @@ document.addEventListener('DOMContentLoaded', function() {
   gsap.ticker.lagSmoothing(0);
 
   // Setup scroll to booking from
-  const bookingButton = document.getElementById('bookingButton');
-  bookingButton.addEventListener('click', function (event) {
-    event.preventDefault;
-    lenis.scrollTo('#section-5');
-  });
+  // const booking = document.getElementById('booking');
+  // booking.addEventListener('click', function (event) {
+  //   event.preventDefault;
+  //   lenis.scrollTo('#section-7');
+  // });
 
   // Exit animation of the first section on scroll
   const firstSectionMM = gsap.matchMedia();
