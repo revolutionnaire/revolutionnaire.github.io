@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     firstSectionOut.to('h1', {
       xPercent: isDesktop ? -16.5 : -422,
-      yPercent: isDesktop ? 3000 : 1800,
+      yPercent: isDesktop ? 4240 : 1800,
       scale: isDesktop ?  170 : 60,
       ease: 'none'
     });
