@@ -52,7 +52,8 @@ a {
   color: #E34234;
   text-decoration: none;
 
-  &.light {
+  &.light,
+  &.light:visited {
     color: #FFAE98;
   }
 
