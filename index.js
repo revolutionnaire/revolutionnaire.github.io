@@ -1536,7 +1536,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, function(context) {
         var _context_conditions = context.conditions, isMobile = _context_conditions.isMobile, isDesktop = _context_conditions.isDesktop;
         firstSectionOut.to('h1', {
-            xPercent: isDesktop ? -16.5 : -422,
+            xPercent: isDesktop ? -16.5 : -424,
             yPercent: isDesktop ? 4240 : 1800,
             scale: isDesktop ? 170 : 60,
             ease: 'none'
