@@ -142,13 +142,13 @@
       this[globalName] = mainExports;
     }
   }
-})({"1PLo9":[function(require,module,exports,__globalThis) {
+})({"6ea7x":[function(require,module,exports,__globalThis) {
 var _asyncToGenerator = require("@swc/helpers/_/_async_to_generator");
 var _toConsumableArray = require("@swc/helpers/_/_to_consumable_array");
 var _tsGenerator = require("@swc/helpers/_/_ts_generator");
 var global = arguments[3];
 var HMR_HOST = null;
-var HMR_PORT = 65225;
+var HMR_PORT = 63064;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "ddb6ac7c9a3a9178";
 var HMR_USE_SSE = false;
@@ -1544,14 +1544,37 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     firstSectionMM.add({
-        isMobile: '(min-width: 320px)',
-        isDesktop: '(min-width: 768px)'
+        isiPhone: '(max-width: 320px)',
+        isiPadAir: '(max-width: 820px)',
+        isiPadPro: '(height: 1366px)',
+        isDesktop: '(min-width: 1024px)'
     }, function(context) {
-        var _context_conditions = context.conditions, isMobile = _context_conditions.isMobile, isDesktop = _context_conditions.isDesktop;
+        var _context_conditions = context.conditions, isiPhone = _context_conditions.isiPhone, isiPadAir = _context_conditions.isiPadAir, isiPadPro = _context_conditions.isiPadPro, isDesktop = _context_conditions.isDesktop, xPercent, yPercent, scale;
+        switch(true){
+            case isiPadAir:
+                xPercent = -350;
+                yPercent = 2240;
+                scale = 117;
+                break;
+            case isiPhone:
+                xPercent = -424;
+                yPercent = 1800;
+                scale = 60;
+                break;
+            case isiPadPro:
+                xPercent = -16.5;
+                yPercent = 4240;
+                scale = 380;
+            case isDesktop:
+                xPercent = -16.5;
+                yPercent = 4240;
+                scale = 170;
+                break;
+        }
         firstSectionOut.to('h1', {
-            xPercent: isDesktop ? -16.5 : -424,
-            yPercent: isDesktop ? 4240 : 1800,
-            scale: isDesktop ? 170 : 60,
+            xPercent: xPercent,
+            yPercent: yPercent,
+            scale: scale,
             ease: 'none'
         });
     });
@@ -9015,6 +9038,6 @@ function _object_spread(target) {
     return target;
 }
 
-},{"./_define_property.js":"2kM9N","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}]},["1PLo9","1Ak3V"], "1Ak3V", "parcelRequire94c2")
+},{"./_define_property.js":"2kM9N","@parcel/transformer-js/src/esmodule-helpers.js":"hyCVi"}]},["6ea7x","1Ak3V"], "1Ak3V", "parcelRequire94c2")
 
 //# sourceMappingURL=index.js.map

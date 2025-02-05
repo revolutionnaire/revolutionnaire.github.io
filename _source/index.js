@@ -59,15 +59,42 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   firstSectionMM.add({
-     isMobile: '(min-width: 320px)',
-     isDesktop: '(min-width: 768px)'
+    isiPhone: '(max-width: 320px)',
+    isiPadAir: '(max-width: 820px)',
+    isiPadPro: '(height: 1366px)',
+    isDesktop: '(min-width: 1024px)'
   }, (context) => {
-    let { isMobile, isDesktop } = context.conditions;
+    let { isiPhone, isiPadAir, isiPadPro, isDesktop } = context.conditions,
+        xPercent,
+        yPercent,
+        scale;
+
+    switch(true) {
+      case isiPadAir:
+        xPercent = -350;
+        yPercent = 2240;
+        scale = 117;
+        break;
+      case isiPhone:
+        xPercent = -424;
+        yPercent = 1800;
+        scale = 60;
+        break;
+      case isiPadPro:
+        xPercent = -16.5;
+        yPercent = 4240;
+        scale = 380;
+      case isDesktop:
+        xPercent = -16.5;
+        yPercent = 4240;
+        scale = 170;
+        break;
+    }
 
     firstSectionOut.to('h1', {
-      xPercent: isDesktop ? -16.5 : -424,
-      yPercent: isDesktop ? 4240 : 1800,
-      scale: isDesktop ?  170 : 60,
+      xPercent: xPercent,
+      yPercent: yPercent,
+      scale: scale,
       ease: 'none'
     });
   });
