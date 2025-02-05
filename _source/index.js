@@ -35,14 +35,14 @@ document.addEventListener('DOMContentLoaded', function() {
     height: 0,
     duration: 1.5,
     delay: 0.25,
-    ease: 'none'
+    ease: 'power1.in'
   });
 
   firstSectionIn.from('#introduction', {
     opacity: 0,
     y: '100vh',
     duration: 0.75,
-    ease: 'none'
+    ease: 'power1.in'
   }, 0);
 
   // Exit animation of the first section on scroll
