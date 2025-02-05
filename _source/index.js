@@ -29,6 +29,22 @@ document.addEventListener('DOMContentLoaded', function() {
   //   lenis.scrollTo('#section-7');
   // });
 
+  const firstSectionIn = gsap.timeline();
+
+  firstSectionIn.from('.background', {
+    opacity: 0,
+    duration: 1.25,
+    delay: 0.25,
+    ease: 'none'
+  });
+
+  firstSectionIn.from('#introduction', {
+    opacity: 0,
+    y: '100vh',
+    duration: 0.75,
+    ease: 'none'
+  }, 0);
+
   // Exit animation of the first section on scroll
   const firstSectionMM = gsap.matchMedia();
   const firstSectionOut = gsap.timeline({
