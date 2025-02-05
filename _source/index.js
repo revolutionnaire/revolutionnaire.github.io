@@ -32,8 +32,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const firstSectionIn = gsap.timeline();
 
   firstSectionIn.from('.background', {
-    opacity: 0,
-    duration: 1.25,
+    height: 0,
+    duration: 1.5,
     delay: 0.25,
     ease: 'none'
   });
