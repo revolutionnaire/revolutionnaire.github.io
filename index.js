@@ -1563,14 +1563,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     firstSectionMM.add({
-        isiPhone: '(max-width: 320px)',
-        isiPadAir: '(max-width: 820px)',
+        isiPhone: '(min-width: 320px)',
+        isiPadMini: '(min-width: 768px)',
         isiPadPro: '(height: 1366px)',
         isDesktop: '(min-width: 1024px)'
     }, function(context) {
-        var _context_conditions = context.conditions, isiPhone = _context_conditions.isiPhone, isiPadAir = _context_conditions.isiPadAir, isiPadPro = _context_conditions.isiPadPro, isDesktop = _context_conditions.isDesktop, xPercent, yPercent, scale;
+        var _context_conditions = context.conditions, isiPhone = _context_conditions.isiPhone, isiPadMini = _context_conditions.isiPadMini, isiPadPro = _context_conditions.isiPadPro, isDesktop = _context_conditions.isDesktop, xPercent, yPercent, scale;
         switch(true){
-            case isiPadAir:
+            case isiPadMini:
                 xPercent = -350;
                 yPercent = 2240;
                 scale = 117;

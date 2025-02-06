@@ -80,18 +80,18 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   firstSectionMM.add({
-    isiPhone: '(max-width: 320px)',
-    isiPadAir: '(max-width: 820px)',
+    isiPhone: '(min-width: 320px)',
+    isiPadMini: '(min-width: 768px)',
     isiPadPro: '(height: 1366px)',
     isDesktop: '(min-width: 1024px)'
   }, (context) => {
-    let { isiPhone, isiPadAir, isiPadPro, isDesktop } = context.conditions,
+    let { isiPhone, isiPadMini, isiPadPro, isDesktop } = context.conditions,
         xPercent,
         yPercent,
         scale;
 
     switch(true) {
-      case isiPadAir:
+      case isiPadMini:
         xPercent = -350;
         yPercent = 2240;
         scale = 117;
