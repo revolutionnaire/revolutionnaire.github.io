@@ -1565,11 +1565,16 @@ document.addEventListener('DOMContentLoaded', function() {
     firstSectionMM.add({
         isiPhone: '(min-width: 320px)',
         isiPadMini: '(min-width: 768px)',
-        isiPadPro: '(height: 1366px)',
+        isiPadPro: '(min-height: 1366px)',
         isDesktop: '(min-width: 1024px)'
     }, function(context) {
         var _context_conditions = context.conditions, isiPhone = _context_conditions.isiPhone, isiPadMini = _context_conditions.isiPadMini, isiPadPro = _context_conditions.isiPadPro, isDesktop = _context_conditions.isDesktop, xPercent, yPercent, scale;
         switch(true){
+            case isiPadPro:
+                xPercent = -27;
+                yPercent = 6240;
+                scale = 280;
+                break;
             case isiPadMini:
                 xPercent = -350;
                 yPercent = 2240;
@@ -1580,10 +1585,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 yPercent = 1800;
                 scale = 60;
                 break;
-            case isiPadPro:
-                xPercent = -16.5;
-                yPercent = 4240;
-                scale = 380;
             case isDesktop:
                 xPercent = -16.5;
                 yPercent = 4240;
