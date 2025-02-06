@@ -1563,10 +1563,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     firstSectionMM.add({
-        isiPhone: '(min-width: 320px)',
-        isiPadMini: '(min-width: 768px)',
-        isiPadPro: '(min-height: 1366px)',
-        isDesktop: '(min-width: 1024px)'
+        isiPhone: '(min-width: 320px) and (orientation: portrait)',
+        isiPadMini: '(min-width: 768px) and (orientation: portrait)',
+        isiPadPro: '(min-height: 1366px) and (orientation: portrait)',
+        isDesktop: '(min-width: 1024px) and (orientation: landscape)'
     }, function(context) {
         var _context_conditions = context.conditions, isiPhone = _context_conditions.isiPhone, isiPadMini = _context_conditions.isiPadMini, isiPadPro = _context_conditions.isiPadPro, isDesktop = _context_conditions.isDesktop, xPercent, yPercent, scale;
         switch(true){

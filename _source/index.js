@@ -80,10 +80,10 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   firstSectionMM.add({
-    isiPhone: '(min-width: 320px)',
-    isiPadMini: '(min-width: 768px)',
-    isiPadPro: '(min-height: 1366px)',
-    isDesktop: '(min-width: 1024px)'
+    isiPhone: '(min-width: 320px) and (orientation: portrait)',
+    isiPadMini: '(min-width: 768px) and (orientation: portrait)',
+    isiPadPro: '(min-height: 1366px) and (orientation: portrait)',
+    isDesktop: '(min-width: 1024px) and (orientation: landscape)'
   }, (context) => {
     let { isiPhone, isiPadMini, isiPadPro, isDesktop } = context.conditions,
         xPercent,
