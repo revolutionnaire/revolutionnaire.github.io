@@ -29,21 +29,42 @@ document.addEventListener('DOMContentLoaded', function() {
   //   lenis.scrollTo('#section-7');
   // });
 
-  const firstSectionIn = gsap.timeline();
-
-  firstSectionIn.from('.background', {
-    height: 0,
-    duration: 1.5,
-    delay: 0.25,
-    ease: 'power1.in'
+  const loadingAnimation = gsap.timeline({
+    repeat: -1
   });
 
-  firstSectionIn.from('#introduction', {
+  loadingAnimation.to('#fireworks', {
     opacity: 0,
-    y: '100vh',
-    duration: 0.75,
+    duration: 0.01,
+    delay: 0.25,
     ease: 'power1.in'
-  }, 0);
+  }).to('#shocked', {
+    opacity: 1,
+    duration: 0.01,
+    delay: 0.25,
+    ease: 'power1.in'
+  }, '<');
+
+  loadingAnimation.to('#shocked', {
+    opacity: 0,
+    duration: 0.01,
+    delay: 0.25,
+    ease: 'power1.in'
+  }).to('#fireworks',{
+    opacity: 1,
+    duration: 0.01,
+    delay: 0.25,
+    ease: 'power1.in'
+  }, '<');
+
+  const loadingOut = gsap.timeline();
+
+  loadingOut.to('#loading', {
+    clipPath: 'polygon(0% 0%, 100% 0, 100% 0%, 0% 0%)',
+    duration: 0.25,
+    delay: 2,
+    ease: 'power1.in'
+  });
 
   // Exit animation of the first section on scroll
   const firstSectionMM = gsap.matchMedia();

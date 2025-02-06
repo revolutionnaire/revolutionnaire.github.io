@@ -8,7 +8,7 @@
 }
 
 body {
-  background: #000;
+  background: #0D0D0D;
   color: #D9D6D2;
 }
 
@@ -263,10 +263,6 @@ button {
   }
 }
 
-#introduction {
-  z-index: 2;
-}
-
 #works {
   margin-top: 8rem;
 
@@ -282,4 +278,32 @@ button {
   right: 50%;
   bottom: 24px;
   transform: translateX(50%);
+}
+
+#loading {
+  background-color: #D9D6D2;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+
+  #fireworks,
+  #shocked {
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+  }
+
+  #fireworks path {
+    fill: #0D0D0D;
+  }
+
+  #shocked {
+    opacity: 0;
+  }
 }

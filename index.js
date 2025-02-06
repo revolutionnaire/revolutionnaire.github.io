@@ -1518,19 +1518,38 @@ document.addEventListener('DOMContentLoaded', function() {
     //   event.preventDefault;
     //   lenis.scrollTo('#section-7');
     // });
-    var firstSectionIn = (0, _gsap.gsap).timeline();
-    firstSectionIn.from('.background', {
-        height: 0,
-        duration: 1.5,
+    var loadingAnimation = (0, _gsap.gsap).timeline({
+        repeat: -1
+    });
+    loadingAnimation.to('#fireworks', {
+        opacity: 0,
+        duration: 0.01,
         delay: 0.25,
         ease: 'power1.in'
-    });
-    firstSectionIn.from('#introduction', {
-        opacity: 0,
-        y: '100vh',
-        duration: 0.75,
+    }).to('#shocked', {
+        opacity: 1,
+        duration: 0.01,
+        delay: 0.25,
         ease: 'power1.in'
-    }, 0);
+    }, '<');
+    loadingAnimation.to('#shocked', {
+        opacity: 0,
+        duration: 0.01,
+        delay: 0.25,
+        ease: 'power1.in'
+    }).to('#fireworks', {
+        opacity: 1,
+        duration: 0.01,
+        delay: 0.25,
+        ease: 'power1.in'
+    }, '<');
+    var loadingOut = (0, _gsap.gsap).timeline();
+    loadingOut.to('#loading', {
+        clipPath: 'polygon(0% 0%, 100% 0, 100% 0%, 0% 0%)',
+        duration: 0.25,
+        delay: 2,
+        ease: 'power1.in'
+    });
     // Exit animation of the first section on scroll
     var firstSectionMM = (0, _gsap.gsap).matchMedia();
     var firstSectionOut = (0, _gsap.gsap).timeline({
