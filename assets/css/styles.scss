@@ -92,11 +92,6 @@ button {
   top: 50%;
   right: 50%;
   transform: translate(50%, -50%);
-
-  @media only screen and (min-width: 1024px) {
-    width: 100%;
-    height: auto;
-  }
 }
 
 .text-negative {
