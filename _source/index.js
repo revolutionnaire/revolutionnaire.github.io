@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function() {
       case isDesktop:
         xPercent = -16.5;
         yPercent = 4240;
-        scale = 170;
+        scale = 240;
         break;
     }
 
