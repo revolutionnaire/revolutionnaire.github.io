@@ -117,7 +117,8 @@ document.addEventListener('DOMContentLoaded', function() {
       xPercent: xPercent,
       yPercent: yPercent,
       scale: scale,
-      ease: 'none'
+      ease: 'none',
+      force3D: false
     });
   });
 
